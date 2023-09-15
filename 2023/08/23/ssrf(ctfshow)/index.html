@@ -146,7 +146,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="16">
-<input type="hidden" id="yelog_site_word_count" value="38.2k">
+<input type="hidden" id="yelog_site_word_count" value="38.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -425,7 +425,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-09-12 23:20:34'>2023-08-23 09:32</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-13 19:21:28'>2023-08-23 09:32</time>
         
     </div>
     <div class="article-meta">
@@ -543,7 +543,7 @@ header(&quot;Location:http://127.0.0.1/flag.php&quot;);
 <img src="/2023/08/23/ssrf(ctfshow)/132206.png" class="">
 
 <p>多试几次就可以</p>
-<h3 id="web358"><a href="#web358" class="headerlink" title="web358"></a>web358</h3><p>url必须以<code>http://ctf.</code>开头，必须以show结尾。<br>以show结尾比较好办，要么#show，要么?a&#x3D;show这样的都可以。<br>以<code>http://ctf.</code>开头的话，加上一个@127.0.0.1就可以绕过了，这样parse_url解析出来的host是127.0.0.1，考虑到<a href="ftp://user[:pass]@ip[:port]/path，因此前面的ctf.会被解析成user。">ftp://user[:pass]@ip[:port]/path，因此前面的ctf.会被解析成user。</a></p>
+<h3 id="web358"><a href="#web358" class="headerlink" title="web358"></a>web358</h3><p>url必须以<code>http://ctf.</code>开头，必须以show结尾。<br>以show结尾比较好办，要么#show，要么?a&#x3D;show这样的都可以。<br>以<code>http://ctf.</code>开头的话，加上一个@127.0.0.1就可以绕过了，这样parse_url解析出来的host是127.0.0.1，考虑到<code>ftp://user[:pass]@ip[:port]/path</code>，因此前面的ctf.会被解析成user。</p>
 <pre><code>url=http://ctf.@127.0.0.1/flag.php#show
 </code></pre>
 
