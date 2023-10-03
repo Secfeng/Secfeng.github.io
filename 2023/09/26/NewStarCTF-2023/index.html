@@ -6,15 +6,22 @@
   <meta name="keywords" content=" buuctf ">
   <meta name="description" content="NewStarCTF_2023 | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://example.com/about/index.html">
+<meta name="description" content="week1signin这道题是信息搜集，打开题目后查看源代码，有个assets&#x2F;index-33309f51.js，打开后在页面最底部可发现一个sourceMappingURL&#x3D;index-33309f51.js.map,猜测可能是sourcemap文件泄露 将url栏中的index-33309f51.js用index-33309f51.js.map替换，即可下载文件 然后用reverse-sou">
+<meta property="og:type" content="article">
+<meta property="og:title" content="0xGame-2023">
+<meta property="og:url" content="http://example.com/2023/10/02/0xGame-2023/index.html">
 <meta property="og:site_name" content="Secfeng">
+<meta property="og:description" content="week1signin这道题是信息搜集，打开题目后查看源代码，有个assets&#x2F;index-33309f51.js，打开后在页面最底部可发现一个sourceMappingURL&#x3D;index-33309f51.js.map,猜测可能是sourcemap文件泄露 将url栏中的index-33309f51.js用index-33309f51.js.map替换，即可下载文件 然后用reverse-sou">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
-<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="og:image" content="http://example.com/2023/10/02/0xGame-2023/185016.png">
+<meta property="og:image" content="http://example.com/2023/10/02/0xGame-2023/194458.png">
+<meta property="og:image" content="http://example.com/2023/10/02/0xGame-2023/194707.png">
+<meta property="article:published_time" content="2023-10-02T10:30:00.000Z">
+<meta property="article:modified_time" content="2023-10-02T12:53:13.589Z">
 <meta property="article:author" content="Secfeng">
+<meta property="article:tag" content="0xGame">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/10/02/0xGame-2023/185016.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -146,7 +153,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="18">
-<input type="hidden" id="yelog_site_word_count" value="42.9k">
+<input type="hidden" id="yelog_site_word_count" value="43.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -447,12 +454,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-09-26 22:28:43'>2023-09-26 20:59</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-03 18:46:56'>2023-09-26 20:59</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:779</span>
+        <span>字数:1.1k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -471,7 +478,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEEK1"><span class="toc-text">WEEK1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%84%E6%BC%8F%E7%9A%84%E7%A7%98%E5%AF%86"><span class="toc-text">泄漏的秘密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-Upload"><span class="toc-text">Begin of Upload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-HTTP"><span class="toc-text">Begin of HTTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ErrorFlask"><span class="toc-text">ErrorFlask</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-PHP"><span class="toc-text">Begin of PHP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-C-E"><span class="toc-text">R!C!E!</span></a></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEEK1"><span class="toc-text">WEEK1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#web"><span class="toc-text">web</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%84%E6%BC%8F%E7%9A%84%E7%A7%98%E5%AF%86"><span class="toc-text">泄漏的秘密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-Upload"><span class="toc-text">Begin of Upload</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-HTTP"><span class="toc-text">Begin of HTTP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ErrorFlask"><span class="toc-text">ErrorFlask</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Begin-of-PHP"><span class="toc-text">Begin of PHP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#R-C-E"><span class="toc-text">R!C!E!</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EasyLogin"><span class="toc-text">EasyLogin</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -586,6 +593,40 @@ md5()
 <p>用&#96;&#96;替代system函数，用f’l’ag绕过flag</p>
 <pre><code>payload password=04p9l&amp;e[v.a.l=echo `c&#39;a&#39;t /f&#39;l&#39;ag`;
 </code></pre>
+<p>官方题解：</p>
+<pre><code>POST:e[v.a.l=var_dump(file_get_contents($_GET[&#39;a&#39;]));\
+GET:a=/flag
+</code></pre>
+<h3 id="EasyLogin"><a href="#EasyLogin" class="headerlink" title="EasyLogin"></a>EasyLogin</h3><p>看了一下官方题解</p>
+<p>进入之后是一个登录界面，先随便注册一个账号登进去看看。</p>
+<p>进入之后是一个登录界面，先随便注册一个账号登进去看看。</p>
+<p><code>Ctrl</code>+<code>D</code>回到 Shell，简单看了下目录结构没有什么东西，只告知了含有一个 admin 用户，按方向上键可以查询Bash历史记录。</p>
+<img src="/2023/09/26/NewStarCTF-2023/180143.png" class="">
+
+<p>发现 Hint，第一句意思是将“newstar”和“newstar2023”这两个密码加入弱密码文件，第二句意思是将将密码设为密码文件中的任意一个。</p>
+<p>得知 admin 的密码为弱密码加上<code>newstar newstar2023</code>后其中的一个。</p>
+<p>按<code>CtrlD</code>或者输入<code>exit</code>后回车回到登录界面。</p>
+<p>试一下<code>newstar``newstar2023</code>，没登进去，在网上随便搜弱密码，试一些常见的，试出来是<code>000000</code>，不同的靶机密码可能不一样。</p>
+<p>题目采用的弱密码表</p>
+<pre><code>123456789
+password
+newstar
+newstar2023
+123qwe
+qwe123
+qwertyuiop
+asdfghjkl
+zxcvbnm
+admin123
+admin888
+111111
+000000
+</code></pre>
+<p>查询历史记录只提示了使用<code>BurpSuite</code>，尝试抓包。</p>
+<img src="/2023/09/26/NewStarCTF-2023/180953.png" class="">
+
+<p>使用<code>BurpSuite</code>拦截、开启代理，重新完成一次登录，发现一个<code>/passport</code>的 302 跳转，查看它的响应获取 flag.</p>
+<img src="/2023/09/26/NewStarCTF-2023/184505.png" class="">
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
