@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Secfeng</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="Secfeng">
+  <title>misc(ctfshow) | Secfeng</title>
+  <meta name="keywords" content=" misc ">
+  <meta name="description" content="misc(ctfshow) | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="about">
@@ -54,7 +54,7 @@
 
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/"
    class="avatar_target">
@@ -465,12 +465,52 @@
         </div>
     </div>
 </aside>
-<div id="post" class="index">
+<div id="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-misc(ctfshow)" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%84%E8%AF%AD"><span class="toc-text">寄语</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8ESecfeng"><span class="toc-text">关于Secfeng</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%B9%B3%E5%8F%B0"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">misc(ctfshow)</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color5">misc</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-11-02 23:43:21'>2023-11-02 20:19</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:164</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#misc1"><span class="toc-text">misc1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#misc2"><span class="toc-text">misc2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#misc3"><span class="toc-text">misc3</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -483,25 +523,46 @@
     }
 </style>
 </div>
-            <h1 id="寄语"><a href="#寄语" class="headerlink" title="寄语"></a>寄语</h1><p>人生本来苦恼已多，再多一次又如何，向着那梦中的地方去，错了我也不悔过。</p>
-<h2 id="关于Secfeng"><a href="#关于Secfeng" class="headerlink" title="关于Secfeng"></a>关于Secfeng</h2><p><strong>Secfeng</strong> 是阁主的个人站。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> 生成，部署在 <a target="_blank" rel="noopener" href="https://pages.github.com/">GitHub Pages</a>主题 <a target="_blank" rel="noopener" href="https://github.com/yelog/hexo-theme-3-hexo">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
-<ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad&#x2F;手机等移动端适配</li>
-<li>页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a></li>
-</ul>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h3><p>打开图片就能看到flag</p>
+<h3 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h3><p>打开压缩包有一个.txt文件，用文本模式看了一下没发现什么有用的消息，用010editor打开查看16进制，发现文件头是<strong>89 59 4E 47</strong>,这是png的文件头</p>
+<img src="/2023/11/02/misc(ctfshow)/203313.png" class="">
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+<p>所以把文件后缀改为.png，得到flag</p>
+<p>还可以用python来提取图片中的文字</p>
+<pre><code>import pytesseract
+from PIL import Image
+image=Image.open(&#39;C:/Users/534545/Desktop/misc2/misc2.png&#39;)
+text=pytesseract.image_to_string(image)
+print(text)
+</code></pre>
+<h3 id="misc3"><a href="#misc3" class="headerlink" title="misc3"></a>misc3</h3><p>压缩包里有个bpg格式的文件，bpg就是一种图片的后缀，可以用很多图片查看器查看</p>
+<p>这里尝试下载一个图片查看器 Honeyview 。</p>
+<img src="/2023/11/02/misc(ctfshow)/234055.png" class="">
+
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">
@@ -510,11 +571,11 @@
 <p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-</div>
-<div class="full-toc">
-    <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
 <a class="" id="rocket" ></a>
 
+    </div>
 </div>
 
 <div class="hide_box" onclick="dashangToggle()"></div>

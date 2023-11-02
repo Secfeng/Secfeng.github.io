@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>misc(ctfshow)</title>
+      <link href="/2023/11/02/misc(ctfshow)/"/>
+      <url>/2023/11/02/misc(ctfshow)/</url>
+      
+        <content type="html"><![CDATA[<h3 id="misc1"><a href="#misc1" class="headerlink" title="misc1"></a>misc1</h3><p>打开图片就能看到flag</p><h3 id="misc2"><a href="#misc2" class="headerlink" title="misc2"></a>misc2</h3><p>打开压缩包有一个.txt文件，用文本模式看了一下没发现什么有用的消息，用010editor打开查看16进制，发现文件头是<strong>89 59 4E 47</strong>,这是png的文件头</p><img src="/2023/11/02/misc(ctfshow)/203313.png" class=""><p>所以把文件后缀改为.png，得到flag</p><p>还可以用python来提取图片中的文字</p><pre><code>import pytesseractfrom PIL import Imageimage=Image.open(&#39;C:/Users/534545/Desktop/misc2/misc2.png&#39;)text=pytesseract.image_to_string(image)print(text)</code></pre><h3 id="misc3"><a href="#misc3" class="headerlink" title="misc3"></a>misc3</h3><p>压缩包里有个bpg格式的文件，bpg就是一种图片的后缀，可以用很多图片查看器查看</p><p>这里尝试下载一个图片查看器 Honeyview 。</p><img src="/2023/11/02/misc(ctfshow)/234055.png" class="">]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> misc </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Moectf-2023</title>
       <link href="/2023/10/04/Moectf-2023/"/>
       <url>/2023/10/04/Moectf-2023/</url>
