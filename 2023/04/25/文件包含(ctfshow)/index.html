@@ -6,15 +6,32 @@
   <meta name="keywords" content=" 文件包含 ">
   <meta name="description" content="文件包含(ctfshow) | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://example.com/about/index.html">
+<meta name="description" content="misc1打开图片就能看到flag misc2打开压缩包有一个.txt文件，用文本模式看了一下没发现什么有用的消息，用010editor打开查看16进制，发现文件头是89 50 4E 47,这是png的文件头   所以把文件后缀改为.png，得到flag 还可以用python来提取图片中的文字 import pytesseract from PIL import Image image&#x3D;Image">
+<meta property="og:type" content="article">
+<meta property="og:title" content="misc(ctfshow)">
+<meta property="og:url" content="http://example.com/2023/11/02/misc(ctfshow)/index.html">
 <meta property="og:site_name" content="Secfeng">
+<meta property="og:description" content="misc1打开图片就能看到flag misc2打开压缩包有一个.txt文件，用文本模式看了一下没发现什么有用的消息，用010editor打开查看16进制，发现文件头是89 50 4E 47,这是png的文件头   所以把文件后缀改为.png，得到flag 还可以用python来提取图片中的文字 import pytesseract from PIL import Image image&#x3D;Image">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
-<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/203313.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/234055.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/202139.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/203409.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/204502.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/212036.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/201505.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/204811.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/211026.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/212926.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/215958.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/220809.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/223956.png">
+<meta property="article:published_time" content="2023-11-02T12:19:04.000Z">
+<meta property="article:modified_time" content="2023-11-06T14:53:48.591Z">
 <meta property="article:author" content="Secfeng">
+<meta property="article:tag" content="misc">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/11/02/misc(ctfshow)/203313.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -146,7 +163,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="21">
-<input type="hidden" id="yelog_site_word_count" value="51.5k">
+<input type="hidden" id="yelog_site_word_count" value="52.3k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
