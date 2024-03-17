@@ -6,21 +6,15 @@
   <meta name="keywords" content=" linux ">
   <meta name="description" content="linux学习 | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="一、含义​	客户端连接服务端为正向连接（如：远程桌面、ssh等），反向连接弹shell（即反弹shell为攻击者为服务端，受害者主机为客户端主动连接攻击者的服务端） 二、适用情况​	1、目标机因防火墙受限，目标机器只能发送请求，不能接收请求 ​	2、目标机端口被占用 ​	3、目标机位于局域网 ​	4、IP会动态变化 ​	5、攻击了一台主机需要在自己的机器上交互式地执行目标机器中的cmd&#x2F;">
-<meta property="og:type" content="article">
-<meta property="og:title" content="反弹shell">
-<meta property="og:url" content="http://example.com/2024/02/26/%E5%8F%8D%E5%BC%B9shell/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="about">
+<meta property="og:url" content="http://example.com/about/index.html">
 <meta property="og:site_name" content="Secfeng">
-<meta property="og:description" content="一、含义​	客户端连接服务端为正向连接（如：远程桌面、ssh等），反向连接弹shell（即反弹shell为攻击者为服务端，受害者主机为客户端主动连接攻击者的服务端） 二、适用情况​	1、目标机因防火墙受限，目标机器只能发送请求，不能接收请求 ​	2、目标机端口被占用 ​	3、目标机位于局域网 ​	4、IP会动态变化 ​	5、攻击了一台主机需要在自己的机器上交互式地执行目标机器中的cmd&#x2F;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2024/02/26/%E5%8F%8D%E5%BC%B9shell/201908.png">
-<meta property="og:image" content="http://example.com/2024/02/26/%E5%8F%8D%E5%BC%B9shell/202030.png">
-<meta property="article:published_time" content="2024-02-26T11:29:53.000Z">
-<meta property="article:modified_time" content="2024-02-26T13:33:47.640Z">
+<meta property="article:published_time" content="2023-03-05T11:53:12.000Z">
+<meta property="article:modified_time" content="2023-03-28T14:09:40.008Z">
 <meta property="article:author" content="Secfeng">
-<meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/02/26/%E5%8F%8D%E5%BC%B9shell/201908.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -152,7 +146,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="24">
-<input type="hidden" id="yelog_site_word_count" value="57.2k">
+<input type="hidden" id="yelog_site_word_count" value="60.9k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -527,12 +521,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-02-26 16:38:29'>2023-04-14 22:24</time>
+            发布时间 : <time class="date" title='最后更新: 2024-03-17 22:16:39'>2023-04-14 22:24</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:2.5k</span>
+        <span>字数:6.2k</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -551,7 +545,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81linux%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">一、linux文件与目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81vi-x2F-vim%E7%BC%96%E8%BE%91%E5%99%A8"><span class="toc-text">二、vi&#x2F;vim编辑器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%B8%B8%E7%94%A8%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-text">三、常用基本命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%B8%AE%E5%8A%A9%E5%91%BD%E4%BB%A4"><span class="toc-text">1、帮助命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%B1%BB"><span class="toc-text">2、文件目录类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%97%B6%E9%97%B4%E6%97%A5%E6%9C%9F%E7%B1%BB"><span class="toc-text">3、时间日期类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">4、用户管理命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E7%AB%AF%E5%8F%A3%E5%91%BD%E4%BB%A4"><span class="toc-text">5、端口命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4"><span class="toc-text">6、查找命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#find%E5%91%BD%E4%BB%A4"><span class="toc-text">find命令</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86"><span class="toc-text">7、配置全局网络代理</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%A7%E5%85%A8"><span class="toc-text">Linux配置文件路径大全</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx-%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">Nginx 重要文件目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E4%B8%8B%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">linux下的快捷键</span></a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">linux目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-text">linux基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">单用户操作系统和多用户操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8linux%E5%91%BD%E4%BB%A4%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">1.常用linux命令的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E9%98%85%E5%91%BD%E4%BB%A4%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF"><span class="toc-text">查阅命令帮助信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ls%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text">ls常用参数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ls%E9%80%9A%E9%85%8D%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-text">ls通配符的使用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cd%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">cd常用参数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#touch%E6%89%A9%E5%B1%95%EF%BC%9A"><span class="toc-text">touch扩展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mkdir%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">mkdir常用参数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rm%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">rm常用参数：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8B%B7%E8%B4%9D%E5%92%8C%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6"><span class="toc-text">2.拷贝和移动文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tree"><span class="toc-text">tree:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cp"><span class="toc-text">cp:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mv"><span class="toc-text">mv:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">3.查看文件内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cat"><span class="toc-text">cat:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#grep"><span class="toc-text">grep:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BE%93%E5%87%BA"><span class="toc-text">4.输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#echo-%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9"><span class="toc-text">echo 文字内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91-gt-%E5%92%8C-gt-gt"><span class="toc-text">重定向&gt;和&gt;&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%A1%E9%81%93"><span class="toc-text">管道|</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">5.远程管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#shutdown%EF%BC%9A"><span class="toc-text">shutdown：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E5%92%8C%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-text">远程登录和复制文件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh%EF%BC%9A"><span class="toc-text">ssh：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#scp"><span class="toc-text">scp:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">6.用户权限相关命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84"><span class="toc-text">组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ls-l%E6%89%A9%E5%B1%95"><span class="toc-text">ls -l扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chmod"><span class="toc-text">chmod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7"><span class="toc-text">超级用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sudo"><span class="toc-text">sudo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E7%AE%A1%E7%90%86-%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="toc-text">组管理 终端命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86-%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="toc-text">用户管理 终端命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-text">查看用户信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#passwd%E6%96%87%E4%BB%B6"><span class="toc-text">passwd文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#usermod"><span class="toc-text">usermod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gpasswd"><span class="toc-text">gpasswd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#which"><span class="toc-text">which</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-text">切换用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">7.系统信息相关命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F"><span class="toc-text">时间和日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%BF%A1%E6%81%AF"><span class="toc-text">磁盘信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="toc-text">进程信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="toc-text">8.其他命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6"><span class="toc-text">查找文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="toc-text">软链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="toc-text">硬链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%8C%85-x2F-%E8%A7%A3%E5%8C%85"><span class="toc-text">打包&#x2F;解包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9-x2F-%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="toc-text">压缩&#x2F;解压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gzip"><span class="toc-text">gzip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bzip2"><span class="toc-text">bzip2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-text">软件安装</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4"><span class="toc-text">linux进阶命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#netstat%EF%BC%88%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%EF%BC%89"><span class="toc-text">netstat（查看网络服务及监听端口）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86"><span class="toc-text">虚拟机配置网络代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%A7%E5%85%A8"><span class="toc-text">Linux配置文件路径大全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx-%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">Nginx 重要文件目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux%E4%B8%8B%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">linux下的快捷键</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -567,115 +561,832 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、linux文件与目录结构"><a href="#一、linux文件与目录结构" class="headerlink" title="一、linux文件与目录结构"></a>一、linux文件与目录结构</h2><p>1.linux文件</p>
-<p>​	linux 系统中一切皆文件</p>
-<p>2.linux 目录结构</p>
-<img src="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/11230.jpg" class="">
+        <p><div class='inner-toc'><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-text">linux目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-text">linux基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%92%8C%E5%A4%9A%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-text">单用户操作系统和多用户操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8linux%E5%91%BD%E4%BB%A4%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-text">1.常用linux命令的基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E9%98%85%E5%91%BD%E4%BB%A4%E5%B8%AE%E5%8A%A9%E4%BF%A1%E6%81%AF"><span class="toc-text">查阅命令帮助信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ls%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-text">ls常用参数:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ls%E9%80%9A%E9%85%8D%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8%EF%BC%9A"><span class="toc-text">ls通配符的使用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cd%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">cd常用参数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#touch%E6%89%A9%E5%B1%95%EF%BC%9A"><span class="toc-text">touch扩展：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mkdir%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">mkdir常用参数：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#rm%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0%EF%BC%9A"><span class="toc-text">rm常用参数：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%8B%B7%E8%B4%9D%E5%92%8C%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6"><span class="toc-text">2.拷贝和移动文件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tree"><span class="toc-text">tree:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cp"><span class="toc-text">cp:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mv"><span class="toc-text">mv:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%9F%A5%E7%9C%8B%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="toc-text">3.查看文件内容</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#cat"><span class="toc-text">cat:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#grep"><span class="toc-text">grep:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E8%BE%93%E5%87%BA"><span class="toc-text">4.输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#echo-%E6%96%87%E5%AD%97%E5%86%85%E5%AE%B9"><span class="toc-text">echo 文字内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91-gt-%E5%92%8C-gt-gt"><span class="toc-text">重定向&gt;和&gt;&gt;</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%A1%E9%81%93"><span class="toc-text">管道|</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%BF%9C%E7%A8%8B%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">5.远程管理命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#shutdown%EF%BC%9A"><span class="toc-text">shutdown：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E5%92%8C%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6%EF%BC%9A"><span class="toc-text">远程登录和复制文件：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ssh%EF%BC%9A"><span class="toc-text">ssh：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#scp"><span class="toc-text">scp:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">6.用户权限相关命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84"><span class="toc-text">组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ls-l%E6%89%A9%E5%B1%95"><span class="toc-text">ls -l扩展</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#chmod"><span class="toc-text">chmod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7"><span class="toc-text">超级用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sudo"><span class="toc-text">sudo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E7%AE%A1%E7%90%86-%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="toc-text">组管理 终端命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86-%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4"><span class="toc-text">用户管理 终端命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-text">查看用户信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#passwd%E6%96%87%E4%BB%B6"><span class="toc-text">passwd文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#usermod"><span class="toc-text">usermod</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gpasswd"><span class="toc-text">gpasswd</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#which"><span class="toc-text">which</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7"><span class="toc-text">切换用户</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">7.系统信息相关命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E5%92%8C%E6%97%A5%E6%9C%9F"><span class="toc-text">时间和日期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A3%81%E7%9B%98%E4%BF%A1%E6%81%AF"><span class="toc-text">磁盘信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E4%BF%A1%E6%81%AF"><span class="toc-text">进程信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="toc-text">8.其他命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6"><span class="toc-text">查找文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E9%93%BE%E6%8E%A5"><span class="toc-text">软链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AC%E9%93%BE%E6%8E%A5"><span class="toc-text">硬链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%93%E5%8C%85-x2F-%E8%A7%A3%E5%8C%85"><span class="toc-text">打包&#x2F;解包</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%8B%E7%BC%A9-x2F-%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="toc-text">压缩&#x2F;解压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gzip"><span class="toc-text">gzip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bzip2"><span class="toc-text">bzip2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="toc-text">软件安装</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E8%BF%9B%E9%98%B6%E5%91%BD%E4%BB%A4"><span class="toc-text">linux进阶命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#netstat%EF%BC%88%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E5%8F%8A%E7%9B%91%E5%90%AC%E7%AB%AF%E5%8F%A3%EF%BC%89"><span class="toc-text">netstat（查看网络服务及监听端口）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86"><span class="toc-text">虚拟机配置网络代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E5%A4%A7%E5%85%A8"><span class="toc-text">Linux配置文件路径大全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nginx-%E9%87%8D%E8%A6%81%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">Nginx 重要文件目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linux%E4%B8%8B%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">linux下的快捷键</span></a></li></ol></li></ol></div></p>
+<h2 id="linux目录结构"><a href="#linux目录结构" class="headerlink" title="linux目录结构"></a>linux目录结构</h2><img src="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/11230.jpg" class="">
 
 <img src="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/11231.png" class="">
 
-<h2 id="二、vi-x2F-vim编辑器"><a href="#二、vi-x2F-vim编辑器" class="headerlink" title="二、vi&#x2F;vim编辑器"></a>二、vi&#x2F;vim编辑器</h2><p>1、普通模式</p>
-<p>2、编辑模式</p>
-<p>3、命令模式</p>
-<pre><code>命令		  功能
-:w		  保存
-:q		  退出
-:wq		  保存并退出
-:q!		  不保存强制退出
-:set nu	  	  显示行号
-:set nonu 	  关闭行号
-/要查找的词 n 	  查找下一个，N 往上查找
-:noh	   	  取消高亮显示
+<h2 id="linux基础命令"><a href="#linux基础命令" class="headerlink" title="linux基础命令"></a>linux基础命令</h2><h3 id="单用户操作系统和多用户操作系统"><a href="#单用户操作系统和多用户操作系统" class="headerlink" title="单用户操作系统和多用户操作系统"></a>单用户操作系统和多用户操作系统</h3><p><strong>单用户操作系统：</strong>指一台计算机在同一时间只能由一个用户使用，一个用户独自享用全部的软件和硬件资源。</p>
+<p>​	windows xp之前的版本都是单用户操作系统</p>
+<p><strong>多用户操作系统：</strong>指一台计算机在同一时间可以由多个用户使用，多个用户共同享用全部的软件和硬件资源。</p>
+<p>​	Unix和linux的设计初衷就是多用户操作系统</p>
+<h3 id="1-常用linux命令的基本使用"><a href="#1-常用linux命令的基本使用" class="headerlink" title="1.常用linux命令的基本使用"></a>1.常用linux命令的基本使用</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ls</td>
+<td align="center">查看当前文件夹下的内容</td>
+</tr>
+<tr>
+<td align="center">pwd</td>
+<td align="center">查看当前所在文件夹</td>
+</tr>
+<tr>
+<td align="center">cd [目录名]</td>
+<td align="center">切换文件夹</td>
+</tr>
+<tr>
+<td align="center">touch [文件名]</td>
+<td align="center">如果文件不存在，新建文件</td>
+</tr>
+<tr>
+<td align="center">mkdir [目录名]</td>
+<td align="center">创建目录</td>
+</tr>
+<tr>
+<td align="center">rm [文件名]</td>
+<td align="center">删除指定的文件名</td>
+</tr>
+<tr>
+<td align="center">clear</td>
+<td align="center">清屏</td>
+</tr>
+</tbody></table>
+<h4 id="查阅命令帮助信息"><a href="#查阅命令帮助信息" class="headerlink" title="查阅命令帮助信息"></a>查阅命令帮助信息</h4><pre><code>1. command --help
+2. man command
 </code></pre>
-<h2 id="三、常用基本命令"><a href="#三、常用基本命令" class="headerlink" title="三、常用基本命令"></a>三、常用基本命令</h2><h4 id="1、帮助命令"><a href="#1、帮助命令" class="headerlink" title="1、帮助命令"></a>1、帮助命令</h4><p>​	man	获得帮助信息</p>
-<p>​	help	获得shell内置命令的帮助信息（系统加载启动后随着shell一起加载，常驻系统内存中，这部分命令被称为内置命令,使用type查看命令类型）</p>
-<h4 id="2、文件目录类"><a href="#2、文件目录类" class="headerlink" title="2、文件目录类"></a>2、文件目录类</h4><p>（1）pwd 显示当前工作目录路径</p>
-<p>（2）cd 切换路径</p>
-<p>（3）ls 列出目录的内容</p>
-<p>​			-a	全部的文件，连同隐藏档（开头为 . 的文件）一起列出来</p>
-<p>​			-l	 长数据列出，包含文件的属性与权限等等数据，等同与”ll”</p>
-<p>（4）mkdir 创建一个新的文件夹</p>
-<p>（5）rmdir 删除一个空的文件夹</p>
-<p>（6）touch 创建空文件</p>
-<p>（7）cp 复制文件或目录	</p>
-<p>​			cp  test.txt  ..&#x2F;home&#x2F;afdsf&#x2F;	将test.txt复制到..&#x2F;home&#x2F;afdsf目录下</p>
-<p>​			cp  test.txt  ..&#x2F;home&#x2F;dsaf.txt	将test.txt中的内容覆盖到dsaf.txt</p>
-<p>​			cp  -r  a  &#x2F;home&#x2F;afdsf&#x2F;	将a目录复制到afdsf目录下</p>
-<p>（8）rm 删除文件或目录</p>
-<p>​			-r	递归删除目录中的所有内容</p>
-<p>​			-f	强制执行删除操作。而不是提示进行确认</p>
-<p>（9）mv 移动文件与目录或重命名</p>
-<p>​			mv  inital.txt  &#x2F;home&#x2F;dfds&#x2F;  移动文件</p>
-<p>​			mv  inital.txt  &#x2F;home&#x2F;dfds&#x2F;1.txt  将inital.txt移动并且重命名为1.txt</p>
-<p>（10）cat 查看文件内容</p>
-<p>​			-n	显示所有行的行号，包括空行</p>
-<p>（11）more 文件内容分屏查看器</p>
-<p>（12）less  分屏显示文件内容（比more更强大）</p>
-<p>（13）echo 输出内容到控制台</p>
-<p>​			-e	支持反斜线控制的字符转换</p>
-<p>（14）&gt; 输出重定向和 &gt;&gt; 追加</p>
-<p>​			ls -l &gt; a.txt	（列表的内容写入文件a.txt中（覆盖写））</p>
-<p>​			ls -ll &gt;&gt; a.txt （列表的内容追加到文件a.txt的末尾）</p>
-<p>​			cat 文件1 &gt; 文件2	（将文件1的内容覆盖到文件2）</p>
-<p>（15）head 显示文件头部内容</p>
-<p>​			head用于显示文件开头部分内容，默认情况下head指令显示文件的前10行内容</p>
-<p>​			-n&lt;行数&gt; 指定显示头部内容的行数</p>
-<p>（16）tail 输出文件尾部内容</p>
-<p>​			tail -n 5 文件	查看文件尾部5行内容</p>
-<p>​			tail -f 文件	实时追踪该文档的所有更新</p>
-<p>（17）ln 软链接	软链接也称为符号链接，类似于windows里的快捷方式，主要存放了链接其他文件的路径</p>
-<p>（18）history 查看历史命令</p>
-<p>​			 清空历史命令:</p>
-<p>​				bash: history -c</p>
-<p>​				zsh: rm -rf &#x2F;root&#x2F;.zsh_history（<em>kali</em> 默认的 shell <em>环境</em>已经从 bash 更改为 zsh）<strong>执行完之后要重新登录才能生效</strong></p>
-<h4 id="3、时间日期类"><a href="#3、时间日期类" class="headerlink" title="3、时间日期类"></a>3、时间日期类</h4><p>​	date 查看当天日期</p>
-<p>​	cal 查看日历</p>
-<h4 id="4、用户管理命令"><a href="#4、用户管理命令" class="headerlink" title="4、用户管理命令"></a>4、用户管理命令</h4><p>​	（1）useradd 添加新用户</p>
-<p>​			useradd 用户名	（添加新用户）</p>
-<p>​			useradd  -g  组名  用户名	（添加新用户到某个组）</p>
-<p>​	（2）passwd 设置用户密码</p>
-<p>​			password 用户名</p>
-<p>​	（3）id 查看用户是否存在</p>
-<p>​	（4）cat  &#x2F;etc&#x2F;password  查看系统中的用户信息</p>
-<p>​	（5）su 切换用户</p>
-<p>​	（6）who 查看登录用户信息</p>
-<p>​			whoami  查看当前登录用户信息</p>
-<p>​			who am i  查看原始登录用户（有空格）</p>
-<p>​	（7）</p>
-<h4 id="5、端口命令"><a href="#5、端口命令" class="headerlink" title="5、端口命令"></a>5、端口命令</h4><pre><code>netstat -tunlp | grep 端口号
+<p>使用man时的操作键：</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作键</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">空格</td>
+<td align="center">手册页的下一页</td>
+</tr>
+<tr>
+<td align="center">b</td>
+<td align="center">回滚一屏</td>
+</tr>
+<tr>
+<td align="center">Enter键</td>
+<td align="center">一次滚动手册页的一行</td>
+</tr>
+<tr>
+<td align="center">q</td>
+<td align="center">退出</td>
+</tr>
+</tbody></table>
+<h4 id="ls常用参数"><a href="#ls常用参数" class="headerlink" title="ls常用参数:"></a>ls常用参数:</h4><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-a</td>
+<td align="center">显示指定目录下所有子目录与文件，包括隐藏文件</td>
+</tr>
+<tr>
+<td align="center">-l</td>
+<td align="center">以列表方式显示文件的详细信息</td>
+</tr>
+<tr>
+<td align="center">-h</td>
+<td align="center">配合 -l以人性化的方式显示文件大小</td>
+</tr>
+</tbody></table>
+<h4 id="ls通配符的使用："><a href="#ls通配符的使用：" class="headerlink" title="ls通配符的使用："></a>ls通配符的使用：</h4><table>
+<thead>
+<tr>
+<th align="center">通配符</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td align="center">代表任意个数个字符</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="center">代表任意一个字符，必须是一个</td>
+</tr>
+<tr>
+<td align="center">[]</td>
+<td align="center">表示可以匹配字符组中的任一一个。例如[123]、[a-f]</td>
+</tr>
+</tbody></table>
+<h4 id="cd常用参数："><a href="#cd常用参数：" class="headerlink" title="cd常用参数："></a>cd常用参数：</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd</td>
+<td>切换到当前用户的主目录(&#x2F;home&#x2F;用户目录)</td>
+</tr>
+<tr>
+<td>cd ~</td>
+<td>切换到当前用户的主目录(&#x2F;home&#x2F;用户目录)</td>
+</tr>
+<tr>
+<td>cd -</td>
+<td>可以在最近两次工作目录之间来回切换</td>
+</tr>
+</tbody></table>
+<h4 id="touch扩展："><a href="#touch扩展：" class="headerlink" title="touch扩展："></a>touch扩展：</h4><p>​	如果文件不存在，可以创建一个空白文件</p>
+<p>​	如果文件已经存在，可以修改文件的末次修改日期</p>
+<h4 id="mkdir常用参数："><a href="#mkdir常用参数：" class="headerlink" title="mkdir常用参数："></a>mkdir常用参数：</h4><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-p</td>
+<td align="center">可以递归创建目录</td>
+</tr>
+</tbody></table>
+<p>注意：在当前目录中，目录与文件不能同名</p>
+<h4 id="rm常用参数："><a href="#rm常用参数：" class="headerlink" title="rm常用参数："></a>rm常用参数：</h4><p>rm删除的内容不能恢复！</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-r</td>
+<td align="center"><strong>删除目录时必须使用次参数</strong>，并且能递归删除目录下的内容</td>
+</tr>
+<tr>
+<td align="center">-f</td>
+<td align="center">强制删除，忽略不存在的文件，无需提示</td>
+</tr>
+</tbody></table>
+<h3 id="2-拷贝和移动文件"><a href="#2-拷贝和移动文件" class="headerlink" title="2.拷贝和移动文件"></a>2.拷贝和移动文件</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">tree</td>
+<td align="center">以树状图列出文件目录结构</td>
+</tr>
+<tr>
+<td align="center">cp 源文件 目标文件</td>
+<td align="center">复制文件</td>
+</tr>
+<tr>
+<td align="center">mv 源文件 目标文件</td>
+<td align="center">移动文件或者目录&#x2F;文件或者目录重命名</td>
+</tr>
+</tbody></table>
+<h4 id="tree"><a href="#tree" class="headerlink" title="tree:"></a>tree:</h4><table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-d</td>
+<td align="center">只显示目录</td>
+</tr>
+</tbody></table>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp:"></a>cp:</h4><table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-i</td>
+<td align="center">覆盖文件前提示</td>
+</tr>
+<tr>
+<td align="center">-r</td>
+<td align="center">若给出的源文件是目录文件，则cp将递归复制该目录下的所有子目录和文件，目标文件必须为一个目录名</td>
+</tr>
+</tbody></table>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv:"></a>mv:</h4><table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-i</td>
+<td align="center">覆盖文件前提示</td>
+</tr>
+</tbody></table>
+<h3 id="3-查看文件内容"><a href="#3-查看文件内容" class="headerlink" title="3.查看文件内容"></a>3.查看文件内容</h3><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">cat 文件名</td>
+<td align="center">查看文件内容、创建文件、文件合并、追加文件内容等功能</td>
+</tr>
+<tr>
+<td align="center">more 文件名</td>
+<td align="center">分屏显示文件内容</td>
+</tr>
+<tr>
+<td align="center">grep 搜索文本 文件名</td>
+<td align="center">搜索文本文件内容</td>
+</tr>
+</tbody></table>
+<h4 id="cat"><a href="#cat" class="headerlink" title="cat:"></a>cat:</h4><table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-b</td>
+<td align="center">对非空输出行编号</td>
+</tr>
+<tr>
+<td align="center">-n</td>
+<td align="center">对输出的所有行编号</td>
+</tr>
+</tbody></table>
+<h4 id="grep"><a href="#grep" class="headerlink" title="grep:"></a>grep:</h4><table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-n</td>
+<td align="center">显示匹配行及行号</td>
+</tr>
+<tr>
+<td align="center">-v</td>
+<td align="center">显示不包括含匹配文本的所有行</td>
+</tr>
+<tr>
+<td align="center">-i</td>
+<td align="center">忽略大小写</td>
+</tr>
+</tbody></table>
+<p>grep允许对文本进行模式查找，所谓模式查找，又被称为正则表达式</p>
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">^a</td>
+<td align="center">行首，搜村以a开头的行</td>
+</tr>
+<tr>
+<td align="center">ke$</td>
+<td align="center">行尾，搜寻以ke结束的行</td>
+</tr>
+</tbody></table>
+<h3 id="4-输出"><a href="#4-输出" class="headerlink" title="4.输出"></a>4.输出</h3><h4 id="echo-文字内容"><a href="#echo-文字内容" class="headerlink" title="echo 文字内容"></a>echo 文字内容</h4><p>​	echo 会在终端显示参数指定的文字，通常会和重定向联合使用</p>
+<h4 id="重定向-gt-和-gt-gt"><a href="#重定向-gt-和-gt-gt" class="headerlink" title="重定向&gt;和&gt;&gt;"></a>重定向&gt;和&gt;&gt;</h4><p>linux允许将命令执行结果重定向到一个文件，将本应显示在终端上的内容输出&#x2F;追加到指定文件中</p>
+<p>​	&gt;表示输出，会覆盖文件原有内容</p>
+<p>​	&gt;&gt; 表示追加，会将内容追加到已有文件的末尾</p>
+<h4 id="管道"><a href="#管道" class="headerlink" title="管道|"></a>管道|</h4><p>linux允许将一个命令的输出可以通过管道 <strong>|</strong> 作为另一个命令的输入</p>
+<p>常用的管道命令有：</p>
+<p>more、grep</p>
+<h3 id="5-远程管理命令"><a href="#5-远程管理命令" class="headerlink" title="5.远程管理命令"></a>5.远程管理命令</h3><h4 id="shutdown："><a href="#shutdown：" class="headerlink" title="shutdown："></a>shutdown：</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">shutdown 选项 时间</td>
+<td align="center">关机&#x2F;重启</td>
+</tr>
+<tr>
+<td align="center">shutdown now&#x2F;20:25</td>
+<td align="center">立刻&#x2F;20:25关机</td>
+</tr>
+<tr>
+<td align="center">shutdown -r now&#x2F;20:25</td>
+<td align="center">立刻&#x2F;20:25重启</td>
+</tr>
+<tr>
+<td align="center">shutdown +10</td>
+<td align="center">系统再过十分钟关机</td>
+</tr>
+<tr>
+<td align="center">shutdown -c</td>
+<td align="center">取消之前的关机计划</td>
+</tr>
+</tbody></table>
+<p>若不指定选项和参数，默认表示1分钟之后关闭电脑</p>
+<h4 id="远程登录和复制文件："><a href="#远程登录和复制文件：" class="headerlink" title="远程登录和复制文件："></a>远程登录和复制文件：</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ssh 用户名@ip</td>
+<td align="center">远程登录会话</td>
+</tr>
+<tr>
+<td align="center">scp 用户名@ip:文件名或路径   用户名@ip:文件名或路径</td>
+<td align="center">远程复制文件</td>
+</tr>
+</tbody></table>
+<h4 id="ssh："><a href="#ssh：" class="headerlink" title="ssh："></a>ssh：</h4><p>​	数据传输是加密的，可以防止信息泄露</p>
+<p>​	数据传输是压缩的，可以提高传输速度</p>
+<pre><code>ssh [-p port] user@ip
+//port是SSH Server监听的端口，如果不指定，就默认为22
 </code></pre>
-<p>-tunlp的含义：</p>
-<ul>
-<li>-t (tcp) 仅显示tcp相关选项</li>
-<li>-u (udp)仅显示udp相关选项</li>
-<li>-n 拒绝显示别名，能显示数字的全部转化为数字</li>
-<li>-l 仅列出在Listen(监听)的服务状态</li>
-<li>-p 显示建立相关链接的程序名</li>
-</ul>
-<p>比如查看22端口的情况</p>
-<p>​	netstat -tunlp |grep 22</p>
-<p>杀死端口</p>
-<pre><code>kill -9 PID
+<p>免密码登录：</p>
+<pre><code>1.配置公私钥： 执行 ssh-keygen即可生成ssh钥匙，一路回车即可
+2.上传公钥(id_rsa.pub)到服务器: 执行 ssh-copy-id -p port user@ip ，可以让远程服务记住我们的公钥
 </code></pre>
-<p>例如杀死PID为2956的端口：</p>
-<p>kill -9 2956</p>
-<h4 id="6、查找命令"><a href="#6、查找命令" class="headerlink" title="6、查找命令"></a>6、查找命令</h4><h5 id="find命令"><a href="#find命令" class="headerlink" title="find命令"></a>find命令</h5><pre><code>find &lt; path &gt; &lt; expression &gt; &lt; cmd &gt;
-&#39;&#39;&#39;
-path： 所要搜索的目录及其所有子目录。默认为当前目录。
-expression： 所要搜索的文件的特征。
-cmd： 对搜索结果进行特定的处理。
-如果什么参数也不加，find默认搜索当前目录及其子目录，并且不过滤任何结果（也就是返回所有文件），将它们全都显示在屏幕上。
-&#39;&#39;&#39;
+<p>配置别名：</p>
+<pre><code>在~/.ssh/config里面追加以下内容：
+Host win
+    HostName ip地址
+    user jack
+    Port 22
 </code></pre>
-<p>例：</p>
-<p>-name 按照文件名查找文件。</p>
-<pre><code># 在/dir目录及其子目录下面查找名字为filename的文件
-find /dir -name filename 
-# 在当前目录及其子目录（用“.”表示）中查找任何扩展名为“c”的文件
-find . -name &quot;*.c&quot; 
+<p><strong>设置的免密码登录和配置的别名对于scp命令同样适用</strong></p>
+<h4 id="scp"><a href="#scp" class="headerlink" title="scp:"></a>scp:</h4><p>它的地址格式与ssh基本相同，需要注意的是，在制定端口时用的时大写的 -P而不是小写的</p>
+<pre><code>//把本地当前目录下的 01.py文件复制到 远程家目录下的 Desktop/01.py
+//注意： &#39;:&#39;后面的路径如果不是绝对路径，则以用户的家目录作为参照路径
+scp -P port 01.py user@ip:Desktop/01.py
+
+//把远程家目录下的 Desktop/01.py文件复制到 本地当前目录下的01.py
+scp -P port user@ip:Desktop/01.py 01.py
+
+#加上 -r 选项可以传送文件夹
 </code></pre>
-<h4 id="7、配置全局网络代理"><a href="#7、配置全局网络代理" class="headerlink" title="7、配置全局网络代理"></a>7、配置全局网络代理</h4><p>以下都需要在clash全局模式(global)下</p>
-<p>（1）虚拟机使用net网络模式</p>
+<h3 id="6-用户权限相关命令"><a href="#6-用户权限相关命令" class="headerlink" title="6.用户权限相关命令"></a>6.用户权限相关命令</h3><p>对文件&#x2F;目录的权限包括：</p>
+<table>
+<thead>
+<tr>
+<th align="center">权限</th>
+<th align="center">缩写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读</td>
+<td align="center">r</td>
+</tr>
+<tr>
+<td align="center">写</td>
+<td align="center">w</td>
+</tr>
+<tr>
+<td align="center">执行</td>
+<td align="center">x</td>
+</tr>
+</tbody></table>
+<h4 id="组"><a href="#组" class="headerlink" title="组"></a>组</h4><p>为了方便用户管理，提出了<strong>组</strong>的概念</p>
+<h4 id="ls-l扩展"><a href="#ls-l扩展" class="headerlink" title="ls -l扩展"></a>ls -l扩展</h4><p><strong>权限，</strong>第一个字符如果是d表示目录</p>
+<p><strong>硬链接数，</strong>通俗的讲，就是有多少中方式，可以访问到当前目录&#x2F;文件</p>
+<p><strong>拥有者，</strong>家目录下 文件&#x2F;目录 的拥有者通常都是当前用户</p>
+<p><strong>组，</strong>在linux中，很多时候，会出现组名和用户名相同的情况</p>
+<p><strong>大小</strong></p>
+<p><strong>时间</strong></p>
+<p><strong>名称</strong></p>
+<img src="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/141143.png" class="">
+
+<h4 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h4><p>chmod可以修改用户&#x2F;组 对 文件&#x2F;目录的权限</p>
+<p>命令格式：</p>
+<pre><code>chmod +/-rwx 文件名|目录名
+//会同时修改用户、组和其他用户的权限，不能精准定位
+</code></pre>
+<p><strong>注：要想在目录下执行终端命令(ls、touch)，就必须要有可执行权限！！！</strong></p>
+<p>chmod在设置权限时，可以简单的使用三个数字，分别对应 <strong>拥有者&#x2F;组和其他</strong> 用户的权限</p>
+<pre><code>chmod -R 755 文件名|目录名	R表示递归修改权限
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">r</th>
+<th align="center">w</th>
+<th align="center">x</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">4</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h4 id="超级用户"><a href="#超级用户" class="headerlink" title="超级用户"></a>超级用户</h4><p>linux 系统中的root账号通常用于系统的维护和管理，对操作系统的所有资源具有所有访问权限</p>
+<p>在linux安装过程中，系统会自动创建一个用户账号，而这个默认的用户就被称为“标准用户”</p>
+<h4 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h4><p>sudo命令用来以其他身份来执行命令，预设的身份是root</p>
+<p>用户使用sudo时，必须先输入密码，之后有5分钟的有效期限，超过期限则必须重新输入密码</p>
+<h4 id="组管理-终端命令"><a href="#组管理-终端命令" class="headerlink" title="组管理 终端命令"></a>组管理 终端命令</h4><p>​	<strong>注：创建组&#x2F;删除组的终端命令都需要通过sudo执行</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">groupadd 组名</td>
+<td align="center">添加组</td>
+</tr>
+<tr>
+<td align="center">groupdel 组名</td>
+<td align="center">删除组</td>
+</tr>
+<tr>
+<td align="center">cat &#x2F;etc&#x2F;group</td>
+<td align="center">确认组信息</td>
+</tr>
+<tr>
+<td align="center">chown 用户名 文件名|目录名</td>
+<td align="center">修改文件&#x2F;目录的拥有者</td>
+</tr>
+<tr>
+<td align="center">chgrp  -R 组名 文件&#x2F;目录名</td>
+<td align="center">修改文件&#x2F;目录的所属组</td>
+</tr>
+</tbody></table>
+<h4 id="用户管理-终端命令"><a href="#用户管理-终端命令" class="headerlink" title="用户管理 终端命令"></a>用户管理 终端命令</h4><p>​	<strong>注：创建用户&#x2F;删除用户&#x2F;修改其他用户密码 的终端命令都需要通过sudo执行</strong></p>
+<p>创建用户&#x2F;设置密码&#x2F;删除用户</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">useradd -m -g 组 新建用户名</td>
+<td align="center">添加新用户</td>
+<td>-m 自动建立用户家目录 | -g 指定用户所在的组，否则会建立一个和用户<strong>同名</strong>的组</td>
+</tr>
+<tr>
+<td align="center">passwd 用户名</td>
+<td align="center">设置用户密码</td>
+<td>如果是普通用户，直接用passwd可以修改自己的账户密码</td>
+</tr>
+<tr>
+<td align="center">userdel -r 用户名</td>
+<td align="center">删除用户</td>
+<td>-r选项会自动删除用户家目录</td>
+</tr>
+<tr>
+<td align="center">cat &#x2F;etc&#x2F;passwd</td>
+<td align="center">确认用户信息</td>
+<td>新建用户后，用户信息会保存在&#x2F;etc&#x2F;passwd文件中</td>
+</tr>
+</tbody></table>
+<h4 id="查看用户信息"><a href="#查看用户信息" class="headerlink" title="查看用户信息"></a>查看用户信息</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">id [用户名]</td>
+<td align="center">查看用户UID(用户代号，在&#x2F;etc&#x2F;passwd)和GID(组代号，在&#x2F;etc&#x2F;group)信息</td>
+</tr>
+<tr>
+<td align="center">who</td>
+<td align="center">查看当前所有登录的用户列表</td>
+</tr>
+<tr>
+<td align="center">whoami</td>
+<td align="center">查看当前登录用户的账户名</td>
+</tr>
+</tbody></table>
+<h4 id="passwd文件"><a href="#passwd文件" class="headerlink" title="passwd文件"></a>passwd文件</h4><p>&#x2F;etc&#x2F;passwd文件存放的是用户的信息，由6个分号组成的7个信息，分别是</p>
+<p>用户名：密码(x表示加密的密码)：UID：GID：用户全名或本地账号：家目录：登录使用的shell(就是登录之后使用的终端命令)</p>
+<h4 id="usermod"><a href="#usermod" class="headerlink" title="usermod"></a>usermod</h4><p>usermod可以用来设置用户的 <strong>主组&#x2F;附加组</strong>  和 <strong>登录shell</strong> </p>
+<p><strong>主组：</strong>通常在新建用户时指定，在&#x2F;etc&#x2F;passwd的第4列GID对应的组</p>
+<p><strong>附加组：</strong>在&#x2F;etc&#x2F;group中最后一列表示该组的用户列表，用于指定 <strong>用户的附加权限</strong></p>
+<p>​	提示：设置了用户的附加组之后，需要重新登录才能生效！</p>
+<pre><code>//修改用户的主组
+usermod -g 组 用户名
+
+//修改用户的附加组
+//***慎用***// usermod -G 组 用户名 //***慎用***//
+
+//修改用户登录shell
+usermod -s /bin/bash
+</code></pre>
+<p>​	注：默认时使用useradd添加的用户是没有权限使用sudo以root身份执行命令的，可以使用usermod -G sudo 用户名 将用户添加到sudo附加组中</p>
+<p>​	<strong>注：usemod -G 改写用户的附加组之后，用户的附加组信息是覆盖，也就是说usermod使用户只能存在于一个附加组。</strong>使用户同时属于多个附加组要使用gpasswd:</p>
+<h4 id="gpasswd"><a href="#gpasswd" class="headerlink" title="gpasswd"></a>gpasswd</h4><pre><code>//添加用户到组
+gpasswd -a 用户名 组名
+
+//从组删除用户
+gpasswd -d 用户名 组名
+</code></pre>
+<h4 id="which"><a href="#which" class="headerlink" title="which"></a>which</h4><p>which命令可以查看执行命令所在位置，例如：</p>
+<pre><code>which ls
+# /bin/ls
+
+which useradd
+# /usr/sbin/useradd
+</code></pre>
+<p>bin和sbin</p>
+<p>在linux中，绝大多数可执行文件都是保存在&#x2F;bin、&#x2F;sbin、&#x2F;usr&#x2F;bin、&#x2F;usr&#x2F;sbin</p>
+<p>&#x2F;bin是二进制执行文件目录，主要用于具体应用</p>
+<p>&#x2F;sbin是系统管理员专用的二进制代码存放目录，主要用于系统管理</p>
+<p>&#x2F;usr&#x2F;bin是<strong>整个系统安装好后</strong>后期安装的一些软件</p>
+<p>&#x2F;usr&#x2F;sbin是超级用户的一些管理程序</p>
+<h4 id="切换用户"><a href="#切换用户" class="headerlink" title="切换用户"></a>切换用户</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">su - 用户名</td>
+<td align="center">切换用户，并且切换目录</td>
+<td align="center">- 可以切换到用户家目录，否则保持位置不变</td>
+</tr>
+<tr>
+<td align="center">exit</td>
+<td align="center">退出当前登录账户</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p><strong>su不接用户名，可以切换到root</strong></p>
+<h3 id="7-系统信息相关命令"><a href="#7-系统信息相关命令" class="headerlink" title="7.系统信息相关命令"></a>7.系统信息相关命令</h3><h4 id="时间和日期"><a href="#时间和日期" class="headerlink" title="时间和日期"></a>时间和日期</h4><table>
+<thead>
+<tr>
+<th align="center">序号</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">date</td>
+<td align="center">查看系统时间</td>
+</tr>
+<tr>
+<td align="center">cal</td>
+<td align="center">查看日历，-y可以查看一年的日历</td>
+</tr>
+</tbody></table>
+<h4 id="磁盘信息"><a href="#磁盘信息" class="headerlink" title="磁盘信息"></a>磁盘信息</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">df -h</td>
+<td align="center">disk free 显示磁盘剩余空间大小</td>
+</tr>
+<tr>
+<td align="center">du -h [目录名]</td>
+<td align="center">disk usage 显示目录下文件大小(没有指定目录名时会显示当前目录)</td>
+</tr>
+</tbody></table>
+<p>-h：以人性化的方式显示文件大小</p>
+<h4 id="进程信息"><a href="#进程信息" class="headerlink" title="进程信息"></a>进程信息</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ps aux</td>
+<td align="center">process status 查看进程的详细状况</td>
+</tr>
+<tr>
+<td align="center">top</td>
+<td align="center">动态显示进行中的进程并且排序</td>
+</tr>
+<tr>
+<td align="center">kill [-9] 进程代号</td>
+<td align="center">终止指定代号的进程，-9表示强行终止</td>
+</tr>
+</tbody></table>
+<p>​	ps默认只会显示当前用户通过终端启动的应用程序</p>
+<p>​	要退出top可以直接输入q</p>
+<p>ps选项说明</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">a</td>
+<td align="center">显示终端上的所有进程，包括其他用户的进程</td>
+</tr>
+<tr>
+<td align="center">u</td>
+<td align="center">显示进程的详细状态</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">显示没有控制终端的进程</td>
+</tr>
+</tbody></table>
+<h3 id="8-其他命令"><a href="#8-其他命令" class="headerlink" title="8.其他命令"></a>8.其他命令</h3><h4 id="查找文件"><a href="#查找文件" class="headerlink" title="查找文件"></a>查找文件</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">find [路径] -name “*.py”</td>
+<td align="center">查找指定路径下扩展名是.py的文件，包括子目录</td>
+</tr>
+</tbody></table>
+<h4 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h4><table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ln -s 被链接的源文件 链接文件</td>
+<td align="center">建立文件的软链接，用通俗的方式讲类似于windows下的快捷方式</td>
+</tr>
+</tbody></table>
+<p>注：没有 -s 选项建立的是一个 <strong>硬链接</strong> 文件</p>
+<p>​		源文件要使用<strong>绝对路径</strong>，不能使用相对路径，这样可以方便移动链接文件后，仍然能正常使用</p>
+<h4 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h4><p>在linux中，<strong>文件名</strong> 和 <strong>文件数据</strong> 是分开存储的</p>
+<img src="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/220433.png" class="">
+
+<h4 id="打包-x2F-解包"><a href="#打包-x2F-解包" class="headerlink" title="打包&#x2F;解包"></a>打包&#x2F;解包</h4><p>tar 是linux中最常用的备份工具，此命令可以 <strong>把一系列文件</strong> 打包到 <strong>一个大文件中</strong>，也可以把一个 <strong>打包的大文件恢复成一系列文件</strong></p>
+<pre><code>//打包文件
+tar -cvf 打包文件.tar 被打包的文件/路径
+
+//解包文件
+tar -xvf 打包文件.tar
+</code></pre>
+<p>tar选项说明</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">c</td>
+<td align="center">生成档案文件，创建打包文件</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">解开档案文件</td>
+</tr>
+<tr>
+<td align="center">v</td>
+<td align="center">列出归档解档的详细过程，显示进度</td>
+</tr>
+<tr>
+<td align="center">f</td>
+<td align="center">指定档案文件名称，f后面一定是.tar文件，所以必须方选项最后</td>
+</tr>
+</tbody></table>
+<p>注：f 选项必须放在最后，其他选项顺序可以随意</p>
+<h4 id="压缩-x2F-解压缩"><a href="#压缩-x2F-解压缩" class="headerlink" title="压缩&#x2F;解压缩"></a>压缩&#x2F;解压缩</h4><h4 id="gzip"><a href="#gzip" class="headerlink" title="gzip"></a>gzip</h4><p>tar 与 gzip 命令结合可以实现文件 <strong>打包和压缩</strong></p>
+<p>tar 只负责打包文件，但不压缩</p>
+<p>用 gzip压缩tar 打包后的文件，其扩展名一般用 xxx.tar.gz</p>
+<p>在 linux中，最常见的压缩文件格式就是xxx.tar.gz</p>
+<p><strong>在tar 命令中有一个 -z 选项可以调用 gzip，从而可以方便的实现压缩和解压缩的功能</strong></p>
+<pre><code>//压缩文件
+tar -zcvf 打包文件.tar.gz 被压缩的文件/路径...
+
+//解压缩文件
+tar -zxvf 打包文件.tar.gz
+
+//解压缩到指定路径
+tar -zxvf 打包文件.tar.gz -C 目标路径
+</code></pre>
+<h4 id="bzip2"><a href="#bzip2" class="headerlink" title="bzip2"></a>bzip2</h4><p>tar 与 bzip2 命令结合可以使用实现文件 打包和压缩</p>
+<p>tar 只负责打包文件，但不压缩</p>
+<p>用 bzip 压缩 tar 打包后的文件，其扩展名一般用 xxx.tar.bz2</p>
+<p><strong>在tar 命令中有一个 -j 选项可以调用 gzip，从而可以方便的实现压缩和解压缩的功能</strong></p>
+<pre><code>//压缩文件
+tar -jcvf 打包文件.tar.gz 被压缩的文件/路径...
+
+//解压缩文件
+tar -jxvf 打包文件.tar.gz
+
+//解压缩到指定路径
+tar -jxvf 打包文件.tar.gz -C 目标路径
+</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-C</td>
+<td align="center">解压缩到指定目录，注意：<strong>指定的目录必须存在</strong></td>
+</tr>
+</tbody></table>
+<h4 id="软件安装"><a href="#软件安装" class="headerlink" title="软件安装"></a>软件安装</h4><p>通过 apt 安装&#x2F;卸载软件</p>
+<p>apt 是 advanced Packing Tool ,是linux下的一款安装包管理工具</p>
+<pre><code>//安装软件
+sudo apt install 软件名
+
+//卸载软件
+sudo apt remove 软件名
+
+//更新已安装的包
+sudo apt upgrade
+</code></pre>
+<pre><code>一个小火车
+sudo apt install sl
+一个当前进程排名软件
+sudo apt install htop
+</code></pre>
+<h2 id="linux进阶命令"><a href="#linux进阶命令" class="headerlink" title="linux进阶命令"></a>linux进阶命令</h2><h3 id="netstat（查看网络服务及监听端口）"><a href="#netstat（查看网络服务及监听端口）" class="headerlink" title="netstat（查看网络服务及监听端口）"></a>netstat（查看网络服务及监听端口）</h3><p>Netstat 是一款命令行工具，可用于列出系统上所有的网络套接字连接情况，包括 tcp, udp 以及 unix 套接字，另外它还能列出处于监听状态（即等待接入请求）的套接字。</p>
+<p>若使用netstat -nlpt会显示如下信息：</p>
+<img src="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/185943.png" class="">
+
+<p>属性列表：</p>
+<p>|Proto|连接协议的种类	|Recv-Q|接收到的字节数	|Send-Q|从本服务器发出去的字节数</p>
+<p>|Local Address|本地ip地址&#x2F;主机名	|Foreign Address|远程主机的IP地址	|state|网络连接状态</p>
+<p>|PID&#x2F;Program name|进程号&#x2F;进程名</p>
+<p>State(网络连接状态)详解：</p>
+<pre><code>LISTEN：(Listening for a connection.)侦听来自远方的TCP端口的连接请求
+SYN-SENT：(Active; sent SYN. Waiting for a matching connection request after having sent a connection request.)再发送连接请求后等待匹配的连接请求
+SYN-RECEIVED：(Sent and received SYN. Waiting for a confirming connection request acknowledgment after having both received and sent connection requests.)再收到和发送一个连接请求后等待对方对连接请求的确认
+ESTABLISHED：(Connection established.)代表一个打开的连接
+FIN-WAIT-1：(Closed; sent FIN.)等待远程TCP连接中断请求，或先前的连接中断请求的确认
+FIN-WAIT-2：(Closed; FIN is acknowledged; awaiting FIN.)从远程TCP等待连接中断请求
+CLOSE-WAIT：(Received FIN; waiting to receive CLOSE.)等待从本地用户发来的连接中断请求
+CLOSING：(Closed; exchanged FIN; waiting for FIN.)等待远程TCP对连接中断的确认
+LAST-ACK：(Received FIN and CLOSE; waiting for FIN ACK.)等待原来的发向远程TCP的连接中断请求的确认
+TIME-WAIT：(In 2 MSL (twice the maximum segment length) quiet wait after close. )等待足够的时间以确保远程TCP接收到连接中断请求的确认
+CLOSED：(Connection is closed.)没有任何连接状态
+</code></pre>
+<p>Netstat选项：</p>
+<pre><code>-a或--all：显示所有连线中的Socket；
+-A&lt;网络类型&gt;或--&lt;网络类型&gt;：列出该网络类型连线中的相关地址；
+-c或--continuous：持续列出网络状态；
+-C或--cache：显示路由器配置的缓存信息；
+-e或--extend：显示拥有者信息；
+-F或--fib：显示FIB；
+-g或--groups：显示多重广播功能群组组员名单；
+-h或--help：在线帮助；
+-i或--interfaces：显示网络界面信息表单；
+-l或--listening：显示监控中的服务器的Socket；
+-M或--masquerade：显示伪装的网络连线；
+-n或--numeric：直接使用IP地址，而不通过域名服务器；
+-N或--netlink或--symbolic：显示网络硬件外围设备的符号连接名称；
+-o或--timers：显示计时器；
+-p或--programs：显示正在使用Socket的程序识别码和程序名称；（必须使用root权限）
+-r或--route：显示路由表；
+-s或--statistics：显示网络工作信息统计表；
+-t或--tcp：显示TCP传输协议的连线状况；
+-u或--udp：显示UDP传输协议的连线状况；
+-v或--verbose：显示指令执行过程；
+-V或--version：显示版本信息；
+-w或--raw：显示RAW传输协议的连线状况；
+-x或--unix：此参数的效果和指定-A unix参数相同；
+--ip或--inet：此参数的效果和指定-A inet参数相同。
+</code></pre>
+<p>例如：</p>
+<pre><code>netstat -a		列出 tcp, udp 和 unix 协议下所有套接字的所有连接。
+netstat -c		持续输出信息
+netstat	-at		列出所有tcp连接
+netstat -au		列出所有udp连接
+netstat -atn	禁用反向域名解析，加快查询速度
+netstat -tln	只列出监听中的连接(不要使用 -a 选项，否则 netstat 会列出所有连接，而不仅仅是监听端口。)
+netstat -tlpe	获取进程名、进程号以及用户名( 假如你将 -n 和 -e 选项一起使用，User 列的属性就是用户的 ID 号，而不是用户名。)
+netstat -rn		显示内核路由信息
+netstat -ie		打印网络接口信息(-i输出的信息比较原始，可以配合-e输出用户友好的信息，输出信息与 ifconfig 输出的信息一样。)
+</code></pre>
+<p>注：<code>[::]:*</code>和<code>:::*</code>表示所有可用的Ipv6地址上的所有端口，<code>0.0.0.0:*</code>表示所有可用的Ipv4地址上的所有端口（以上都是ipv6和ipv4地址和端口通配符的写法）</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="虚拟机配置网络代理"><a href="#虚拟机配置网络代理" class="headerlink" title="虚拟机配置网络代理"></a>虚拟机配置网络代理</h3><p>（1）clash直接开启allow lan模式</p>
+<p>以下都需要在clash全局模式(global)下</p>
+<p>（2）虚拟机使用net网络模式</p>
 <p>​		直接在主机clash上开启TUN模式和混合配置(mixin)（防止冲突关闭systemproxy系统代理）</p>
 <img src="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/23255.png" class="">
 
@@ -723,7 +1434,7 @@ find . -name &quot;*.c&quot;
      macOS-auto-route: true
      macOS-auto-detect-interface: true # 自动检测出口网卡
 </code></pre>
-<p>（2）虚拟机使用桥接模式</p>
+<p>（3）虚拟机使用桥接模式</p>
 <p>​		&lt;1&gt;clash开启系统代理(systemproxy)</p>
 <p>​		 &lt;2&gt;linux进入&#x2F;etc&#x2F;profile.d目录，新建proxy.sh，内容如下：</p>
 <pre><code>export proxy=&quot;http://192.168.150.1:7890&quot;
@@ -743,7 +1454,7 @@ export all_proxy=socks5://192.168.10.103:7890
 <pre><code>curl cip.cc
 </code></pre>
 <p>​		&lt;6&gt;浏览器代理需要单独配置，chrome可以用代理插件</p>
-<h1 id="Linux配置文件路径大全"><a href="#Linux配置文件路径大全" class="headerlink" title="Linux配置文件路径大全"></a>Linux配置文件路径大全</h1><pre><code>1:/etc/sysconfig/i18n(语言配置文件).2:/etc/sysconfig/network-scripts/ifcfg-eth0(eth0配置文件).
+<h3 id="Linux配置文件路径大全"><a href="#Linux配置文件路径大全" class="headerlink" title="Linux配置文件路径大全"></a>Linux配置文件路径大全</h3><pre><code>1:/etc/sysconfig/i18n(语言配置文件).2:/etc/sysconfig/network-scripts/ifcfg-eth0(eth0配置文件).
 3:/boot/grub/grub.conf(grup配置文件) 或/boot/grub/menu.list.
 4:/etc/passwd:系统用户数据库文件.
 5:/etc/group:组的数据库文件.
@@ -806,7 +1517,7 @@ export all_proxy=socks5://192.168.10.103:7890
 63:/proc/self/environ
 64:/sys/class/net/eth0/address(获得网卡mac地址）
 </code></pre>
-<h1 id="Nginx-重要文件目录"><a href="#Nginx-重要文件目录" class="headerlink" title="Nginx 重要文件目录"></a>Nginx 重要文件目录</h1><pre><code>配置文件存放目录：/etc/nginx
+<h3 id="Nginx-重要文件目录"><a href="#Nginx-重要文件目录" class="headerlink" title="Nginx 重要文件目录"></a>Nginx 重要文件目录</h3><pre><code>配置文件存放目录：/etc/nginx
 
 主要配置文件：/etc/nginx/conf/nginx.conf
 
@@ -814,7 +1525,7 @@ export all_proxy=socks5://192.168.10.103:7890
 
 模块：/usr/lisb64/nginx/modules
 </code></pre>
-<h1 id="linux下的快捷键"><a href="#linux下的快捷键" class="headerlink" title="linux下的快捷键"></a>linux下的快捷键</h1><pre><code>ctrl+c强行中断当前程序的执行。
+<h3 id="linux下的快捷键"><a href="#linux下的快捷键" class="headerlink" title="linux下的快捷键"></a>linux下的快捷键</h3><pre><code>ctrl+c强行中断当前程序的执行。
 ctrl+z将任务中断,但是此任务并没有结束,他仍然在进程中，只是放到后台并维持挂起的状态。如需其在后台继续运行，需用“bg 进程号”使其继续运行；再用&quot;fg 进程号&quot;可将后台进程前台化。
 ctrl+\表示退出。
 ctrl+d表示结束当前输入（即用户不再给当前程序发出指令），那么Linux通常将结束当前程序。(ctrl-d 不是发送信号，而是表示一个特殊的二进制值，表示 EOF。)(在shell中，ctrl-d表示退出当前shell.)
