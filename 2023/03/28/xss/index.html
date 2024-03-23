@@ -120,7 +120,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(24)</small>
+                <small>(25)</small>
             
         </div>
     </li>
@@ -145,8 +145,8 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="24">
-<input type="hidden" id="yelog_site_word_count" value="62.4k">
+<input type="hidden" id="yelog_site_posts_number" value="25">
+<input type="hidden" id="yelog_site_word_count" value="64.6k">
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
     <span id="busuanzi_value_site_pv"></span>
@@ -441,6 +441,15 @@
         
         
         <a  class="全部文章 "
+           href="/2023/04/15/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="工具使用速查手册">工具使用速查手册</span>
+            <span class="post-date" title="2023-04-15 20:17:38">2023/04/15</span>
+        </a>
+        
+        
+        <a  class="全部文章 "
            href="/2023/04/14/linux%E5%AD%A6%E4%B9%A0/"
            data-tag="linux"
            data-author="" >
@@ -521,7 +530,7 @@
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-03-22 16:52:19'>2023-03-28 20:37</time>
+            发布时间 : <time class="date" title='最后更新: 2024-03-23 14:16:34'>2023-03-28 20:37</time>
         
     </div>
     <div class="article-meta">
@@ -565,12 +574,12 @@
 <p>​	反射型</p>
 <p>​	存储型</p>
 <p>​	DOM型（document.write、innerHTML、eval）</p>
-<p><strong>DOM型xss和反射型xss最大的区别就是它不经过服务器，仅仅是通过网页本身的JavaScript进行渲染触发的</strong></p>
+<p><strong>DOM型xss和反射型xss最大的区别就是dom型xss不经过服务器，仅仅是通过网页本身的JavaScript进行渲染触发的</strong></p>
 <p>注：document.write可以识别Native编码</p>
 <p>同源策略：同协议，同域名，同端口</p>
 <pre><code>标签法：&lt;script&gt;alert(123)&lt;/script&gt;
 伪协议：&lt;a href=javascript:alert(555)&gt;fff&lt;/a&gt;
-事件法：&lt;a onmousemove=alert(888)&gt;8888&lt;a&gt;
+事件法：&lt;a onmousemove=alert(888)&gt;8888&lt;/a&gt;
 </code></pre>
 <h3 id="无过滤情况"><a href="#无过滤情况" class="headerlink" title="无过滤情况"></a>无过滤情况</h3><p>&lt;script&gt;</p>
 <pre><code>&lt;scirpt&gt;alert(&quot;xss&quot;);&lt;/script&gt;
